@@ -27,6 +27,8 @@ const float time_step = 0.017f; //60 fps
 //Objects of the game
 sf::CircleShape ball;
 sf::RectangleShape paddles[2];
+sf::Font font;
+sf::Text text;
 
 void init() {
 	// Set size and origin of paddles
@@ -98,6 +100,7 @@ void render(sf::RenderWindow& window) {
 	window.draw(paddles[0]);
 	window.draw(paddles[1]);
 	window.draw(ball);
+	window.draw(text);
 }
 
 void load() {
@@ -119,6 +122,16 @@ int main() {
 	//initialise and load
 	init();
 	load();
+
+	if (!font.loadFromFile("Fonts/arial.ttf")) {
+		return -1; // Error loading font
+	}
+
+	text.setFont(font);
+	text.setString("It's all meaningless!");
+	text.setCharacterSize(24);
+	text.setFillColor(sf::Color::White);
+	text.setPosition(ballRadius / 2, ballRadius / 2);
 
 	sf::Clock clock;
 	while (window.isOpen()) {
