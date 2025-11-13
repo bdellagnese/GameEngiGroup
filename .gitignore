@@ -2,6 +2,8 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=c++,visualstudiocode,visualstudio
 
 # Ignore build directory
+git rm -r --cached GameEngiGroup/out/build
+
 GameEngiGroup/out/build/
 
 ### C++ ###
