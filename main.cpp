@@ -123,7 +123,7 @@ int main() {
 	init();
 	load();
 
-	if (!font.loadFromFile("Fonts/arial.ttf")) {
+	if (!font.loadFromFile("Assets/Fonts/arial.ttf")) {
 		return -1; // Error loading font
 	}
 
