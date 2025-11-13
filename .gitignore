@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/c++,visualstudiocode,visualstudio
 # Edit at https://www.toptal.com/developers/gitignore?templates=c++,visualstudiocode,visualstudio
 
+# Ignore build directory
+GameEngiGroup/out/build/
+
 ### C++ ###
 # Prerequisites
 *.d
