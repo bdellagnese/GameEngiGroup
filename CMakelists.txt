@@ -5,10 +5,8 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #### Setup Directories ####
-#Main output directory
-SET(OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/")
-# Ouput all DLLs from all libs into main build folder
-SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIRECTORY})
+# Set the output directory to the highest relative folder
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/GameBuild") # Where the executable is output
 
 #### Add External Dependencies ####
 add_subdirectory("lib/SFML")
