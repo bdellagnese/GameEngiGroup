@@ -9,7 +9,7 @@
 		"files" : 
 		[
 			"lib/SFML/cmake/Macros.cmake",
-			"lib/SFML/src/SFML/Network/CMakeLists.txt"
+			"lib/SFML/src/SFML/Graphics/CMakeLists.txt"
 		],
 		"nodes" : 
 		[
@@ -19,7 +19,7 @@
 			{
 				"command" : 1,
 				"file" : 1,
-				"line" : 48,
+				"line" : 89,
 				"parent" : 0
 			},
 			{
@@ -38,10 +38,10 @@
 			"destination" : "lib",
 			"paths" : 
 			[
-				"lib/SFML/lib/sfml-network-d.lib"
+				"lib/SFML/lib/sfml-graphics-d.lib"
 			],
-			"targetId" : "sfml-network::@c3d7f79628bafd5c7994",
-			"targetIndex" : 4,
+			"targetId" : "sfml-graphics::@05826a7f30b7c69d94d4",
+			"targetIndex" : 2,
 			"targetIsImportLibrary" : true,
 			"type" : "target"
 		},
@@ -51,16 +51,16 @@
 			"destination" : "bin",
 			"paths" : 
 			[
-				"bin/sfml-network-d-2.dll"
+				"C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/Build/sfml-graphics-d-2.dll"
 			],
-			"targetId" : "sfml-network::@c3d7f79628bafd5c7994",
-			"targetIndex" : 4,
+			"targetId" : "sfml-graphics::@05826a7f30b7c69d94d4",
+			"targetIndex" : 2,
 			"type" : "target"
 		}
 	],
 	"paths" : 
 	{
-		"build" : "lib/SFML/src/SFML/Network",
-		"source" : "lib/SFML/src/SFML/Network"
+		"build" : "lib/SFML/src/SFML/Graphics",
+		"source" : "lib/SFML/src/SFML/Graphics"
 	}
 }

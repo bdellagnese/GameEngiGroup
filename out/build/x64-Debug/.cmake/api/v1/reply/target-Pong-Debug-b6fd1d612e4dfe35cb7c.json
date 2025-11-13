@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "bin/pong.exe"
+			"path" : "C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/Build/Pong.exe"
 		},
 		{
-			"path" : "bin/pong.pdb"
+			"path" : "C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/Build/Pong.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -119,7 +119,7 @@
 			"id" : "sfml-graphics::@05826a7f30b7c69d94d4"
 		}
 	],
-	"id" : "pong::@6890427a1f51a3e7e1df",
+	"id" : "Pong::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -159,8 +159,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "pong",
-	"nameOnDisk" : "pong.exe",
+	"name" : "Pong",
+	"nameOnDisk" : "Pong.exe",
 	"paths" : 
 	{
 		"build" : ".",

@@ -63,7 +63,7 @@
 				{
 					"build" : "lib/SFML/src/SFML/System",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-lib.SFML.src.SFML.System-Debug-d82dfc9236605204ccef.json",
+					"jsonFile" : "directory-lib.SFML.src.SFML.System-Debug-5e966a8f126988a5e185.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.7.2"
@@ -95,7 +95,7 @@
 				{
 					"build" : "lib/SFML/src/SFML/Window",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-lib.SFML.src.SFML.Window-Debug-c026ff82ee4eb286fa64.json",
+					"jsonFile" : "directory-lib.SFML.src.SFML.Window-Debug-5d5b356994b76eb7b3e4.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.7.2"
@@ -111,7 +111,7 @@
 				{
 					"build" : "lib/SFML/src/SFML/Network",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-lib.SFML.src.SFML.Network-Debug-79992bbc1047ae6c78ab.json",
+					"jsonFile" : "directory-lib.SFML.src.SFML.Network-Debug-80708fbef96c82945ce3.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.7.2"
@@ -127,7 +127,7 @@
 				{
 					"build" : "lib/SFML/src/SFML/Graphics",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-lib.SFML.src.SFML.Graphics-Debug-3d91b3dc6c9eabf19c4c.json",
+					"jsonFile" : "directory-lib.SFML.src.SFML.Graphics-Debug-ccd7e0daa0abc693d45d.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.7.2"
@@ -143,7 +143,7 @@
 				{
 					"build" : "lib/SFML/src/SFML/Audio",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-lib.SFML.src.SFML.Audio-Debug-b620d1d3b3413468038b.json",
+					"jsonFile" : "directory-lib.SFML.src.SFML.Audio-Debug-6bd5ff4bbe8f8395776b.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.7.2"
@@ -204,22 +204,22 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "pong::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-pong-Debug-8da3df37258206630d02.json",
-					"name" : "pong",
+					"id" : "Pong::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Pong-Debug-b6fd1d612e4dfe35cb7c.json",
+					"name" : "Pong",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 8,
 					"id" : "sfml-audio::@2c88909a109778213ad3",
-					"jsonFile" : "target-sfml-audio-Debug-6c729124e403ea732e14.json",
+					"jsonFile" : "target-sfml-audio-Debug-294c1abeea0cd660763f.json",
 					"name" : "sfml-audio",
 					"projectIndex" : 1
 				},
 				{
 					"directoryIndex" : 7,
 					"id" : "sfml-graphics::@05826a7f30b7c69d94d4",
-					"jsonFile" : "target-sfml-graphics-Debug-b14506f06cca244f1cbe.json",
+					"jsonFile" : "target-sfml-graphics-Debug-b4d86ceb8619091e2939.json",
 					"name" : "sfml-graphics",
 					"projectIndex" : 1
 				},
@@ -233,21 +233,21 @@
 				{
 					"directoryIndex" : 6,
 					"id" : "sfml-network::@c3d7f79628bafd5c7994",
-					"jsonFile" : "target-sfml-network-Debug-de858ba046f39175cc4d.json",
+					"jsonFile" : "target-sfml-network-Debug-94d39f5f349e5a0b79d4.json",
 					"name" : "sfml-network",
 					"projectIndex" : 1
 				},
 				{
 					"directoryIndex" : 3,
 					"id" : "sfml-system::@a0857d3fa2d27435d485",
-					"jsonFile" : "target-sfml-system-Debug-110d9b219be2579f12b3.json",
+					"jsonFile" : "target-sfml-system-Debug-84679b669e80f0d58b65.json",
 					"name" : "sfml-system",
 					"projectIndex" : 1
 				},
 				{
 					"directoryIndex" : 5,
 					"id" : "sfml-window::@662453be02e81ddd067b",
-					"jsonFile" : "target-sfml-window-Debug-ef99b5cf5a1bf4ef7b48.json",
+					"jsonFile" : "target-sfml-window-Debug-daaed063618407c151da.json",
 					"name" : "sfml-window",
 					"projectIndex" : 1
 				}

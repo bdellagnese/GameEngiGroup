@@ -9,7 +9,7 @@
 		"files" : 
 		[
 			"lib/SFML/cmake/Macros.cmake",
-			"lib/SFML/src/SFML/Graphics/CMakeLists.txt"
+			"lib/SFML/src/SFML/Audio/CMakeLists.txt"
 		],
 		"nodes" : 
 		[
@@ -19,7 +19,7 @@
 			{
 				"command" : 1,
 				"file" : 1,
-				"line" : 89,
+				"line" : 80,
 				"parent" : 0
 			},
 			{
@@ -38,10 +38,10 @@
 			"destination" : "lib",
 			"paths" : 
 			[
-				"lib/SFML/lib/sfml-graphics-d.lib"
+				"lib/SFML/lib/sfml-audio-d.lib"
 			],
-			"targetId" : "sfml-graphics::@05826a7f30b7c69d94d4",
-			"targetIndex" : 2,
+			"targetId" : "sfml-audio::@2c88909a109778213ad3",
+			"targetIndex" : 1,
 			"targetIsImportLibrary" : true,
 			"type" : "target"
 		},
@@ -51,16 +51,16 @@
 			"destination" : "bin",
 			"paths" : 
 			[
-				"bin/sfml-graphics-d-2.dll"
+				"C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/Build/sfml-audio-d-2.dll"
 			],
-			"targetId" : "sfml-graphics::@05826a7f30b7c69d94d4",
-			"targetIndex" : 2,
+			"targetId" : "sfml-audio::@2c88909a109778213ad3",
+			"targetIndex" : 1,
 			"type" : "target"
 		}
 	],
 	"paths" : 
 	{
-		"build" : "lib/SFML/src/SFML/Graphics",
-		"source" : "lib/SFML/src/SFML/Graphics"
+		"build" : "lib/SFML/src/SFML/Audio",
+		"source" : "lib/SFML/src/SFML/Audio"
 	}
 }

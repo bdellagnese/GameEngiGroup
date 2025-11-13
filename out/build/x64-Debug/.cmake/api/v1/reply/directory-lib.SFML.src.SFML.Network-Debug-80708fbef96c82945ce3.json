@@ -9,7 +9,7 @@
 		"files" : 
 		[
 			"lib/SFML/cmake/Macros.cmake",
-			"lib/SFML/src/SFML/Window/CMakeLists.txt"
+			"lib/SFML/src/SFML/Network/CMakeLists.txt"
 		],
 		"nodes" : 
 		[
@@ -19,7 +19,7 @@
 			{
 				"command" : 1,
 				"file" : 1,
-				"line" : 284,
+				"line" : 48,
 				"parent" : 0
 			},
 			{
@@ -38,10 +38,10 @@
 			"destination" : "lib",
 			"paths" : 
 			[
-				"lib/SFML/lib/sfml-window-d.lib"
+				"lib/SFML/lib/sfml-network-d.lib"
 			],
-			"targetId" : "sfml-window::@662453be02e81ddd067b",
-			"targetIndex" : 6,
+			"targetId" : "sfml-network::@c3d7f79628bafd5c7994",
+			"targetIndex" : 4,
 			"targetIsImportLibrary" : true,
 			"type" : "target"
 		},
@@ -51,16 +51,16 @@
 			"destination" : "bin",
 			"paths" : 
 			[
-				"bin/sfml-window-d-2.dll"
+				"C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/Build/sfml-network-d-2.dll"
 			],
-			"targetId" : "sfml-window::@662453be02e81ddd067b",
-			"targetIndex" : 6,
+			"targetId" : "sfml-network::@c3d7f79628bafd5c7994",
+			"targetIndex" : 4,
 			"type" : "target"
 		}
 	],
 	"paths" : 
 	{
-		"build" : "lib/SFML/src/SFML/Window",
-		"source" : "lib/SFML/src/SFML/Window"
+		"build" : "lib/SFML/src/SFML/Network",
+		"source" : "lib/SFML/src/SFML/Network"
 	}
 }

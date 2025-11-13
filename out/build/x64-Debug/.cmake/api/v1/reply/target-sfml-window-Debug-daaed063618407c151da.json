@@ -2,13 +2,13 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "bin/sfml-audio-d-2.dll"
+			"path" : "C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/Build/sfml-window-d-2.dll"
 		},
 		{
-			"path" : "lib/SFML/lib/sfml-audio-d.lib"
+			"path" : "lib/SFML/lib/sfml-window-d.lib"
 		},
 		{
-			"path" : "lib/SFML/lib/sfml-audio-d.pdb"
+			"path" : "lib/SFML/lib/sfml-window-d.pdb"
 		}
 	],
 	"backtrace" : 2,
@@ -29,7 +29,7 @@
 		"files" : 
 		[
 			"lib/SFML/cmake/Macros.cmake",
-			"lib/SFML/src/SFML/Audio/CMakeLists.txt",
+			"lib/SFML/src/SFML/Window/CMakeLists.txt",
 			"lib/SFML/CMakeLists.txt"
 		],
 		"nodes" : 
@@ -40,7 +40,7 @@
 			{
 				"command" : 1,
 				"file" : 1,
-				"line" : 80,
+				"line" : 284,
 				"parent" : 0
 			},
 			{
@@ -58,19 +58,19 @@
 			{
 				"command" : 3,
 				"file" : 1,
-				"line" : 84,
+				"line" : 298,
 				"parent" : 0
 			},
 			{
 				"command" : 3,
 				"file" : 1,
-				"line" : 93,
+				"line" : 342,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
-				"line" : 72,
+				"line" : 326,
 				"parent" : 0
 			},
 			{
@@ -86,40 +86,10 @@
 				"parent" : 7
 			},
 			{
-				"command" : 3,
-				"file" : 0,
-				"line" : 357,
-				"parent" : 7
-			},
-			{
-				"command" : 3,
-				"file" : 0,
-				"line" : 357,
-				"parent" : 7
-			},
-			{
-				"command" : 3,
-				"file" : 0,
-				"line" : 357,
-				"parent" : 7
-			},
-			{
-				"command" : 5,
+				"command" : 6,
 				"file" : 1,
-				"line" : 73,
+				"line" : 92,
 				"parent" : 0
-			},
-			{
-				"command" : 4,
-				"file" : 0,
-				"line" : 401,
-				"parent" : 12
-			},
-			{
-				"command" : 3,
-				"file" : 0,
-				"line" : 357,
-				"parent" : 13
 			},
 			{
 				"file" : 2
@@ -128,7 +98,7 @@
 				"command" : 6,
 				"file" : 2,
 				"line" : 197,
-				"parent" : 15
+				"parent" : 10
 			},
 			{
 				"command" : 7,
@@ -139,7 +109,13 @@
 			{
 				"command" : 7,
 				"file" : 1,
-				"line" : 87,
+				"line" : 309,
+				"parent" : 0
+			},
+			{
+				"command" : 7,
+				"file" : 1,
+				"line" : 301,
 				"parent" : 0
 			},
 			{
@@ -165,49 +141,43 @@
 			"defines" : 
 			[
 				{
-					"backtrace" : 5,
-					"define" : "FLAC__NO_DLL"
+					"define" : "SFML_WINDOW_EXPORTS"
 				},
 				{
-					"backtrace" : 5,
-					"define" : "OV_EXCLUDE_STATIC_CALLBACKS"
+					"backtrace" : 9,
+					"define" : "UNICODE"
 				},
 				{
-					"define" : "SFML_AUDIO_EXPORTS"
-				},
-				{
-					"backtrace" : 16,
+					"backtrace" : 11,
 					"define" : "_CRT_SECURE_NO_DEPRECATE"
 				},
 				{
-					"backtrace" : 16,
+					"backtrace" : 11,
 					"define" : "_SCL_SECURE_NO_WARNINGS"
+				},
+				{
+					"backtrace" : 9,
+					"define" : "_UNICODE"
 				}
 			],
 			"includes" : 
 			[
 				{
-					"backtrace" : 17,
+					"backtrace" : 12,
 					"path" : "C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/lib/SFML/include"
 				},
 				{
-					"backtrace" : 17,
+					"backtrace" : 12,
 					"path" : "C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/lib/SFML/src"
 				},
 				{
-					"backtrace" : 18,
-					"isSystem" : true,
-					"path" : "C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/lib/SFML/extlibs/headers/minimp3"
+					"backtrace" : 13,
+					"path" : "C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/lib/SFML/extlibs/headers/vulkan"
 				},
 				{
-					"backtrace" : 4,
+					"backtrace" : 14,
 					"isSystem" : true,
-					"path" : "C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/lib/SFML/extlibs/headers/AL"
-				},
-				{
-					"backtrace" : 5,
-					"isSystem" : true,
-					"path" : "C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/lib/SFML/extlibs/headers"
+					"path" : "C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/lib/SFML/extlibs/headers/glad/include"
 				}
 			],
 			"language" : "CXX",
@@ -221,27 +191,32 @@
 			},
 			"sourceIndexes" : 
 			[
-				0,
-				2,
-				4,
-				7,
+				1,
+				3,
+				5,
 				9,
 				11,
-				13,
-				15,
 				17,
 				19,
-				21,
-				23,
-				25,
-				27,
+				22,
+				24,
+				26,
+				28,
+				30,
 				32,
-				34,
-				36,
-				38,
-				41,
-				43,
-				45
+				35,
+				37,
+				39,
+				42,
+				46,
+				48,
+				49,
+				51,
+				54,
+				55,
+				56,
+				58,
+				60
 			]
 		},
 		{
@@ -254,62 +229,56 @@
 			"defines" : 
 			[
 				{
-					"backtrace" : 5,
-					"define" : "FLAC__NO_DLL"
+					"define" : "SFML_WINDOW_EXPORTS"
 				},
 				{
-					"backtrace" : 5,
-					"define" : "OV_EXCLUDE_STATIC_CALLBACKS"
+					"backtrace" : 9,
+					"define" : "UNICODE"
 				},
 				{
-					"define" : "SFML_AUDIO_EXPORTS"
-				},
-				{
-					"backtrace" : 16,
+					"backtrace" : 11,
 					"define" : "_CRT_SECURE_NO_DEPRECATE"
 				},
 				{
-					"backtrace" : 16,
+					"backtrace" : 11,
 					"define" : "_SCL_SECURE_NO_WARNINGS"
+				},
+				{
+					"backtrace" : 9,
+					"define" : "_UNICODE"
 				}
 			],
 			"includes" : 
 			[
 				{
-					"backtrace" : 17,
+					"backtrace" : 12,
 					"path" : "C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/lib/SFML/include"
 				},
 				{
-					"backtrace" : 17,
+					"backtrace" : 12,
 					"path" : "C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/lib/SFML/src"
 				},
 				{
-					"backtrace" : 18,
-					"isSystem" : true,
-					"path" : "C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/lib/SFML/extlibs/headers/minimp3"
+					"backtrace" : 13,
+					"path" : "C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/lib/SFML/extlibs/headers/vulkan"
 				},
 				{
-					"backtrace" : 4,
+					"backtrace" : 14,
 					"isSystem" : true,
-					"path" : "C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/lib/SFML/extlibs/headers/AL"
-				},
-				{
-					"backtrace" : 5,
-					"isSystem" : true,
-					"path" : "C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/lib/SFML/extlibs/headers"
+					"path" : "C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/lib/SFML/extlibs/headers/glad/include"
 				}
 			],
 			"language" : "RC",
 			"sourceIndexes" : 
 			[
-				46
+				62
 			]
 		}
 	],
 	"dependencies" : 
 	[
 		{
-			"backtrace" : 5,
+			"backtrace" : 4,
 			"id" : "sfml-system::@a0857d3fa2d27435d485"
 		}
 	],
@@ -317,7 +286,7 @@
 	{
 		"name" : "SFML"
 	},
-	"id" : "sfml-audio::@2c88909a109778213ad3",
+	"id" : "sfml-window::@662453be02e81ddd067b",
 	"install" : 
 	{
 		"destinations" : 
@@ -346,37 +315,22 @@
 			},
 			{
 				"backtrace" : 4,
-				"fragment" : "C:\\Users\\Braydon\\source\\repos\\bdellagnese\\GameEngiGroup\\lib\\SFML\\extlibs\\libs-msvc-universal\\x64\\openal32.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 5,
 				"fragment" : "lib\\SFML\\lib\\sfml-system-d.lib",
 				"role" : "libraries"
 			},
 			{
+				"backtrace" : 5,
+				"fragment" : "winmm.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "gdi32.lib",
+				"role" : "libraries"
+			},
+			{
 				"backtrace" : 8,
-				"fragment" : "C:\\Users\\Braydon\\source\\repos\\bdellagnese\\GameEngiGroup\\lib\\SFML\\extlibs\\libs-msvc-universal\\x64\\vorbisenc.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 9,
-				"fragment" : "C:\\Users\\Braydon\\source\\repos\\bdellagnese\\GameEngiGroup\\lib\\SFML\\extlibs\\libs-msvc-universal\\x64\\vorbisfile.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 10,
-				"fragment" : "C:\\Users\\Braydon\\source\\repos\\bdellagnese\\GameEngiGroup\\lib\\SFML\\extlibs\\libs-msvc-universal\\x64\\vorbis.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 11,
-				"fragment" : "C:\\Users\\Braydon\\source\\repos\\bdellagnese\\GameEngiGroup\\lib\\SFML\\extlibs\\libs-msvc-universal\\x64\\ogg.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 14,
-				"fragment" : "C:\\Users\\Braydon\\source\\repos\\bdellagnese\\GameEngiGroup\\lib\\SFML\\extlibs\\libs-msvc-universal\\x64\\flac.lib",
+				"fragment" : "opengl32.lib",
 				"role" : "libraries"
 			},
 			{
@@ -386,12 +340,12 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "sfml-audio",
-	"nameOnDisk" : "sfml-audio-d-2.dll",
+	"name" : "sfml-window",
+	"nameOnDisk" : "sfml-window-d-2.dll",
 	"paths" : 
 	{
-		"build" : "lib/SFML/src/SFML/Audio",
-		"source" : "lib/SFML/src/SFML/Audio"
+		"build" : "lib/SFML/src/SFML/Window",
+		"source" : "lib/SFML/src/SFML/Window"
 	},
 	"sourceGroups" : 
 	[
@@ -426,13 +380,6 @@
 				24,
 				25,
 				26,
-				46
-			]
-		},
-		{
-			"name" : "codecs",
-			"sourceIndexes" : 
-			[
 				27,
 				28,
 				29,
@@ -451,7 +398,30 @@
 				42,
 				43,
 				44,
-				45
+				62
+			]
+		},
+		{
+			"name" : "windows",
+			"sourceIndexes" : 
+			[
+				45,
+				46,
+				47,
+				48,
+				49,
+				50,
+				51,
+				52,
+				53,
+				54,
+				55,
+				56,
+				57,
+				58,
+				59,
+				60,
+				61
 			]
 		}
 	],
@@ -459,259 +429,344 @@
 	[
 		{
 			"backtrace" : 2,
-			"compileGroupIndex" : 0,
-			"path" : "lib/SFML/src/SFML/Audio/ALCheck.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 2,
-			"path" : "lib/SFML/src/SFML/Audio/ALCheck.hpp",
+			"path" : "lib/SFML/include/SFML/Window/Clipboard.hpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 2,
 			"compileGroupIndex" : 0,
-			"path" : "lib/SFML/src/SFML/Audio/AlResource.cpp",
+			"path" : "lib/SFML/src/SFML/Window/Clipboard.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 2,
-			"path" : "lib/SFML/include/SFML/Audio/AlResource.hpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 2,
-			"compileGroupIndex" : 0,
-			"path" : "lib/SFML/src/SFML/Audio/AudioDevice.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 2,
-			"path" : "lib/SFML/src/SFML/Audio/AudioDevice.hpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 2,
-			"path" : "lib/SFML/include/SFML/Audio/Export.hpp",
+			"path" : "lib/SFML/src/SFML/Window/ClipboardImpl.hpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 2,
 			"compileGroupIndex" : 0,
-			"path" : "lib/SFML/src/SFML/Audio/Listener.cpp",
+			"path" : "lib/SFML/src/SFML/Window/Context.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 2,
-			"path" : "lib/SFML/include/SFML/Audio/Listener.hpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 2,
-			"compileGroupIndex" : 0,
-			"path" : "lib/SFML/src/SFML/Audio/Music.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 2,
-			"path" : "lib/SFML/include/SFML/Audio/Music.hpp",
+			"path" : "lib/SFML/include/SFML/Window/Context.hpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 2,
 			"compileGroupIndex" : 0,
-			"path" : "lib/SFML/src/SFML/Audio/Sound.cpp",
+			"path" : "lib/SFML/src/SFML/Window/Cursor.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 2,
-			"path" : "lib/SFML/include/SFML/Audio/Sound.hpp",
+			"path" : "lib/SFML/include/SFML/Window/Cursor.hpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 2,
-			"compileGroupIndex" : 0,
-			"path" : "lib/SFML/src/SFML/Audio/SoundBuffer.cpp",
+			"path" : "lib/SFML/src/SFML/Window/CursorImpl.hpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 2,
-			"path" : "lib/SFML/include/SFML/Audio/SoundBuffer.hpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 2,
-			"compileGroupIndex" : 0,
-			"path" : "lib/SFML/src/SFML/Audio/SoundBufferRecorder.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 2,
-			"path" : "lib/SFML/include/SFML/Audio/SoundBufferRecorder.hpp",
+			"path" : "lib/SFML/include/SFML/Window/Export.hpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 2,
 			"compileGroupIndex" : 0,
-			"path" : "lib/SFML/src/SFML/Audio/InputSoundFile.cpp",
+			"path" : "lib/SFML/src/SFML/Window/GlContext.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 2,
-			"path" : "lib/SFML/include/SFML/Audio/InputSoundFile.hpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 2,
-			"compileGroupIndex" : 0,
-			"path" : "lib/SFML/src/SFML/Audio/OutputSoundFile.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 2,
-			"path" : "lib/SFML/include/SFML/Audio/OutputSoundFile.hpp",
+			"path" : "lib/SFML/src/SFML/Window/GlContext.hpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 2,
 			"compileGroupIndex" : 0,
-			"path" : "lib/SFML/src/SFML/Audio/SoundRecorder.cpp",
+			"path" : "lib/SFML/src/SFML/Window/GlResource.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 2,
-			"path" : "lib/SFML/include/SFML/Audio/SoundRecorder.hpp",
+			"path" : "lib/SFML/include/SFML/Window/GlResource.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "lib/SFML/include/SFML/Window/ContextSettings.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "lib/SFML/include/SFML/Window/Event.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "lib/SFML/src/SFML/Window/InputImpl.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "lib/SFML/include/SFML/Window/Joystick.hpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 2,
 			"compileGroupIndex" : 0,
-			"path" : "lib/SFML/src/SFML/Audio/SoundSource.cpp",
+			"path" : "lib/SFML/src/SFML/Window/Joystick.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 2,
-			"path" : "lib/SFML/include/SFML/Audio/SoundSource.hpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 2,
-			"compileGroupIndex" : 0,
-			"path" : "lib/SFML/src/SFML/Audio/SoundStream.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 2,
-			"path" : "lib/SFML/include/SFML/Audio/SoundStream.hpp",
+			"path" : "lib/SFML/src/SFML/Window/JoystickImpl.hpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 2,
 			"compileGroupIndex" : 0,
-			"path" : "lib/SFML/src/SFML/Audio/SoundFileFactory.cpp",
+			"path" : "lib/SFML/src/SFML/Window/JoystickManager.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "lib/SFML/src/SFML/Window/JoystickManager.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "lib/SFML/include/SFML/Window/Keyboard.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "lib/SFML/src/SFML/Window/Keyboard.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "lib/SFML/include/SFML/Window/Mouse.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "lib/SFML/src/SFML/Window/Mouse.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "lib/SFML/include/SFML/Window/Touch.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "lib/SFML/src/SFML/Window/Touch.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "lib/SFML/include/SFML/Window/Sensor.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "lib/SFML/src/SFML/Window/Sensor.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "lib/SFML/src/SFML/Window/SensorImpl.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "lib/SFML/src/SFML/Window/SensorManager.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "lib/SFML/src/SFML/Window/SensorManager.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "lib/SFML/src/SFML/Window/VideoMode.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "lib/SFML/include/SFML/Window/VideoMode.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "lib/SFML/src/SFML/Window/VideoModeImpl.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "lib/SFML/src/SFML/Window/Vulkan.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "lib/SFML/include/SFML/Window/Vulkan.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "lib/SFML/src/SFML/Window/Window.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "lib/SFML/include/SFML/Window/Window.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "lib/SFML/src/SFML/Window/WindowBase.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "lib/SFML/include/SFML/Window/WindowBase.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "lib/SFML/include/SFML/Window/WindowHandle.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "lib/SFML/src/SFML/Window/WindowImpl.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "lib/SFML/src/SFML/Window/WindowImpl.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "lib/SFML/include/SFML/Window/WindowStyle.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "lib/SFML/src/SFML/Window/Win32/CursorImpl.hpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 2,
-			"path" : "lib/SFML/include/SFML/Audio/SoundFileFactory.hpp",
+			"compileGroupIndex" : 0,
+			"path" : "lib/SFML/src/SFML/Window/Win32/CursorImpl.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 2,
-			"path" : "lib/SFML/include/SFML/Audio/SoundFileFactory.inl",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 2,
-			"path" : "lib/SFML/include/SFML/Audio/SoundFileReader.hpp",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 2,
-			"path" : "lib/SFML/src/SFML/Audio/SoundFileReaderFlac.hpp",
+			"path" : "lib/SFML/src/SFML/Window/Win32/ClipboardImpl.hpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 2,
 			"compileGroupIndex" : 0,
-			"path" : "lib/SFML/src/SFML/Audio/SoundFileReaderFlac.cpp",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 2,
-			"path" : "lib/SFML/src/SFML/Audio/SoundFileReaderMp3.hpp",
+			"path" : "lib/SFML/src/SFML/Window/Win32/ClipboardImpl.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 2,
 			"compileGroupIndex" : 0,
-			"path" : "lib/SFML/src/SFML/Audio/SoundFileReaderMp3.cpp",
+			"path" : "lib/SFML/src/SFML/Window/Win32/InputImpl.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 2,
-			"path" : "lib/SFML/src/SFML/Audio/SoundFileReaderOgg.hpp",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 2,
-			"compileGroupIndex" : 0,
-			"path" : "lib/SFML/src/SFML/Audio/SoundFileReaderOgg.cpp",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 2,
-			"path" : "lib/SFML/src/SFML/Audio/SoundFileReaderWav.hpp",
+			"path" : "lib/SFML/src/SFML/Window/Win32/InputImpl.hpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 2,
 			"compileGroupIndex" : 0,
-			"path" : "lib/SFML/src/SFML/Audio/SoundFileReaderWav.cpp",
+			"path" : "lib/SFML/src/SFML/Window/Win32/JoystickImpl.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 2,
-			"path" : "lib/SFML/include/SFML/Audio/SoundFileWriter.hpp",
+			"path" : "lib/SFML/src/SFML/Window/Win32/JoystickImpl.hpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 2,
-			"path" : "lib/SFML/src/SFML/Audio/SoundFileWriterFlac.hpp",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 2,
-			"compileGroupIndex" : 0,
-			"path" : "lib/SFML/src/SFML/Audio/SoundFileWriterFlac.cpp",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 2,
-			"path" : "lib/SFML/src/SFML/Audio/SoundFileWriterOgg.hpp",
+			"path" : "lib/SFML/src/SFML/Window/Win32/SensorImpl.hpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 2,
 			"compileGroupIndex" : 0,
-			"path" : "lib/SFML/src/SFML/Audio/SoundFileWriterOgg.cpp",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 2,
-			"path" : "lib/SFML/src/SFML/Audio/SoundFileWriterWav.hpp",
+			"path" : "lib/SFML/src/SFML/Window/Win32/SensorImpl.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 2,
 			"compileGroupIndex" : 0,
-			"path" : "lib/SFML/src/SFML/Audio/SoundFileWriterWav.cpp",
+			"path" : "lib/SFML/src/SFML/Window/Win32/VideoModeImpl.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
-			"backtrace" : 19,
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "lib/SFML/src/SFML/Window/Win32/VulkanImplWin32.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"path" : "lib/SFML/src/SFML/Window/Win32/VulkanImplWin32.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "lib/SFML/src/SFML/Window/Win32/WindowImplWin32.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"path" : "lib/SFML/src/SFML/Window/Win32/WindowImplWin32.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "lib/SFML/src/SFML/Window/Win32/WglContext.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"path" : "lib/SFML/src/SFML/Window/Win32/WglContext.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 15,
 			"compileGroupIndex" : 1,
-			"path" : "out/build/x64-Debug/lib/SFML/src/SFML/Audio/sfml-audio.rc",
+			"path" : "out/build/x64-Debug/lib/SFML/src/SFML/Window/sfml-window.rc",
 			"sourceGroupIndex" : 0
 		}
 	],
