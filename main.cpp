@@ -130,6 +130,12 @@ void render(sf::RenderWindow& window) {
 
 void load() {
 	ballVelocity = { (isPlayer1Serving ? initialVelocityX : -initialVelocityX), initialVelocityY };
+
+	sf::Image Image;
+	if (!Image.loadFromFile("Assets/Sprites/TestDoorway.tga"))
+	{
+		// Error...
+	}
 }
 
 void clean() {
