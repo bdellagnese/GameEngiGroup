@@ -1,28 +1,35 @@
 #include <SFML/Graphics.hpp>
+#include <string>
 
 sf::Vector2f ballVelocity;
+sf::Event event;
+
 bool isPlayer1Serving = true;
 const float initialVelocityX = 100.f; //horizontal velocity
 const float initialVelocityY = 60.f; //vertical velocity
 
 const float velocityMultiplier = 1.1f; //how much the ball will speed up everytime it hits a paddle. Here, 10% every time.
 
-const sf::Keyboard::Key controls[4] = {
-	sf::Keyboard::W,   // Player1 UP
-	sf::Keyboard::S,   // Player1 Down
-	sf::Keyboard::Up,  // Player2 UP
-	sf::Keyboard::Down // Player2 Down
+const sf::Keyboard::Key controls[5] = {
+	sf::Keyboard::W,  // UP
+	sf::Keyboard::S,  // Down
+	sf::Keyboard::A,  // Left
+	sf::Keyboard::D,   // Right
+	sf::Keyboard::Space   // PlaceMode
 };
 
 //Parameters
 const sf::Vector2f paddleSize(25.f, 100.f);
 const float ballRadius = 10.f;
-const int gameWidth = 800;
-const int gameHeight = 600;
-const float paddleSpeed = 400.f;
+const int gameWidth = 1920;
+const int gameHeight = 1080;
+const float placeModeSpeed = 400.f;
 const float paddleOffsetWall = 10.f;
 const float time_step = 0.017f; //60 fps
 
+bool placeMode = false;
+bool canPress;
+float pressTime;
 
 //Objects of the game
 sf::CircleShape ball;
@@ -44,29 +51,43 @@ void init() {
 	paddles[1].setPosition(gameWidth - paddleOffsetWall - paddleSize.x / 2.f, gameHeight / 2.f);
 	// reset Ball Position
 	ball.setPosition(gameWidth / 2, gameHeight / 2);
+
 }
 
 void reset();
 
 void update(float dt) {
-	// handle paddle movement
+	// handle Placement
 	float direction1 = 0.0f;
 	float direction2 = 0.0f;
-	if (sf::Keyboard::isKeyPressed(controls[0])) {
+
+	// Press Delay
+	if (pressTime > 0) {
+		pressTime -= dt;
+	}
+	else {
+		canPress = true;
+	}
+
+	// Inputs
+	if (sf::Keyboard::isKeyPressed(controls[4]) && canPress){ // toggle placemode
+		placeMode = !placeMode;
+		canPress = false;
+		pressTime = 1;
+	}
+	if (sf::Keyboard::isKeyPressed(controls[0]) && placeMode) {
 		direction1--;
 	}
-	if (sf::Keyboard::isKeyPressed(controls[1])) {
+	if (sf::Keyboard::isKeyPressed(controls[1]) && placeMode) {
 		direction1++;
 	}
-	paddles[0].move(sf::Vector2f(0.f, direction1 * paddleSpeed * dt));
-
-	if (sf::Keyboard::isKeyPressed(controls[2])) {
+	if (sf::Keyboard::isKeyPressed(controls[2]) && placeMode) {
 		direction2--;
 	}
-	if (sf::Keyboard::isKeyPressed(controls[3])) {
+	if (sf::Keyboard::isKeyPressed(controls[3]) && placeMode) {
 		direction2++;
 	}
-	paddles[1].move(sf::Vector2f(0.f, direction2 * paddleSpeed * dt));
+	paddles[0].move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
 
 	ball.move(ballVelocity * dt);
 
@@ -96,9 +117,13 @@ void update(float dt) {
 }
 
 void render(sf::RenderWindow& window) {
+	// update position text
+	sf::Vector2f textPosition = paddles[0].getPosition();
+	text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
+		std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode));
+	
 	// Draw Everything
 	window.draw(paddles[0]);
-	window.draw(paddles[1]);
 	window.draw(ball);
 	window.draw(text);
 }
@@ -126,7 +151,6 @@ int main() {
 	if (!font.loadFromFile("Assets/Fonts/arial.ttf")) {
 		return -1; // Error loading font
 	}
-
 	text.setFont(font);
 	text.setString("It's all meaningless!");
 	text.setCharacterSize(24);
@@ -135,6 +159,12 @@ int main() {
 
 	sf::Clock clock;
 	while (window.isOpen()) {
+		
+		// Quit Game
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+			window.close();
+		}
+		
 		//Calculate dt
 		double dt = clock.restart().asSeconds();
 
