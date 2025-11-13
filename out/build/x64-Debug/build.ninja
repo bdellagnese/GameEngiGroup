@@ -41,42 +41,42 @@ include CMakeFiles\rules.ninja
 
 cmake_ninja_workdir = C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\out\build\x64-Debug\
 # =============================================================================
-# Object build statements for EXECUTABLE target Pong
+# Object build statements for EXECUTABLE target lab_1
 
 
 #############################################
-# Order-only phony target for Pong
+# Order-only phony target for lab_1
 
-build cmake_object_order_depends_target_Pong: phony || cmake_object_order_depends_target_sfml-graphics cmake_object_order_depends_target_sfml-system cmake_object_order_depends_target_sfml-window
+build cmake_object_order_depends_target_lab_1: phony || cmake_object_order_depends_target_sfml-graphics cmake_object_order_depends_target_sfml-system cmake_object_order_depends_target_sfml-window
 
-build CMakeFiles\Pong.dir\main.cpp.obj: CXX_COMPILER__Pong_unscanned_Debug C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\main.cpp || cmake_object_order_depends_target_Pong
+build CMakeFiles\lab_1.dir\main.cpp.obj: CXX_COMPILER__lab_1_unscanned_Debug C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\main.cpp || cmake_object_order_depends_target_lab_1
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++14
   INCLUDES = -IC:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\lib\SFML\include
-  OBJECT_DIR = CMakeFiles\Pong.dir
-  OBJECT_FILE_DIR = CMakeFiles\Pong.dir
-  TARGET_COMPILE_PDB = CMakeFiles\Pong.dir\
-  TARGET_PDB = C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\Pong.pdb
+  OBJECT_DIR = CMakeFiles\lab_1.dir
+  OBJECT_FILE_DIR = CMakeFiles\lab_1.dir
+  TARGET_COMPILE_PDB = CMakeFiles\lab_1.dir\
+  TARGET_PDB = C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\lab_1.pdb
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target Pong
+# Link build statements for EXECUTABLE target lab_1
 
 
 #############################################
-# Link the executable C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\Pong.exe
+# Link the executable C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\lab_1.exe
 
-build C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\Pong.exe: CXX_EXECUTABLE_LINKER__Pong_Debug CMakeFiles\Pong.dir\main.cpp.obj | lib\SFML\lib\sfml-graphics-d.lib lib\SFML\lib\sfml-window-d.lib lib\SFML\lib\sfml-system-d.lib || C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-graphics-d-2.dll C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-system-d-2.dll C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-window-d-2.dll
+build C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\lab_1.exe: CXX_EXECUTABLE_LINKER__lab_1_Debug CMakeFiles\lab_1.dir\main.cpp.obj | lib\SFML\lib\sfml-graphics-d.lib lib\SFML\lib\sfml-window-d.lib lib\SFML\lib\sfml-system-d.lib || C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-graphics-d-2.dll C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-system-d-2.dll C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-window-d-2.dll
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = lib\SFML\lib\sfml-graphics-d.lib  lib\SFML\lib\sfml-window-d.lib  lib\SFML\lib\sfml-system-d.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   LINK_PATH = -LIBPATH:C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\out\build\x64-Debug\lib\SFML\lib
-  OBJECT_DIR = CMakeFiles\Pong.dir
+  OBJECT_DIR = CMakeFiles\lab_1.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_COMPILE_PDB = CMakeFiles\Pong.dir\
-  TARGET_FILE = C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\Pong.exe
-  TARGET_IMPLIB = Pong.lib
-  TARGET_PDB = C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\Pong.pdb
+  TARGET_COMPILE_PDB = CMakeFiles\lab_1.dir\
+  TARGET_FILE = C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\lab_1.exe
+  TARGET_IMPLIB = lab_1.lib
+  TARGET_PDB = C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\lab_1.pdb
 
 
 #############################################
@@ -493,9 +493,9 @@ build lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\sfml-system.rc.res: RC
 
 
 #############################################
-# Link the shared library C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-system-d-2.dll
+# Link the shared library C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-system-d-2.dll
 
-build C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-system-d-2.dll lib\SFML\lib\sfml-system-d.lib: CXX_SHARED_LIBRARY_LINKER__sfml-system_Debug lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Clock.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Err.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Lock.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Mutex.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Sleep.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\String.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Thread.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\ThreadLocal.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Time.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\FileInputStream.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\MemoryInputStream.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Win32\ClockImpl.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Win32\MutexImpl.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Win32\SleepImpl.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Win32\ThreadImpl.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Win32\ThreadLocalImpl.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\sfml-system.rc.res
+build C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-system-d-2.dll lib\SFML\lib\sfml-system-d.lib: CXX_SHARED_LIBRARY_LINKER__sfml-system_Debug lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Clock.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Err.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Lock.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Mutex.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Sleep.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\String.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Thread.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\ThreadLocal.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Time.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\FileInputStream.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\MemoryInputStream.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Win32\ClockImpl.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Win32\MutexImpl.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Win32\SleepImpl.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Win32\ThreadImpl.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\Win32\ThreadLocalImpl.cpp.obj lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\sfml-system.rc.res
   LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL
   LINK_LIBRARIES = winmm.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
@@ -504,7 +504,7 @@ build C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-system
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = lib\SFML\src\SFML\System\CMakeFiles\sfml-system.dir\
-  TARGET_FILE = C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-system-d-2.dll
+  TARGET_FILE = C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-system-d-2.dll
   TARGET_IMPLIB = lib\SFML\lib\sfml-system-d.lib
   TARGET_PDB = lib\SFML\lib\sfml-system-d.pdb
 
@@ -967,9 +967,9 @@ build lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\sfml-window.rc.res: RC
 
 
 #############################################
-# Link the shared library C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-window-d-2.dll
+# Link the shared library C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-window-d-2.dll
 
-build C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-window-d-2.dll lib\SFML\lib\sfml-window-d.lib: CXX_SHARED_LIBRARY_LINKER__sfml-window_Debug lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Clipboard.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Context.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Cursor.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\GlContext.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\GlResource.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Joystick.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\JoystickManager.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Keyboard.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Mouse.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Touch.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Sensor.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\SensorManager.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\VideoMode.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Vulkan.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Window.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\WindowBase.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\WindowImpl.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Win32\CursorImpl.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Win32\ClipboardImpl.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Win32\InputImpl.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Win32\JoystickImpl.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Win32\SensorImpl.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Win32\VideoModeImpl.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Win32\VulkanImplWin32.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Win32\WindowImplWin32.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Win32\WglContext.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\sfml-window.rc.res | lib\SFML\lib\sfml-system-d.lib || C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-system-d-2.dll
+build C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-window-d-2.dll lib\SFML\lib\sfml-window-d.lib: CXX_SHARED_LIBRARY_LINKER__sfml-window_Debug lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Clipboard.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Context.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Cursor.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\GlContext.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\GlResource.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Joystick.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\JoystickManager.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Keyboard.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Mouse.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Touch.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Sensor.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\SensorManager.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\VideoMode.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Vulkan.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Window.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\WindowBase.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\WindowImpl.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Win32\CursorImpl.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Win32\ClipboardImpl.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Win32\InputImpl.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Win32\JoystickImpl.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Win32\SensorImpl.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Win32\VideoModeImpl.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Win32\VulkanImplWin32.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Win32\WindowImplWin32.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\Win32\WglContext.cpp.obj lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\sfml-window.rc.res | lib\SFML\lib\sfml-system-d.lib || C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-system-d-2.dll
   LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL
   LINK_LIBRARIES = lib\SFML\lib\sfml-system-d.lib  winmm.lib  gdi32.lib  opengl32.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
@@ -978,7 +978,7 @@ build C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-window
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = lib\SFML\src\SFML\Window\CMakeFiles\sfml-window.dir\
-  TARGET_FILE = C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-window-d-2.dll
+  TARGET_FILE = C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-window-d-2.dll
   TARGET_IMPLIB = lib\SFML\lib\sfml-window-d.lib
   TARGET_PDB = lib\SFML\lib\sfml-window-d.pdb
 
@@ -1179,9 +1179,9 @@ build lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\sfml-network.rc.res:
 
 
 #############################################
-# Link the shared library C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-network-d-2.dll
+# Link the shared library C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-network-d-2.dll
 
-build C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-network-d-2.dll lib\SFML\lib\sfml-network-d.lib: CXX_SHARED_LIBRARY_LINKER__sfml-network_Debug lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\Ftp.cpp.obj lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\Http.cpp.obj lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\IpAddress.cpp.obj lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\Packet.cpp.obj lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\Socket.cpp.obj lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\SocketSelector.cpp.obj lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\TcpListener.cpp.obj lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\TcpSocket.cpp.obj lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\UdpSocket.cpp.obj lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\Win32\SocketImpl.cpp.obj lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\sfml-network.rc.res | lib\SFML\lib\sfml-system-d.lib || C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-system-d-2.dll
+build C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-network-d-2.dll lib\SFML\lib\sfml-network-d.lib: CXX_SHARED_LIBRARY_LINKER__sfml-network_Debug lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\Ftp.cpp.obj lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\Http.cpp.obj lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\IpAddress.cpp.obj lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\Packet.cpp.obj lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\Socket.cpp.obj lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\SocketSelector.cpp.obj lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\TcpListener.cpp.obj lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\TcpSocket.cpp.obj lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\UdpSocket.cpp.obj lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\Win32\SocketImpl.cpp.obj lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\sfml-network.rc.res | lib\SFML\lib\sfml-system-d.lib || C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-system-d-2.dll
   LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL
   LINK_LIBRARIES = lib\SFML\lib\sfml-system-d.lib  ws2_32.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
@@ -1190,7 +1190,7 @@ build C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-networ
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = lib\SFML\src\SFML\Network\CMakeFiles\sfml-network.dir\
-  TARGET_FILE = C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-network-d-2.dll
+  TARGET_FILE = C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-network-d-2.dll
   TARGET_IMPLIB = lib\SFML\lib\sfml-network-d.lib
   TARGET_PDB = lib\SFML\lib\sfml-network-d.pdb
 
@@ -1571,9 +1571,9 @@ build lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\sfml-graphics.rc.r
 
 
 #############################################
-# Link the shared library C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-graphics-d-2.dll
+# Link the shared library C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-graphics-d-2.dll
 
-build C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-graphics-d-2.dll lib\SFML\lib\sfml-graphics-d.lib: CXX_SHARED_LIBRARY_LINKER__sfml-graphics_Debug lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\BlendMode.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Color.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Font.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Glsl.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\GLCheck.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\GLExtensions.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Image.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\ImageLoader.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RenderStates.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RenderTexture.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RenderTarget.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RenderWindow.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Shader.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Texture.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\TextureSaver.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Transform.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Transformable.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\View.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Vertex.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Shape.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\CircleShape.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RectangleShape.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\ConvexShape.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Sprite.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Text.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\VertexArray.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\VertexBuffer.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RenderTextureImpl.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RenderTextureImplFBO.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RenderTextureImplDefault.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\sfml-graphics.rc.res | lib\SFML\lib\sfml-window-d.lib lib\SFML\lib\sfml-system-d.lib C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\lib\SFML\extlibs\libs-msvc-universal\x64\freetype.lib || C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-system-d-2.dll C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-window-d-2.dll
+build C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-graphics-d-2.dll lib\SFML\lib\sfml-graphics-d.lib: CXX_SHARED_LIBRARY_LINKER__sfml-graphics_Debug lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\BlendMode.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Color.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Font.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Glsl.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\GLCheck.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\GLExtensions.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Image.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\ImageLoader.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RenderStates.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RenderTexture.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RenderTarget.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RenderWindow.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Shader.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Texture.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\TextureSaver.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Transform.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Transformable.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\View.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Vertex.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Shape.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\CircleShape.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RectangleShape.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\ConvexShape.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Sprite.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Text.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\VertexArray.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\VertexBuffer.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RenderTextureImpl.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RenderTextureImplFBO.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RenderTextureImplDefault.cpp.obj lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\sfml-graphics.rc.res | lib\SFML\lib\sfml-window-d.lib lib\SFML\lib\sfml-system-d.lib C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\lib\SFML\extlibs\libs-msvc-universal\x64\freetype.lib || C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-system-d-2.dll C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-window-d-2.dll
   LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL
   LINK_LIBRARIES = lib\SFML\lib\sfml-window-d.lib  lib\SFML\lib\sfml-system-d.lib  C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\lib\SFML\extlibs\libs-msvc-universal\x64\freetype.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
@@ -1582,7 +1582,7 @@ build C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-graphi
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = lib\SFML\src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\
-  TARGET_FILE = C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-graphics-d-2.dll
+  TARGET_FILE = C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-graphics-d-2.dll
   TARGET_IMPLIB = lib\SFML\lib\sfml-graphics-d.lib
   TARGET_PDB = lib\SFML\lib\sfml-graphics-d.pdb
 
@@ -1882,9 +1882,9 @@ build lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\sfml-audio.rc.res: RC_CO
 
 
 #############################################
-# Link the shared library C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-audio-d-2.dll
+# Link the shared library C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-audio-d-2.dll
 
-build C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-audio-d-2.dll lib\SFML\lib\sfml-audio-d.lib: CXX_SHARED_LIBRARY_LINKER__sfml-audio_Debug lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\ALCheck.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\AlResource.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\AudioDevice.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\Listener.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\Music.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\Sound.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundBuffer.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundBufferRecorder.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\InputSoundFile.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\OutputSoundFile.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundRecorder.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundSource.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundStream.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundFileFactory.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundFileReaderFlac.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundFileReaderMp3.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundFileReaderOgg.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundFileReaderWav.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundFileWriterFlac.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundFileWriterOgg.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundFileWriterWav.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\sfml-audio.rc.res | C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\lib\SFML\extlibs\libs-msvc-universal\x64\openal32.lib lib\SFML\lib\sfml-system-d.lib C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\lib\SFML\extlibs\libs-msvc-universal\x64\vorbisenc.lib C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\lib\SFML\extlibs\libs-msvc-universal\x64\vorbisfile.lib C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\lib\SFML\extlibs\libs-msvc-universal\x64\vorbis.lib C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\lib\SFML\extlibs\libs-msvc-universal\x64\ogg.lib C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\lib\SFML\extlibs\libs-msvc-universal\x64\flac.lib || C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-system-d-2.dll
+build C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-audio-d-2.dll lib\SFML\lib\sfml-audio-d.lib: CXX_SHARED_LIBRARY_LINKER__sfml-audio_Debug lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\ALCheck.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\AlResource.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\AudioDevice.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\Listener.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\Music.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\Sound.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundBuffer.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundBufferRecorder.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\InputSoundFile.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\OutputSoundFile.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundRecorder.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundSource.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundStream.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundFileFactory.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundFileReaderFlac.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundFileReaderMp3.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundFileReaderOgg.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundFileReaderWav.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundFileWriterFlac.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundFileWriterOgg.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\SoundFileWriterWav.cpp.obj lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\sfml-audio.rc.res | C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\lib\SFML\extlibs\libs-msvc-universal\x64\openal32.lib lib\SFML\lib\sfml-system-d.lib C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\lib\SFML\extlibs\libs-msvc-universal\x64\vorbisenc.lib C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\lib\SFML\extlibs\libs-msvc-universal\x64\vorbisfile.lib C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\lib\SFML\extlibs\libs-msvc-universal\x64\vorbis.lib C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\lib\SFML\extlibs\libs-msvc-universal\x64\ogg.lib C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\lib\SFML\extlibs\libs-msvc-universal\x64\flac.lib || C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-system-d-2.dll
   LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL
   LINK_LIBRARIES = C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\lib\SFML\extlibs\libs-msvc-universal\x64\openal32.lib  lib\SFML\lib\sfml-system-d.lib  C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\lib\SFML\extlibs\libs-msvc-universal\x64\vorbisenc.lib  C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\lib\SFML\extlibs\libs-msvc-universal\x64\vorbisfile.lib  C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\lib\SFML\extlibs\libs-msvc-universal\x64\vorbis.lib  C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\lib\SFML\extlibs\libs-msvc-universal\x64\ogg.lib  C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\lib\SFML\extlibs\libs-msvc-universal\x64\flac.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
@@ -1893,7 +1893,7 @@ build C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-audio-
   PRE_LINK = cd .
   RESTAT = 1
   TARGET_COMPILE_PDB = lib\SFML\src\SFML\Audio\CMakeFiles\sfml-audio.dir\
-  TARGET_FILE = C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-audio-d-2.dll
+  TARGET_FILE = C:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-audio-d-2.dll
   TARGET_IMPLIB = lib\SFML\lib\sfml-audio-d.lib
   TARGET_PDB = lib\SFML\lib\sfml-audio-d.pdb
 
@@ -1977,33 +1977,33 @@ build lib\SFML\src\SFML\Audio\install\local: phony lib\SFML\src\SFML\Audio\CMake
 # =============================================================================
 # Target aliases.
 
-build Pong: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\Pong.exe
+build lab_1: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\lab_1.exe
 
-build Pong.exe: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\Pong.exe
+build lab_1.exe: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\lab_1.exe
 
-build sfml-audio: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-audio-d-2.dll
+build sfml-audio: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-audio-d-2.dll
 
-build sfml-audio-d-2.dll: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-audio-d-2.dll
+build sfml-audio-d-2.dll: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-audio-d-2.dll
 
-build sfml-graphics: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-graphics-d-2.dll
+build sfml-graphics: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-graphics-d-2.dll
 
-build sfml-graphics-d-2.dll: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-graphics-d-2.dll
+build sfml-graphics-d-2.dll: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-graphics-d-2.dll
 
 build sfml-main: phony lib\SFML\lib\sfml-main-d.lib
 
 build sfml-main-d.lib: phony lib\SFML\lib\sfml-main-d.lib
 
-build sfml-network: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-network-d-2.dll
+build sfml-network: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-network-d-2.dll
 
-build sfml-network-d-2.dll: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-network-d-2.dll
+build sfml-network-d-2.dll: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-network-d-2.dll
 
-build sfml-system: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-system-d-2.dll
+build sfml-system: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-system-d-2.dll
 
-build sfml-system-d-2.dll: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-system-d-2.dll
+build sfml-system-d-2.dll: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-system-d-2.dll
 
-build sfml-window: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-window-d-2.dll
+build sfml-window: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-window-d-2.dll
 
-build sfml-window-d-2.dll: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-window-d-2.dll
+build sfml-window-d-2.dll: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-window-d-2.dll
 
 # =============================================================================
 # Folder targets.
@@ -2013,7 +2013,7 @@ build sfml-window-d-2.dll: phony C$:\Users\Braydon\source\repos\bdellagnese\Game
 #############################################
 # Folder: C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/out/build/x64-Debug
 
-build all: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\Pong.exe lib\SFML\all
+build all: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\lab_1.exe lib\SFML\all
 
 # =============================================================================
 
@@ -2034,14 +2034,14 @@ build lib\SFML\src\SFML\all: phony lib\SFML\src\SFML\System\all lib\SFML\src\SFM
 #############################################
 # Folder: C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/out/build/x64-Debug/lib/SFML/src/SFML/Audio
 
-build lib\SFML\src\SFML\Audio\all: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-audio-d-2.dll
+build lib\SFML\src\SFML\Audio\all: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-audio-d-2.dll
 
 # =============================================================================
 
 #############################################
 # Folder: C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/out/build/x64-Debug/lib/SFML/src/SFML/Graphics
 
-build lib\SFML\src\SFML\Graphics\all: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-graphics-d-2.dll
+build lib\SFML\src\SFML\Graphics\all: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-graphics-d-2.dll
 
 # =============================================================================
 
@@ -2055,21 +2055,21 @@ build lib\SFML\src\SFML\Main\all: phony lib\SFML\lib\sfml-main-d.lib
 #############################################
 # Folder: C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/out/build/x64-Debug/lib/SFML/src/SFML/Network
 
-build lib\SFML\src\SFML\Network\all: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-network-d-2.dll
+build lib\SFML\src\SFML\Network\all: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-network-d-2.dll
 
 # =============================================================================
 
 #############################################
 # Folder: C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/out/build/x64-Debug/lib/SFML/src/SFML/System
 
-build lib\SFML\src\SFML\System\all: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-system-d-2.dll
+build lib\SFML\src\SFML\System\all: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-system-d-2.dll
 
 # =============================================================================
 
 #############################################
 # Folder: C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/out/build/x64-Debug/lib/SFML/src/SFML/Window
 
-build lib\SFML\src\SFML\Window\all: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\Build\sfml-window-d-2.dll
+build lib\SFML\src\SFML\Window\all: phony C$:\Users\Braydon\source\repos\bdellagnese\GameEngiGroup\GameBuild\sfml-window-d-2.dll
 
 # =============================================================================
 # Built-in targets

@@ -9,7 +9,7 @@
 		"files" : 
 		[
 			"lib/SFML/cmake/Macros.cmake",
-			"lib/SFML/src/SFML/Window/CMakeLists.txt"
+			"lib/SFML/src/SFML/System/CMakeLists.txt"
 		],
 		"nodes" : 
 		[
@@ -19,7 +19,7 @@
 			{
 				"command" : 1,
 				"file" : 1,
-				"line" : 284,
+				"line" : 89,
 				"parent" : 0
 			},
 			{
@@ -38,10 +38,10 @@
 			"destination" : "lib",
 			"paths" : 
 			[
-				"lib/SFML/lib/sfml-window-d.lib"
+				"lib/SFML/lib/sfml-system-d.lib"
 			],
-			"targetId" : "sfml-window::@662453be02e81ddd067b",
-			"targetIndex" : 6,
+			"targetId" : "sfml-system::@a0857d3fa2d27435d485",
+			"targetIndex" : 5,
 			"targetIsImportLibrary" : true,
 			"type" : "target"
 		},
@@ -51,16 +51,16 @@
 			"destination" : "bin",
 			"paths" : 
 			[
-				"C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/Build/sfml-window-d-2.dll"
+				"C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/GameBuild/sfml-system-d-2.dll"
 			],
-			"targetId" : "sfml-window::@662453be02e81ddd067b",
-			"targetIndex" : 6,
+			"targetId" : "sfml-system::@a0857d3fa2d27435d485",
+			"targetIndex" : 5,
 			"type" : "target"
 		}
 	],
 	"paths" : 
 	{
-		"build" : "lib/SFML/src/SFML/Window",
-		"source" : "lib/SFML/src/SFML/Window"
+		"build" : "lib/SFML/src/SFML/System",
+		"source" : "lib/SFML/src/SFML/System"
 	}
 }

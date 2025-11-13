@@ -9,7 +9,7 @@
 		"files" : 
 		[
 			"lib/SFML/cmake/Macros.cmake",
-			"lib/SFML/src/SFML/System/CMakeLists.txt"
+			"lib/SFML/src/SFML/Graphics/CMakeLists.txt"
 		],
 		"nodes" : 
 		[
@@ -38,10 +38,10 @@
 			"destination" : "lib",
 			"paths" : 
 			[
-				"lib/SFML/lib/sfml-system-d.lib"
+				"lib/SFML/lib/sfml-graphics-d.lib"
 			],
-			"targetId" : "sfml-system::@a0857d3fa2d27435d485",
-			"targetIndex" : 5,
+			"targetId" : "sfml-graphics::@05826a7f30b7c69d94d4",
+			"targetIndex" : 2,
 			"targetIsImportLibrary" : true,
 			"type" : "target"
 		},
@@ -51,16 +51,16 @@
 			"destination" : "bin",
 			"paths" : 
 			[
-				"C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/Build/sfml-system-d-2.dll"
+				"C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/GameBuild/sfml-graphics-d-2.dll"
 			],
-			"targetId" : "sfml-system::@a0857d3fa2d27435d485",
-			"targetIndex" : 5,
+			"targetId" : "sfml-graphics::@05826a7f30b7c69d94d4",
+			"targetIndex" : 2,
 			"type" : "target"
 		}
 	],
 	"paths" : 
 	{
-		"build" : "lib/SFML/src/SFML/System",
-		"source" : "lib/SFML/src/SFML/System"
+		"build" : "lib/SFML/src/SFML/Graphics",
+		"source" : "lib/SFML/src/SFML/Graphics"
 	}
 }

@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/Build/Pong.exe"
+			"path" : "C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/GameBuild/lab_1.exe"
 		},
 		{
-			"path" : "C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/Build/Pong.pdb"
+			"path" : "C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/GameBuild/lab_1.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -32,19 +32,19 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 19,
+				"line" : 17,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 16,
+				"line" : 14,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 21,
+				"line" : 19,
 				"parent" : 0
 			},
 			{
@@ -68,7 +68,7 @@
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 20,
+				"line" : 18,
 				"parent" : 0
 			}
 		]
@@ -119,7 +119,7 @@
 			"id" : "sfml-graphics::@05826a7f30b7c69d94d4"
 		}
 	],
-	"id" : "Pong::@6890427a1f51a3e7e1df",
+	"id" : "lab_1::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -159,8 +159,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "Pong",
-	"nameOnDisk" : "Pong.exe",
+	"name" : "lab_1",
+	"nameOnDisk" : "lab_1.exe",
 	"paths" : 
 	{
 		"build" : ".",

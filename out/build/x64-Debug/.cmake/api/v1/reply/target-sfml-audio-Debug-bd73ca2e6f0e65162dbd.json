@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/Build/sfml-audio-d-2.dll"
+			"path" : "C:/Users/Braydon/source/repos/bdellagnese/GameEngiGroup/GameBuild/sfml-audio-d-2.dll"
 		},
 		{
 			"path" : "lib/SFML/lib/sfml-audio-d.lib"
