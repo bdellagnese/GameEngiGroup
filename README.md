@@ -1,2 +1,7 @@
 # GameEngiGroup
-Repo for group project in games engineering
+Fix All Shop (DEV 0.0)
+
+Current Controls:
+[WASD - Movement]
+[Space - Place Mode]
+[Escape - Quit]
