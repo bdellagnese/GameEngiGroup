@@ -4,7 +4,7 @@ void GameState::handleInput() {
     // Handle input for game
 }
 
-void GameState::update() {
+void GameState::update(float& dt) {
     // Update game logic
 }
 

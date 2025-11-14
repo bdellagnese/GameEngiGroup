@@ -19,8 +19,7 @@ float pressTime;
 // Parameters
 const int gameWidth = 1920;
 const int gameHeight = 1080;
-const float placeModeSpeed = 200.f;
-float dt;
+const float placeModeSpeed = 25.f;
 void load();
 
 // handle Placement
@@ -36,21 +35,11 @@ const sf::Keyboard::Key controls[5] = {
 	sf::Keyboard::Space   // PlaceMode
 };
 
-void MenuState::handleInput() {
-	// Handle input for main menu
-    
+void MenuState::handleInput() { // Handle input for main menu
 	// Start Game
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F))
 	{
 		startGame = true;
-	}
-
-	// Press Delay
-	if (pressTime > 0) {
-		pressTime -= dt;
-	}
-	else {
-		canPress = true;
 	}
 
 	// Inputs for DEBUG PLACEMODE
@@ -60,22 +49,22 @@ void MenuState::handleInput() {
 		pressTime = 1;
 	}
 	else if (sf::Keyboard::isKeyPressed(controls[0]) && placeMode) {
-		if (direction1 > -placeModeSpeed* 2) {
+		if (direction1 > -placeModeSpeed) {
 			direction1--;
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(controls[1]) && placeMode) {
-		if (direction1 < placeModeSpeed * 2) {
+		if (direction1 < placeModeSpeed) {
 			direction1++;
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(controls[2]) && placeMode) {
-		if (direction2 > -placeModeSpeed * 2) {
+		if (direction2 > -placeModeSpeed) {
 			direction2--;
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(controls[3]) && placeMode) {
-		if (direction2 < placeModeSpeed * 2) {
+		if (direction2 < placeModeSpeed) {
 			direction2++;
 		}
 	}
@@ -84,10 +73,14 @@ void MenuState::handleInput() {
 	}
 }
 
-void MenuState::update() {
-	//Calculate dt
-	sf::Clock clock;
-	dt = clock.restart().asSeconds();
+void MenuState::update(float& dt) {
+	// Press Delay
+	if (pressTime > 0) {
+		pressTime -= dt;
+	}
+	else {
+		canPress = true;
+	}
 
 	//PLACE MODE - can be used for any sprite
 	DoorwaySpr.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));

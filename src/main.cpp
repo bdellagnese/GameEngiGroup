@@ -15,6 +15,7 @@ const int gameHeight = 1080;
 const float placeModeSpeed = 400.f;
 const float time_step = 0.017f; //60 fps
 
+
 void init() {
 
 }
@@ -30,6 +31,7 @@ void render(sf::RenderWindow& window) {
 int main() {
 	//create the window
 	sf::RenderWindow window(sf::VideoMode({ gameWidth, gameHeight }), "FixAllShop");
+	sf::Clock clock;
 
 	//initialise and load
 	init();
@@ -40,18 +42,16 @@ int main() {
 	// Create instances of your states
 	MenuState menuState;
 	GameState gameState;
-	
-	//Calculate dt
-	sf::Clock clock;
-	float dt = clock.restart().asSeconds();
 
 	while (window.isOpen()) {
+		//Calculate dt
+		float dt = clock.restart().asSeconds();
 		
 		// HANDLE STATE / SCENE CHANGES
 		switch (currentState) {
 		case States::MENU:
 			menuState.handleInput();
-			menuState.update();
+			menuState.update(dt);
 			menuState.render(window);
 			
 			// Example transition to PLAY state
@@ -63,7 +63,7 @@ int main() {
 
 		case States::PLAY:
 			gameState.handleInput();
-			gameState.update();
+			gameState.update(dt);
 			gameState.render(window);
 			break;
 		}
