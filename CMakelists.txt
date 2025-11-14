@@ -14,6 +14,6 @@ set(SFML_INCS "lib/SFML/include")
 link_directories("${CMAKE_BINARY_DIR}/lib/SFML/lib")
 
 #### Practical 1 ####
-add_executable(FixAllShop main.cpp)
+add_executable(FixAllShop "src/main.cpp" "src/State.h" "src/MenuState.h" "src/MenuState.cpp" "src/GameState.h" "src/GameState.cpp")
 target_include_directories(FixAllShop PRIVATE ${SFML_INCS})
 target_link_libraries(FixAllShop sfml-graphics)
