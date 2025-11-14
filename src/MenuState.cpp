@@ -74,6 +74,11 @@ void MenuState::handleInput() { // Handle input for main menu
 }
 
 void MenuState::update(float& dt) {
+	// Check if has already loaded
+	if (!hasLoaded) {
+		load();
+	}
+
 	// Press Delay
 	if (pressTime > 0) {
 		pressTime -= dt;
@@ -82,26 +87,21 @@ void MenuState::update(float& dt) {
 		canPress = true;
 	}
 
-	//PLACE MODE - can be used for any sprite
+	// PLACE MODE - can be used for any sprite
 	DoorwaySpr.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
-    
-    // Check if has already loaded
-    if (!hasLoaded) {
-		load();
-    }
 
-    // update debug position text
+    // DEBUG TEXT - "(x,y) Placing: t/f"
     sf::Vector2f textPosition = DoorwaySpr.getPosition();
+
     text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
         std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode));
 }
 
-void MenuState::render(sf::RenderWindow& window) {
-    // Render main menu
-	
-    // Render Objects
+void MenuState::render(sf::RenderWindow& window) { // Render Scene
+	//Bottom Layer - The background
 	window.draw(DoorwaySpr);
 	window.draw(text);
+	//Top Layer - UI
 }
 
 void load() {
