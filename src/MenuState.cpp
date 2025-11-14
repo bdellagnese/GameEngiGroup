@@ -19,8 +19,7 @@ float pressTime;
 // Parameters
 const int gameWidth = 1920;
 const int gameHeight = 1080;
-const float placeModeSpeed = 200.f;
-float dt;
+const float placeModeSpeed = 25.f;
 void load();
 
 // handle Placement
@@ -36,13 +35,48 @@ const sf::Keyboard::Key controls[5] = {
 	sf::Keyboard::Space   // PlaceMode
 };
 
-void MenuState::handleInput() {
-	// Handle input for main menu
-    
+void MenuState::handleInput() { // Handle input for main menu
 	// Start Game
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F))
 	{
 		startGame = true;
+	}
+
+	// Inputs for DEBUG PLACEMODE
+	if (sf::Keyboard::isKeyPressed(controls[4]) && canPress) { // toggle placemode
+		placeMode = !placeMode;
+		canPress = false;
+		pressTime = 1;
+	}
+	else if (sf::Keyboard::isKeyPressed(controls[0]) && placeMode) {
+		if (direction1 > -placeModeSpeed) {
+			direction1--;
+		}
+	}
+	else if (sf::Keyboard::isKeyPressed(controls[1]) && placeMode) {
+		if (direction1 < placeModeSpeed) {
+			direction1++;
+		}
+	}
+	else if (sf::Keyboard::isKeyPressed(controls[2]) && placeMode) {
+		if (direction2 > -placeModeSpeed) {
+			direction2--;
+		}
+	}
+	else if (sf::Keyboard::isKeyPressed(controls[3]) && placeMode) {
+		if (direction2 < placeModeSpeed) {
+			direction2++;
+		}
+	}
+	else {
+		direction2 = 0; direction1 = 0;
+	}
+}
+
+void MenuState::update(float& dt) {
+	// Check if has already loaded
+	if (!hasLoaded) {
+		load();
 	}
 
 	// Press Delay
@@ -53,62 +87,21 @@ void MenuState::handleInput() {
 		canPress = true;
 	}
 
-	// Inputs for DEBUG PLACEMODE
-	if (sf::Keyboard::isKeyPressed(controls[4]) && canPress) { // toggle placemode
-		placeMode = !placeMode;
-		canPress = false;
-		pressTime = 1;
-	}
-	else if (sf::Keyboard::isKeyPressed(controls[0]) && placeMode) {
-		if (direction1 > -placeModeSpeed* 2) {
-			direction1--;
-		}
-	}
-	else if (sf::Keyboard::isKeyPressed(controls[1]) && placeMode) {
-		if (direction1 < placeModeSpeed * 2) {
-			direction1++;
-		}
-	}
-	else if (sf::Keyboard::isKeyPressed(controls[2]) && placeMode) {
-		if (direction2 > -placeModeSpeed * 2) {
-			direction2--;
-		}
-	}
-	else if (sf::Keyboard::isKeyPressed(controls[3]) && placeMode) {
-		if (direction2 < placeModeSpeed * 2) {
-			direction2++;
-		}
-	}
-	else {
-		direction2 = 0; direction1 = 0;
-	}
-}
-
-void MenuState::update() {
-	//Calculate dt
-	sf::Clock clock;
-	dt = clock.restart().asSeconds();
-
-	//PLACE MODE - can be used for any sprite
+	// PLACE MODE - can be used for any sprite
 	DoorwaySpr.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
-    
-    // Check if has already loaded
-    if (!hasLoaded) {
-		load();
-    }
 
-    // update debug position text
+    // DEBUG TEXT - "(x,y) Placing: t/f"
     sf::Vector2f textPosition = DoorwaySpr.getPosition();
+
     text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
         std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode));
 }
 
-void MenuState::render(sf::RenderWindow& window) {
-    // Render main menu
-	
-    // Render Objects
+void MenuState::render(sf::RenderWindow& window) { // Render Scene
+	//Bottom Layer - The background
 	window.draw(DoorwaySpr);
 	window.draw(text);
+	//Top Layer - UI
 }
 
 void load() {
