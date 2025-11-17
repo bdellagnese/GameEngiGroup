@@ -76,6 +76,8 @@ void DoorScene::update(float& dt) {
 
 void DoorScene::render(sf::RenderWindow& window) {
 	// Render game
+	
+	window.draw(doorPlaceholder);
 }
 
 void loadDoor() {

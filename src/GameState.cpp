@@ -1,9 +1,12 @@
 #include <SFML/Graphics.hpp>
+#include <string>
 #include "GameVariables.h"
 #include "GameState.h"
 
 bool hasLoadedGame = false;
 void loadGame();
+
+bool canClick = false;
 
 // Objects
 sf::Sprite gamePlaceholder;
@@ -22,6 +25,9 @@ sf::Texture orbTextureHover;
 sf::Sprite bookSprite;
 sf::Texture bookTexture;
 sf::Texture bookTextureHover;
+
+sf::Text debugText;
+sf::Font debugFont;
 
 // Controls
 const sf::Keyboard::Key controls[5] = {
@@ -68,7 +74,8 @@ void GameState::handleInput() {
 void GameState::update(float& dt) {
 	// Update game logic
     if (!hasLoadedGame) {
-        loadGame();
+		pressTime = 1;
+		loadGame();
     }
 
     // Basic Timer
@@ -76,16 +83,15 @@ void GameState::update(float& dt) {
         pressTime -= dt;
     }
     else {
-        canPress = true;
+		canClick = true;
     }
 
     // PLACE MODE - can be used for any sprite
-	gamePlaceholder.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
-
+	bookSprite.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
     // DEBUG TEXT - "(x,y) Placing: t/f"
-    sf::Vector2f textPosition = gamePlaceholder.getPosition();
+    sf::Vector2f textPosition = bookSprite.getPosition();
 
-    text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
+	debugText.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
         std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode));
 }
 
@@ -98,10 +104,10 @@ void GameState::render(sf::RenderWindow& window) {
 	// retrieve the bounding box of the sprite
 	sf::FloatRect doorBounds = doorSprite.getGlobalBounds();
 	sf::FloatRect orbBounds = orbSprite.getGlobalBounds();
-	sf::FloatRect bookBounds = doorSprite.getGlobalBounds();
+	sf::FloatRect bookBounds = bookSprite.getGlobalBounds();
 
 	// mouse hovering on startButton
-	if (doorBounds.contains(mouse))
+	if (doorBounds.contains(mouse) && canClick)
 	{
 		doorSprite.setTexture(doorTextureHover);
 
@@ -110,7 +116,7 @@ void GameState::render(sf::RenderWindow& window) {
 			stateChange = 1; // DOOR
 		}
 	}
-	else if (orbBounds.contains(mouse))
+	/*else if (orbBounds.contains(mouse) && canClick)
 	{
 		orbSprite.setTexture(orbTextureHover);
 
@@ -118,8 +124,8 @@ void GameState::render(sf::RenderWindow& window) {
 		{
 			stateChange = 2; // ORB
 		}
-	}
-	else if (bookBounds.contains(mouse))
+	}*/
+	else if (bookBounds.contains(mouse) && canClick)
 	{
 		bookSprite.setTexture(bookTextureHover);
 
@@ -129,9 +135,9 @@ void GameState::render(sf::RenderWindow& window) {
 		}
 	}
 	else {
-		doorSprite.setTexture(doorTextureHover);
-		orbSprite.setTexture(orbTextureHover);
-		doorSprite.setTexture(doorTextureHover);
+		doorSprite.setTexture(doorTexture);
+		orbSprite.setTexture(orbTexture);
+		bookSprite.setTexture(bookTexture);
 	}
 
 	//Bottom Layer - The background
@@ -139,6 +145,7 @@ void GameState::render(sf::RenderWindow& window) {
 	window.draw(doorSprite);
 	window.draw(orbSprite);
 	window.draw(bookSprite);
+	window.draw(debugText);
 	//Top Layer - UI
 }
 
@@ -157,6 +164,15 @@ void loadGame() {
 	sf::Font font;
 	sf::Text text;
 
+	// Load Font
+	if (!debugFont.loadFromFile("Assets/Fonts/arial.ttf")) {
+		// Error loading font
+	}
+	debugText.setFont(debugFont);
+	debugText.setCharacterSize(24);
+	debugText.setFillColor(sf::Color::White);
+	debugText.setPosition(10, 10);
+
 	// load door
 	if (!doorTexture.loadFromFile("Assets/Sprites/gameDoor.tga"))
 	{
@@ -167,9 +183,9 @@ void loadGame() {
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	doorSprite.setTexture(doorTexture);
-	doorSprite.setPosition(0, 0);
+	doorSprite.setPosition(763, 136);
 
-	// load orb
+	/* load orb
 	if (!orbTexture.loadFromFile("Assets/Sprites/gameOrb.tga"))
 	{
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
@@ -179,7 +195,7 @@ void loadGame() {
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	orbSprite.setTexture(orbTexture);
-	orbSprite.setPosition(0, 0);
+	orbSprite.setPosition(0, 0);*/
 
 	// load spellbook
 	if (!bookTexture.loadFromFile("Assets/Sprites/gameBook.tga"))
@@ -191,7 +207,7 @@ void loadGame() {
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	bookSprite.setTexture(bookTexture);
-	bookSprite.setPosition(0, 0);
+	bookSprite.setPosition(225, 342);
 
 	if (!backgroundTexture.loadFromFile("Assets/Sprites/gameBackground.tga"))
 	{
