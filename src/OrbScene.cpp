@@ -1,12 +1,12 @@
 #include <SFML/Graphics.hpp>
+#include "OrbScene.h"
 #include "GameVariables.h"
-#include "GameState.h"
 
-bool hasLoadedGame = false;
-void loadGame();
+bool hasLoadedOrb = false;
+void loadOrb();
 
 // Objects
-sf::Sprite gamePlaceholder;
+sf::Sprite orbPlaceholder;
 
 // Controls
 const sf::Keyboard::Key controls[5] = {
@@ -17,8 +17,8 @@ const sf::Keyboard::Key controls[5] = {
 	sf::Keyboard::Space   // PlaceMode
 };
 
-void GameState::handleInput() {
-    // Handle input for game
+void OrbScene::handleInput() {
+	// Handle input for game
 	// Inputs for DEBUG PLACEMODE
 	if (sf::Keyboard::isKeyPressed(controls[4]) && canPress) { // toggle placemode
 		placeMode = !placeMode;
@@ -50,36 +50,36 @@ void GameState::handleInput() {
 	}
 }
 
-void GameState::update(float& dt) {
+void OrbScene::update(float& dt) {
 	// Update game logic
-    if (!hasLoadedGame) {
-        loadGame();
-    }
+	if (!hasLoadedOrb) {
+		loadOrb();
+	}
 
-    // Basic Timer
-    if (pressTime > 0) {
-        pressTime -= dt;
-    }
-    else {
-        canPress = true;
-    }
+	// Basic Timer
+	if (pressTime > 0) {
+		pressTime -= dt;
+	}
+	else {
+		canPress = true;
+	}
 
-    // PLACE MODE - can be used for any sprite
-	gamePlaceholder.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
+	// PLACE MODE - can be used for any sprite
+	orbPlaceholder.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
 
-    // DEBUG TEXT - "(x,y) Placing: t/f"
-    sf::Vector2f textPosition = gamePlaceholder.getPosition();
+	// DEBUG TEXT - "(x,y) Placing: t/f"
+	sf::Vector2f textPosition = orbPlaceholder.getPosition();
 
-    text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
-        std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode));
+	text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
+		std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode));
 }
 
-void GameState::render(sf::RenderWindow& window) {
-    // Render game
+void OrbScene::render(sf::RenderWindow& window) {
+	// Render game
 }
 
-void loadGame() {
-	hasLoadedGame = true;
+void loadOrb() {
+	hasLoadedOrb = true;
 
 	// Load values in GameVariables.h
 	bool placeMode = false;

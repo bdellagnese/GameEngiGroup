@@ -1,32 +1,18 @@
+#include <SFML/Graphics.hpp>
 #include "MenuState.h"
+#include "GameVariables.h"
 
-bool hasLoaded = false;
+bool hasLoadedMenu = false;
+void loadMenu();
 
 // Objects
-sf::Font font;
-sf::Text text;
-
 sf::Sprite DoorwaySpr;
-sf::Texture DoorwayTexture;
 sf::Sprite startSprite;
+sf::Texture DoorwayTexture;
 sf::Texture startTexture;
+sf::Texture startHoverTexture;
 
 sf::Sprite DebugSpr;
-
-// Timers
-bool placeMode = false;
-bool canPress;
-float pressTime;
-
-// Parameters
-const int gameWidth = 1920;
-const int gameHeight = 1080;
-const float placeModeSpeed = 25.f;
-void load();
-
-// handle Placement
-float direction1 = 0.0f;
-float direction2 = 0.0f;
 
 // Controls
 const sf::Keyboard::Key controls[5] = {
@@ -38,12 +24,6 @@ const sf::Keyboard::Key controls[5] = {
 };
 
 void MenuState::handleInput() { // Handle input for main menu
-	// Start Game
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::F))
-	{
-		startGame = true;
-	}
-
 	// Inputs for DEBUG PLACEMODE
 	if (sf::Keyboard::isKeyPressed(controls[4]) && canPress) { // toggle placemode
 		placeMode = !placeMode;
@@ -77,8 +57,8 @@ void MenuState::handleInput() { // Handle input for main menu
 
 void MenuState::update(float& dt) {
 	// Check if has already loaded
-	if (!hasLoaded) {
-		load();
+	if (!hasLoadedMenu) {
+		loadMenu();
 	}
 
 	// Press Delay
@@ -101,19 +81,26 @@ void MenuState::update(float& dt) {
 
 void MenuState::render(sf::RenderWindow& window) { // Render Scene
 	// Mouse Input
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	// transform the mouse position from window coordinates to world coordinates
+	sf::Vector2f mouse = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+
+	// retrieve the bounding box of the sprite
+	sf::FloatRect bounds = startSprite.getGlobalBounds();
+
+	// mouse hovering on startButton
+	if (bounds.contains(mouse))
 	{
-		// transform the mouse position from window coordinates to world coordinates
-		sf::Vector2f mouse = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-
-		// retrieve the bounding box of the sprite
-		sf::FloatRect bounds = startSprite.getGlobalBounds();
-
-		// hit test
-		if (bounds.contains(mouse))
+		startSprite.setTexture(startHoverTexture);
+		
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
-			// mouse is on sprite!
+			// start game
+			startGame = true;
+			hasLoadedMenu = false;
 		}
+	}
+	else {
+		startSprite.setTexture(startTexture);
 	}
 
 	//Bottom Layer - The background
@@ -123,8 +110,20 @@ void MenuState::render(sf::RenderWindow& window) { // Render Scene
 	//Top Layer - UI
 }
 
-void load() {
-	hasLoaded = true;
+void loadMenu() {
+	hasLoadedMenu = true;
+
+	// Load values in GameVariables.h
+	bool placeMode = false;
+	bool canPress = true;
+	float pressTime = 0.0f;
+	const float placeModeSpeed = 25.0f;
+	const int gameWidth = 1920;
+	const int gameHeight = 1080;
+	float direction1 = 0.0f;
+	float direction2 = 0.0f;
+	sf::Font font;
+	sf::Text text;
 
 	// Load Font
 	if (!font.loadFromFile("Assets/Fonts/arial.ttf")) {
@@ -152,4 +151,12 @@ void load() {
 	startSprite.setTexture(startTexture);
 	startSprite.setPosition(748, 232);
 	startSprite.setScale(0.5f, 0.5f);
+
+	// load startButtonClick - when hovered or clicked on
+	if (!startHoverTexture.loadFromFile("Assets/Sprites/startButtonClick.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+
+	// load
 }

@@ -1,9 +1,8 @@
 #include "State.h"
 
-class GameState : public State {
+class OrbScene : public State {
 public:
     void handleInput() override;
     void update(float& dt) override;
     void render(sf::RenderWindow& window) override;
-    float stateChange = 0;
 };

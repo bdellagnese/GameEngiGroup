@@ -1,8 +1,7 @@
 # GameEngiGroup
-Fix All Shop (DEV 0.1)
+Fix All Shop (DEV 0.2)
 
-Current Controls:
-[WASD - Movement]
-[Space - Place Mode]
-[F - Change Scene]
+Current Controls:  
+[WASD - Movement (in Place Mode) ]  
+[Space - Place Mode]  
 [Escape - Quit]

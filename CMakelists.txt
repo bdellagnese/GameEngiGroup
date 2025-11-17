@@ -14,6 +14,6 @@ set(SFML_INCS "lib/SFML/include")
 link_directories("${CMAKE_BINARY_DIR}/lib/SFML/lib")
 
 #### Practical 1 ####
-add_executable(FixAllShop "src/main.cpp" "src/State.h" "src/MenuState.h" "src/MenuState.cpp" "src/GameState.h" "src/GameState.cpp")
+add_executable(FixAllShop "src/main.cpp" "src/State.h" "src/MenuState.h" "src/MenuState.cpp" "src/GameState.h" "src/GameState.cpp" "src/OrbScene.h" "src/OrbScene.cpp" "src/DoorScene.h" "src/DoorScene.cpp" "src/SpellScene.h" "src/SpellScene.cpp" "src/GameVariables.h")
 target_include_directories(FixAllShop PRIVATE ${SFML_INCS})
 target_link_libraries(FixAllShop sfml-graphics)

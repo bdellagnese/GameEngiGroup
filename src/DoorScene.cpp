@@ -1,12 +1,12 @@
 #include <SFML/Graphics.hpp>
+#include "DoorScene.h"
 #include "GameVariables.h"
-#include "GameState.h"
 
-bool hasLoadedGame = false;
-void loadGame();
+bool hasLoadedDoor = false;
+void loadDoor();
 
 // Objects
-sf::Sprite gamePlaceholder;
+sf::Sprite doorPlaceholder;
 
 // Controls
 const sf::Keyboard::Key controls[5] = {
@@ -17,8 +17,8 @@ const sf::Keyboard::Key controls[5] = {
 	sf::Keyboard::Space   // PlaceMode
 };
 
-void GameState::handleInput() {
-    // Handle input for game
+void DoorScene::handleInput() {
+	// Handle input for game
 	// Inputs for DEBUG PLACEMODE
 	if (sf::Keyboard::isKeyPressed(controls[4]) && canPress) { // toggle placemode
 		placeMode = !placeMode;
@@ -50,36 +50,36 @@ void GameState::handleInput() {
 	}
 }
 
-void GameState::update(float& dt) {
+void DoorScene::update(float& dt) {
 	// Update game logic
-    if (!hasLoadedGame) {
-        loadGame();
-    }
+	if (!hasLoadedDoor) {
+		loadDoor();
+	}
 
-    // Basic Timer
-    if (pressTime > 0) {
-        pressTime -= dt;
-    }
-    else {
-        canPress = true;
-    }
+	// Basic Timer
+	if (pressTime > 0) {
+		pressTime -= dt;
+	}
+	else {
+		canPress = true;
+	}
 
-    // PLACE MODE - can be used for any sprite
-	gamePlaceholder.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
+	// PLACE MODE - can be used for any sprite
+	doorPlaceholder.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
 
-    // DEBUG TEXT - "(x,y) Placing: t/f"
-    sf::Vector2f textPosition = gamePlaceholder.getPosition();
+	// DEBUG TEXT - "(x,y) Placing: t/f"
+	sf::Vector2f textPosition = doorPlaceholder.getPosition();
 
-    text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
-        std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode));
+	text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
+		std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode));
 }
 
-void GameState::render(sf::RenderWindow& window) {
-    // Render game
+void DoorScene::render(sf::RenderWindow& window) {
+	// Render game
 }
 
-void loadGame() {
-	hasLoadedGame = true;
+void loadDoor() {
+	hasLoadedDoor = true;
 
 	// Load values in GameVariables.h
 	bool placeMode = false;
