@@ -8,6 +8,8 @@ sf::Text text;
 
 sf::Sprite DoorwaySpr;
 sf::Texture DoorwayTexture;
+sf::Sprite startSprite;
+sf::Texture startTexture;
 
 sf::Sprite DebugSpr;
 
@@ -98,6 +100,22 @@ void MenuState::update(float& dt) {
 }
 
 void MenuState::render(sf::RenderWindow& window) { // Render Scene
+	// Mouse Input
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		// transform the mouse position from window coordinates to world coordinates
+		sf::Vector2f mouse = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+
+		// retrieve the bounding box of the sprite
+		sf::FloatRect bounds = startSprite.getGlobalBounds();
+
+		// hit test
+		if (bounds.contains(mouse))
+		{
+			// mouse is on sprite!
+		}
+	}
+
 	//Bottom Layer - The background
 	window.draw(DoorwaySpr);
 	window.draw(text);
@@ -124,4 +142,11 @@ void load() {
 	}
 	DoorwaySpr.setTexture(DoorwayTexture);
 	DoorwaySpr.setPosition(0, 0);
+
+	// load startButton
+	if (!startTexture.loadFromFile("Assets/Sprites/startButton.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	startSprite.setTexture(startTexture);
 }
