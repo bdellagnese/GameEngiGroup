@@ -3,38 +3,47 @@
 
 #include "MenuState.h"
 #include "GameState.h"
+#include "GameVariables.h"
+#include "DoorScene.h"
+#include "OrbScene.h"
+#include "SpellScene.h"
+
 #include "State.h"
 
-enum class States { MENU, PLAY };
+bool placeMode = false;
+bool canPress = true;
+float pressTime = 0.0f;
+const float placeModeSpeed = 25.0f;
+const int gameWidth = 1920;
+const int gameHeight = 1080;
+float direction1 = 0.0f;
+float direction2 = 0.0f;
+sf::Font font;
+sf::Text text;
+
+enum class States { MENU, PLAY, DOOR, ORB, FLAME, BOOK };
 
 sf::Event event;
 
 //Parameters
-const int gameWidth = 1920;
-const int gameHeight = 1080;
-const float placeModeSpeed = 400.f;
 const float time_step = 0.017f; //60 fps
 
-
-void init() {
-
-}
-
-void update(float dt) {
-	
-}
-
-void render(sf::RenderWindow& window) {
-	
-}
-
 int main() {
+	// Load values in GameVariables.h
+	bool placeMode = false;
+	bool canPress = true;
+	float pressTime = 0.0f;
+	const float placeModeSpeed = 25.0f;
+	const int gameWidth = 1920;
+	const int gameHeight = 1080;
+	float direction1 = 0.0f;
+	float direction2 = 0.0f;
+	sf::Font font;
+	sf::Text text;
+	
 	//create the window
 	sf::RenderWindow window(sf::VideoMode({ gameWidth, gameHeight }), "FixAllShop");
 	sf::Clock clock;
-
-	//initialise and load
-	init();
 
 	// Initialize the current state
 	States currentState = States::MENU;
@@ -42,18 +51,21 @@ int main() {
 	// Create instances of your states
 	MenuState menuState;
 	GameState gameState;
+	DoorScene doorScene;
+	OrbScene orbScene;
+	SpellScene spellScene;
 
 	while (window.isOpen()) {
 		//Calculate dt
 		float dt = clock.restart().asSeconds();
-		
+
 		// HANDLE STATE / SCENE CHANGES
 		switch (currentState) {
 		case States::MENU:
 			menuState.handleInput();
 			menuState.update(dt);
 			menuState.render(window);
-			
+
 			// Example transition to PLAY state
 			if (menuState.startGame) {
 				currentState = States::PLAY;
@@ -65,6 +77,43 @@ int main() {
 			gameState.handleInput();
 			gameState.update(dt);
 			gameState.render(window);
+
+			if (gameState.stateChange == 1) {
+				// Door
+				gameState.stateChange = 0;
+				currentState = States::DOOR;
+			}
+			else if (gameState.stateChange == 2) {
+				// Orb
+				gameState.stateChange = 0;
+				currentState = States::ORB;
+			}
+			else if (gameState.stateChange == 3) {
+				// Spellbook
+				gameState.stateChange = 0;
+				currentState = States::BOOK;
+			}
+			break;
+		
+		case States::DOOR:
+			doorScene.handleInput();
+			doorScene.update(dt);
+			doorScene.render(window);
+
+			break;
+		
+		case States::ORB:
+			orbScene.handleInput();
+			orbScene.update(dt);
+			orbScene.render(window);
+
+			break;
+		
+		case States::BOOK:
+			spellScene.handleInput();
+			spellScene.update(dt);
+			spellScene.render(window);
+
 			break;
 		}
 		
