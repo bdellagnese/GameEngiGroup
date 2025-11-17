@@ -90,10 +90,10 @@ void MenuState::update(float& dt) {
 	}
 
 	// PLACE MODE - can be used for any sprite
-	DoorwaySpr.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
+	startSprite.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
 
     // DEBUG TEXT - "(x,y) Placing: t/f"
-    sf::Vector2f textPosition = DoorwaySpr.getPosition();
+    sf::Vector2f textPosition = startSprite.getPosition();
 
     text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
         std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode));
@@ -118,6 +118,7 @@ void MenuState::render(sf::RenderWindow& window) { // Render Scene
 
 	//Bottom Layer - The background
 	window.draw(DoorwaySpr);
+	window.draw(startSprite);
 	window.draw(text);
 	//Top Layer - UI
 }
@@ -149,4 +150,6 @@ void load() {
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	startSprite.setTexture(startTexture);
+	startSprite.setPosition(748, 232);
+	startSprite.setScale(0.5f, 0.5f);
 }
