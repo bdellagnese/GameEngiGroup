@@ -114,18 +114,6 @@ void MenuState::render(sf::RenderWindow& window) { // Render Scene
 void loadMenu() {
 	hasLoadedMenu = true;
 
-	// Load values in GameVariables.h
-	bool placeMode = false;
-	bool canPress = true;
-	float pressTime = 0.0f;
-	const float placeModeSpeed = 25.0f;
-	const int gameWidth = 1920;
-	const int gameHeight = 1080;
-	float direction1 = 0.0f;
-	float direction2 = 0.0f;
-	sf::Font font;
-	sf::Text text;
-
 	// Load Font
 	if (!font.loadFromFile("Assets/Fonts/arial.ttf")) {
 		// Error loading font

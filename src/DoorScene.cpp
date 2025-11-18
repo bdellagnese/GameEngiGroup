@@ -1,12 +1,26 @@
 #include <SFML/Graphics.hpp>
 #include "DoorScene.h"
 #include "GameVariables.h"
+#include "GameState.h"
+
+GameState gameState;
+bool newCharacter;
 
 bool hasLoadedDoor = false;
 void loadDoor();
+void characterHandling();
 
 // Objects
 sf::Sprite doorPlaceholder;
+
+sf::Sprite doorframeSpr;
+sf::Texture doorframeTexture;
+
+sf::Sprite doorframeBgSpr;
+sf::Texture doorframeBgTexture;
+
+sf::Sprite characterSpr;
+sf::Texture characterTexture;
 
 // Controls
 const sf::Keyboard::Key controls[5] = {
@@ -56,6 +70,7 @@ void DoorScene::update(float& dt) {
 		loadDoor();
 	}
 
+
 	// Basic Timer
 	if (pressTime > 0) {
 		pressTime -= dt;
@@ -76,22 +91,98 @@ void DoorScene::update(float& dt) {
 
 void DoorScene::render(sf::RenderWindow& window) {
 	// Render game
-	
-	window.draw(doorPlaceholder);
+
+	//Bottom Layer - The background
+	window.draw(doorframeBgSpr);
+	window.draw(doorframeSpr);
+	if (characterArrived) {
+		window.draw(characterSpr);
+		//window.draw(textboxSpr);
+		//window.draw(characterText);
+	}
+	//Top Layer - UI
 }
 
 void loadDoor() {
 	hasLoadedDoor = true;
 
-	// Load values in GameVariables.h
-	bool placeMode = false;
-	bool canPress = true;
-	float pressTime = 0.0f;
-	const float placeModeSpeed = 25.0f;
-	const int gameWidth = 1920;
-	const int gameHeight = 1080;
-	float direction1 = 0.0f;
-	float direction2 = 0.0f;
-	sf::Font font;
-	sf::Text text;
+	// load doorway
+	if (!doorframeTexture.loadFromFile("Assets/Sprites/Doorway.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	doorframeSpr.setTexture(doorframeTexture);
+	doorframeSpr.setPosition(0, 0);
+
+	// load doorwayBG
+	if (!doorframeBgTexture.loadFromFile("Assets/Sprites/doorwayBG.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	doorframeBgSpr.setTexture(doorframeBgTexture);
+	doorframeBgSpr.setPosition(0, 0);
+
+	// load character
+	if (!characterTexture.loadFromFile("Assets/Sprites/character1.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	characterSpr.setTexture(characterTexture);
+}
+
+void characterHandling() {
+	/*
+	float conversation = 0;
+
+
+
+	if (nextText){
+		nextText = false;
+		interaction++
+	}
+
+	if(conversation == 1){ // Greeting
+		text = characterText;
+
+		if click{
+			nextText = true;
+		}
+	}
+	else if (conversation == 2){ // Additional Text - spell casting
+		text = characterText;
+
+		// array
+		if (currentSpell[] == CorrectSpell[]){
+			conversation = 3; //success
+		}
+		else if (at array character limit){
+			conversation = 4; //fail
+		}
+
+		// WASD inputs
+		if (sf::Keyboard::isKeyPressed(controls[0])) {
+
+		}
+		else if (sf::Keyboard::isKeyPressed(controls[1])) {
+
+		}
+		else if (sf::Keyboard::isKeyPressed(controls[2])) {
+
+		}
+		else if (sf::Keyboard::isKeyPressed(controls[3])) {
+
+		}
+	}
+	else if (conversation == 3){
+		// Success
+		charSpriteTexture = activeCharTexture; // change texture to happy / fail sprite. could be done elsewhere
+		charSprite.setTexture(charSpriteTexture);
+		text = "yap fest";
+	}
+	else if (conversation == 4){
+		// Fail
+		charSprite.setTexture(charSpriteTexture);
+		text = "yap fest";
+	}
+	*/
 }

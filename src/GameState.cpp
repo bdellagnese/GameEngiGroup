@@ -18,6 +18,9 @@ sf::Sprite doorSprite;
 sf::Texture doorTexture;
 sf::Texture doorTextureHover;
 
+sf::Sprite behindDoorSprite;
+sf::Texture behindDoorTexture;
+
 sf::Sprite orbSprite;
 sf::Texture orbTexture;
 sf::Texture orbTextureHover;
@@ -25,6 +28,9 @@ sf::Texture orbTextureHover;
 sf::Sprite bookSprite;
 sf::Texture bookTexture;
 sf::Texture bookTextureHover;
+
+sf::Sprite charSilhouetteSprite;
+sf::Texture charSilhouetteTexture;
 
 sf::Text debugText;
 sf::Font debugFont;
@@ -83,13 +89,14 @@ void GameState::update(float& dt) {
         pressTime -= dt;
     }
     else {
+		canPress = true;
 		canClick = true;
     }
 
     // PLACE MODE - can be used for any sprite
-	bookSprite.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
+	charSilhouetteSprite.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
     // DEBUG TEXT - "(x,y) Placing: t/f"
-    sf::Vector2f textPosition = bookSprite.getPosition();
+    sf::Vector2f textPosition = charSilhouetteSprite.getPosition();
 
 	debugText.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
         std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode));
@@ -116,7 +123,7 @@ void GameState::render(sf::RenderWindow& window) {
 			stateChange = 1; // DOOR
 		}
 	}
-	/*else if (orbBounds.contains(mouse) && canClick)
+	else if (orbBounds.contains(mouse) && canClick)
 	{
 		orbSprite.setTexture(orbTextureHover);
 
@@ -124,7 +131,7 @@ void GameState::render(sf::RenderWindow& window) {
 		{
 			stateChange = 2; // ORB
 		}
-	}*/
+	}
 	else if (bookBounds.contains(mouse) && canClick)
 	{
 		bookSprite.setTexture(bookTextureHover);
@@ -138,10 +145,16 @@ void GameState::render(sf::RenderWindow& window) {
 		doorSprite.setTexture(doorTexture);
 		orbSprite.setTexture(orbTexture);
 		bookSprite.setTexture(bookTexture);
+		bookSprite.setPosition(225, 342);
 	}
 
 	//Bottom Layer - The background
+	window.draw(behindDoorSprite);
 	window.draw(backgroundSprite);
+	if (characterArrived)
+	{
+		window.draw(charSilhouetteSprite);
+	}
 	window.draw(doorSprite);
 	window.draw(orbSprite);
 	window.draw(bookSprite);
@@ -153,16 +166,7 @@ void loadGame() {
 	hasLoadedGame = true;
 
 	// Load values in GameVariables.h
-	bool placeMode = false;
-	bool canPress = true;
-	float pressTime = 0.0f;
-	const float placeModeSpeed = 25.0f;
-	const int gameWidth = 1920;
-	const int gameHeight = 1080;
-	float direction1 = 0.0f;
-	float direction2 = 0.0f;
-	sf::Font font;
-	sf::Text text;
+
 
 	// Load Font
 	if (!debugFont.loadFromFile("Assets/Fonts/arial.ttf")) {
@@ -185,7 +189,16 @@ void loadGame() {
 	doorSprite.setTexture(doorTexture);
 	doorSprite.setPosition(763, 136);
 
-	/* load orb
+	// load behind door
+	if (!behindDoorTexture.loadFromFile("Assets/Sprites/doorwayBG.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	behindDoorSprite.setTexture(behindDoorTexture);
+	behindDoorSprite.setScale(0.5f, 0.5f);
+	behindDoorSprite.setPosition(612, 108);
+
+	// load orb
 	if (!orbTexture.loadFromFile("Assets/Sprites/gameOrb.tga"))
 	{
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
@@ -195,7 +208,7 @@ void loadGame() {
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	orbSprite.setTexture(orbTexture);
-	orbSprite.setPosition(0, 0);*/
+	orbSprite.setPosition(1324, 319);
 
 	// load spellbook
 	if (!bookTexture.loadFromFile("Assets/Sprites/gameBook.tga"))
@@ -214,4 +227,11 @@ void loadGame() {
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	backgroundSprite.setTexture(backgroundTexture);
+
+	if (!charSilhouetteTexture.loadFromFile("Assets/Sprites/charSilhouette.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	charSilhouetteSprite.setTexture(charSilhouetteTexture);
+	charSilhouetteSprite.setPosition(858, 250);
 }
