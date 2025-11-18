@@ -5,5 +5,10 @@ public:
     void handleInput() override;
     void update(float& dt) override;
     void render(sf::RenderWindow& window) override;
+    
+    // Special Variables
     float stateChange = 0;
+    float globalTimer = 0;
+    bool characterArrived;
+
 };

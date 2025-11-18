@@ -1,9 +1,14 @@
 #include <SFML/Graphics.hpp>
 #include "DoorScene.h"
 #include "GameVariables.h"
+#include "GameState.h"
+
+GameState gameState;
+bool newCharacter;
 
 bool hasLoadedDoor = false;
 void loadDoor();
+void characterHandling();
 
 // Objects
 sf::Sprite doorPlaceholder;
@@ -62,6 +67,8 @@ void DoorScene::update(float& dt) {
 		loadDoor();
 	}
 
+	newCharacter = gameState.characterArrived;
+
 	// Basic Timer
 	if (pressTime > 0) {
 		pressTime -= dt;
@@ -84,8 +91,13 @@ void DoorScene::render(sf::RenderWindow& window) {
 	// Render game
 
 	//Bottom Layer - The background
-	window.draw(doorframeBgSpr);
-	window.draw(doorframeSpr);
+	if (newCharacter) {
+		window.draw(doorframeBgSpr);
+		window.draw(doorframeSpr);
+	}
+
+	//window.draw(textboxSpr);
+	//window.draw(characterText);
 	//Top Layer - UI
 }
 
@@ -119,4 +131,61 @@ void loadDoor() {
 	}
 	doorframeBgSpr.setTexture(doorframeBgTexture);
 	doorframeBgSpr.setPosition(0, 0);
+}
+
+void characterHandling() {
+	/*
+	float conversation = 0;
+
+
+
+	if (nextText){
+		nextText = false;
+		interaction++
+	}
+
+	if(conversation == 1){ // Greeting
+		text = characterText;
+
+		if click{
+			nextText = true;
+		}
+	}
+	else if (conversation == 2){ // Additional Text - spell casting
+		text = characterText;
+
+		// array
+		if (currentSpell[] == CorrectSpell[]){
+			conversation = 3; //success
+		}
+		else if (at array character limit){
+			conversation = 4; //fail
+		}
+
+		// WASD inputs
+		if (sf::Keyboard::isKeyPressed(controls[0])) {
+
+		}
+		else if (sf::Keyboard::isKeyPressed(controls[1])) {
+
+		}
+		else if (sf::Keyboard::isKeyPressed(controls[2])) {
+
+		}
+		else if (sf::Keyboard::isKeyPressed(controls[3])) {
+
+		}
+	}
+	else if (conversation == 3){
+		// Success
+		charSpriteTexture = activeCharTexture; // change texture to happy / fail sprite. could be done elsewhere
+		charSprite.setTexture(charSpriteTexture);
+		text = "yap fest";
+	}
+	else if (conversation == 4){
+		// Fail
+		charSprite.setTexture(charSpriteTexture);
+		text = "yap fest";
+	}
+	*/
 }

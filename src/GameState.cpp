@@ -29,6 +29,9 @@ sf::Sprite bookSprite;
 sf::Texture bookTexture;
 sf::Texture bookTextureHover;
 
+sf::Sprite charSilhouetteSprite;
+sf::Texture charSilhouetteTexture;
+
 sf::Text debugText;
 sf::Font debugFont;
 
@@ -46,6 +49,7 @@ void GameState::handleInput() {
 	// Inputs for DEBUG PLACEMODE
 	if (sf::Keyboard::isKeyPressed(controls[4]) && canPress) { // toggle placemode
 		placeMode = !placeMode;
+		characterArrived = !characterArrived;
 		canPress = false;
 		pressTime = 1;
 	}
@@ -86,13 +90,14 @@ void GameState::update(float& dt) {
         pressTime -= dt;
     }
     else {
+		canPress = true;
 		canClick = true;
     }
 
     // PLACE MODE - can be used for any sprite
-	behindDoorSprite.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
+	charSilhouetteSprite.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
     // DEBUG TEXT - "(x,y) Placing: t/f"
-    sf::Vector2f textPosition = behindDoorSprite.getPosition();
+    sf::Vector2f textPosition = charSilhouetteSprite.getPosition();
 
 	debugText.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
         std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode));
@@ -147,6 +152,11 @@ void GameState::render(sf::RenderWindow& window) {
 	//Bottom Layer - The background
 	window.draw(behindDoorSprite);
 	window.draw(backgroundSprite);
+
+	if (characterArrived) {
+		window.draw(charSilhouetteSprite);
+	}
+
 	window.draw(doorSprite);
 	window.draw(orbSprite);
 	window.draw(bookSprite);
@@ -168,6 +178,8 @@ void loadGame() {
 	float direction2 = 0.0f;
 	sf::Font font;
 	sf::Text text;
+
+	bool characterArrived = false;
 
 	// Load Font
 	if (!debugFont.loadFromFile("Assets/Fonts/arial.ttf")) {
@@ -228,4 +240,11 @@ void loadGame() {
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	backgroundSprite.setTexture(backgroundTexture);
+
+	if (!charSilhouetteTexture.loadFromFile("Assets/Sprites/charSilhouette.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	charSilhouetteSprite.setTexture(charSilhouetteTexture);
+	charSilhouetteSprite.setPosition(858, 250);
 }
