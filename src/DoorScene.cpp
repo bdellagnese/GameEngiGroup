@@ -67,7 +67,6 @@ void DoorScene::update(float& dt) {
 		loadDoor();
 	}
 
-	newCharacter = gameState.characterArrived;
 
 	// Basic Timer
 	if (pressTime > 0) {
@@ -91,11 +90,8 @@ void DoorScene::render(sf::RenderWindow& window) {
 	// Render game
 
 	//Bottom Layer - The background
-	if (newCharacter) {
-		window.draw(doorframeBgSpr);
-		window.draw(doorframeSpr);
-	}
-
+	window.draw(doorframeBgSpr);
+	window.draw(doorframeSpr);
 	//window.draw(textboxSpr);
 	//window.draw(characterText);
 	//Top Layer - UI
@@ -103,18 +99,6 @@ void DoorScene::render(sf::RenderWindow& window) {
 
 void loadDoor() {
 	hasLoadedDoor = true;
-
-	// Load values in GameVariables.h
-	bool placeMode = false;
-	bool canPress = true;
-	float pressTime = 0.0f;
-	const float placeModeSpeed = 25.0f;
-	const int gameWidth = 1920;
-	const int gameHeight = 1080;
-	float direction1 = 0.0f;
-	float direction2 = 0.0f;
-	sf::Font font;
-	sf::Text text;
 
 	// load doorway
 	if (!doorframeTexture.loadFromFile("Assets/Sprites/Doorway.tga"))

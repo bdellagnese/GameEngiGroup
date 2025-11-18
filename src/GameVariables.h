@@ -4,6 +4,7 @@
 
 extern bool placeMode;
 extern bool canPress;
+extern bool characterArrived;
 extern float pressTime;
 extern const int gameWidth;
 extern const int gameHeight;

@@ -8,7 +8,5 @@ public:
     
     // Special Variables
     float stateChange = 0;
-    float globalTimer = 0;
-    bool characterArrived;
 
 };

@@ -49,7 +49,6 @@ void GameState::handleInput() {
 	// Inputs for DEBUG PLACEMODE
 	if (sf::Keyboard::isKeyPressed(controls[4]) && canPress) { // toggle placemode
 		placeMode = !placeMode;
-		characterArrived = !characterArrived;
 		canPress = false;
 		pressTime = 1;
 	}
@@ -152,11 +151,10 @@ void GameState::render(sf::RenderWindow& window) {
 	//Bottom Layer - The background
 	window.draw(behindDoorSprite);
 	window.draw(backgroundSprite);
-
-	if (characterArrived) {
+	if (characterArrived)
+	{
 		window.draw(charSilhouetteSprite);
 	}
-
 	window.draw(doorSprite);
 	window.draw(orbSprite);
 	window.draw(bookSprite);
@@ -168,18 +166,7 @@ void loadGame() {
 	hasLoadedGame = true;
 
 	// Load values in GameVariables.h
-	bool placeMode = false;
-	bool canPress = true;
-	float pressTime = 0.0f;
-	const float placeModeSpeed = 25.0f;
-	const int gameWidth = 1920;
-	const int gameHeight = 1080;
-	float direction1 = 0.0f;
-	float direction2 = 0.0f;
-	sf::Font font;
-	sf::Text text;
 
-	bool characterArrived = false;
 
 	// Load Font
 	if (!debugFont.loadFromFile("Assets/Fonts/arial.ttf")) {

@@ -12,6 +12,7 @@
 
 bool placeMode = false;
 bool canPress = true;
+bool characterArrived = false;
 float pressTime = 0.0f;
 const float placeModeSpeed = 25.0f;
 const int gameWidth = 1920;
@@ -32,6 +33,7 @@ int main() {
 	// Load values in GameVariables.h
 	bool placeMode = false;
 	bool canPress = true;
+	bool characterArrived = false;
 	float pressTime = 0.0f;
 	const float placeModeSpeed = 25.0f;
 	const int gameWidth = 1920;
