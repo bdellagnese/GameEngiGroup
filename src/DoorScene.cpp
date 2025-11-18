@@ -19,6 +19,9 @@ sf::Texture doorframeTexture;
 sf::Sprite doorframeBgSpr;
 sf::Texture doorframeBgTexture;
 
+sf::Sprite characterSpr;
+sf::Texture characterTexture;
+
 // Controls
 const sf::Keyboard::Key controls[5] = {
 	sf::Keyboard::W,  // Up
@@ -92,8 +95,11 @@ void DoorScene::render(sf::RenderWindow& window) {
 	//Bottom Layer - The background
 	window.draw(doorframeBgSpr);
 	window.draw(doorframeSpr);
-	//window.draw(textboxSpr);
-	//window.draw(characterText);
+	if (characterArrived) {
+		window.draw(characterSpr);
+		//window.draw(textboxSpr);
+		//window.draw(characterText);
+	}
 	//Top Layer - UI
 }
 
@@ -115,6 +121,13 @@ void loadDoor() {
 	}
 	doorframeBgSpr.setTexture(doorframeBgTexture);
 	doorframeBgSpr.setPosition(0, 0);
+
+	// load character
+	if (!characterTexture.loadFromFile("Assets/Sprites/character1.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	characterSpr.setTexture(characterTexture);
 }
 
 void characterHandling() {
