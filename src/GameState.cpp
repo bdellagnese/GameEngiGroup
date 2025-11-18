@@ -87,9 +87,9 @@ void GameState::update(float& dt) {
     }
 
     // PLACE MODE - can be used for any sprite
-	bookSprite.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
+	orbSprite.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
     // DEBUG TEXT - "(x,y) Placing: t/f"
-    sf::Vector2f textPosition = bookSprite.getPosition();
+    sf::Vector2f textPosition = orbSprite.getPosition();
 
 	debugText.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
         std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode));
@@ -116,7 +116,7 @@ void GameState::render(sf::RenderWindow& window) {
 			stateChange = 1; // DOOR
 		}
 	}
-	/*else if (orbBounds.contains(mouse) && canClick)
+	else if (orbBounds.contains(mouse) && canClick)
 	{
 		orbSprite.setTexture(orbTextureHover);
 
@@ -124,7 +124,7 @@ void GameState::render(sf::RenderWindow& window) {
 		{
 			stateChange = 2; // ORB
 		}
-	}*/
+	}
 	else if (bookBounds.contains(mouse) && canClick)
 	{
 		bookSprite.setTexture(bookTextureHover);
@@ -138,6 +138,7 @@ void GameState::render(sf::RenderWindow& window) {
 		doorSprite.setTexture(doorTexture);
 		orbSprite.setTexture(orbTexture);
 		bookSprite.setTexture(bookTexture);
+		bookSprite.setPosition(225, 342);
 	}
 
 	//Bottom Layer - The background
@@ -185,7 +186,7 @@ void loadGame() {
 	doorSprite.setTexture(doorTexture);
 	doorSprite.setPosition(763, 136);
 
-	/* load orb
+	// load orb
 	if (!orbTexture.loadFromFile("Assets/Sprites/gameOrb.tga"))
 	{
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
@@ -195,7 +196,7 @@ void loadGame() {
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	orbSprite.setTexture(orbTexture);
-	orbSprite.setPosition(0, 0);*/
+	orbSprite.setPosition(1324, 319);
 
 	// load spellbook
 	if (!bookTexture.loadFromFile("Assets/Sprites/gameBook.tga"))
