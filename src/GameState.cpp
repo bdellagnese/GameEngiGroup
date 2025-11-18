@@ -18,6 +18,9 @@ sf::Sprite doorSprite;
 sf::Texture doorTexture;
 sf::Texture doorTextureHover;
 
+sf::Sprite behindDoorSprite;
+sf::Texture behindDoorTexture;
+
 sf::Sprite orbSprite;
 sf::Texture orbTexture;
 sf::Texture orbTextureHover;
@@ -87,9 +90,9 @@ void GameState::update(float& dt) {
     }
 
     // PLACE MODE - can be used for any sprite
-	orbSprite.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
+	behindDoorSprite.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
     // DEBUG TEXT - "(x,y) Placing: t/f"
-    sf::Vector2f textPosition = orbSprite.getPosition();
+    sf::Vector2f textPosition = behindDoorSprite.getPosition();
 
 	debugText.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
         std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode));
@@ -142,6 +145,7 @@ void GameState::render(sf::RenderWindow& window) {
 	}
 
 	//Bottom Layer - The background
+	window.draw(behindDoorSprite);
 	window.draw(backgroundSprite);
 	window.draw(doorSprite);
 	window.draw(orbSprite);
@@ -185,6 +189,15 @@ void loadGame() {
 	}
 	doorSprite.setTexture(doorTexture);
 	doorSprite.setPosition(763, 136);
+
+	// load behind door
+	if (!behindDoorTexture.loadFromFile("Assets/Sprites/doorwayBG.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	behindDoorSprite.setTexture(behindDoorTexture);
+	behindDoorSprite.setScale(0.5f, 0.5f);
+	behindDoorSprite.setPosition(612, 108);
 
 	// load orb
 	if (!orbTexture.loadFromFile("Assets/Sprites/gameOrb.tga"))

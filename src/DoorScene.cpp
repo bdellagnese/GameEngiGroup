@@ -8,6 +8,12 @@ void loadDoor();
 // Objects
 sf::Sprite doorPlaceholder;
 
+sf::Sprite doorframeSpr;
+sf::Texture doorframeTexture;
+
+sf::Sprite doorframeBgSpr;
+sf::Texture doorframeBgTexture;
+
 // Controls
 const sf::Keyboard::Key controls[5] = {
 	sf::Keyboard::W,  // Up
@@ -76,8 +82,11 @@ void DoorScene::update(float& dt) {
 
 void DoorScene::render(sf::RenderWindow& window) {
 	// Render game
-	
-	window.draw(doorPlaceholder);
+
+	//Bottom Layer - The background
+	window.draw(doorframeBgSpr);
+	window.draw(doorframeSpr);
+	//Top Layer - UI
 }
 
 void loadDoor() {
@@ -94,4 +103,20 @@ void loadDoor() {
 	float direction2 = 0.0f;
 	sf::Font font;
 	sf::Text text;
+
+	// load doorway
+	if (!doorframeTexture.loadFromFile("Assets/Sprites/Doorway.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	doorframeSpr.setTexture(doorframeTexture);
+	doorframeSpr.setPosition(0, 0);
+
+	// load doorwayBG
+	if (!doorframeBgTexture.loadFromFile("Assets/Sprites/doorwayBG.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	doorframeBgSpr.setTexture(doorframeBgTexture);
+	doorframeBgSpr.setPosition(0, 0);
 }
