@@ -8,6 +8,7 @@ bool newCharacter;
 
 bool hasLoadedDoor = false;
 void loadDoor();
+void loadCharacters();
 void characterHandling();
 
 // Objects
@@ -21,6 +22,11 @@ sf::Texture doorframeBgTexture;
 
 sf::Sprite characterSpr;
 sf::Texture characterTexture;
+sf::Texture characterHappyTexture;
+sf::Texture characterSadTexture;
+
+sf::Sprite character3DSpr;
+sf::Texture character3DTexture;
 
 // Controls
 const sf::Keyboard::Key controls[6] = {
@@ -100,10 +106,9 @@ void DoorScene::update(float& dt) {
 	}
 
 	// PLACE MODE - can be used for any sprite
-	flameTimerText.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
-
+	characterSpr.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
 	// DEBUG TEXT - "(x,y) Placing: t/f"
-	sf::Vector2f textPosition = flameTimerText.getPosition();
+	sf::Vector2f textPosition = characterSpr.getPosition();
 
 	text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
 		std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode));
@@ -114,11 +119,17 @@ void DoorScene::render(sf::RenderWindow& window) {
 
 	//Bottom Layer - The background
 	window.draw(doorframeBgSpr);
-	window.draw(doorframeSpr);
+
 	if (characterArrived) {
 		window.draw(characterSpr);
 		//window.draw(textboxSpr);
 		//window.draw(characterText);
+	}
+
+	window.draw(doorframeSpr);
+	
+	if (characterArrived) {
+		window.draw(character3DSpr);
 	}
 	window.draw(text);
 	window.draw(flameTimerText);
@@ -144,12 +155,35 @@ void loadDoor() {
 	doorframeBgSpr.setTexture(doorframeBgTexture);
 	doorframeBgSpr.setPosition(0, 0);
 
-	// load character
-	if (!characterTexture.loadFromFile("Assets/Sprites/character1.tga"))
+	loadCharacters();
+}
+
+void loadCharacters(){
+	// load timmy
+	if (!characterTexture.loadFromFile("Assets/Sprites/Characters/Timmy/TimmyNeutral.tga"))
 	{
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
+	// load timmy happy
+	if (!characterHappyTexture.loadFromFile("Assets/Sprites/Characters/Timmy/TimmyHappy.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load timmy sad 
+	if (!characterSadTexture.loadFromFile("Assets/Sprites/Characters/Timmy/TimmySad.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load timmy 3D
+	if (!character3DTexture.loadFromFile("Assets/Sprites/Characters/Timmy/Timmy3D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	character3DSpr.setTexture(character3DTexture);
 	characterSpr.setTexture(characterTexture);
+
+	characterSpr.setPosition(411, 160);
+	character3DSpr.setPosition(characterSpr.getPosition());
 }
 
 void characterHandling() {
