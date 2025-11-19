@@ -5,11 +5,14 @@
 
 GameState gameState;
 bool newCharacter;
-
 bool hasLoadedDoor = false;
-void loadDoor();
-void loadCharacters();
-void characterHandling();
+bool doneCasting;
+
+// Parameters
+int cast[5];
+int correctCast[5];
+int castPosition = 0;
+int x = 0;
 
 // Objects
 sf::Sprite doorPlaceholder;
@@ -27,6 +30,11 @@ sf::Texture characterSadTexture;
 
 sf::Sprite character3DSpr;
 sf::Texture character3DTexture;
+
+void loadDoor();
+void loadCharacters();
+void characterHandling();
+void casting(int direction);
 
 // Controls
 const sf::Keyboard::Key controls[6] = {
@@ -80,6 +88,36 @@ void DoorScene::handleInput() {
 		// go back
 		backDoor = true;
 	}
+
+	// Spell Casting Input
+	// WASD inputs
+	if (sf::Keyboard::isKeyPressed(controls[0]) && canPress && !doneCasting) { //up
+		casting(1);
+	}
+	else if (sf::Keyboard::isKeyPressed(controls[1]) && canPress && !doneCasting) { //down
+		casting(2);
+	}
+	else if (sf::Keyboard::isKeyPressed(controls[2]) && canPress && !doneCasting) { //left
+		casting(3);
+	}
+	else if (sf::Keyboard::isKeyPressed(controls[3]) && canPress && !doneCasting) { //right
+		casting(4);
+	}
+}
+
+void casting(int direction) {
+	canPress = false;
+	pressTime = 1;
+
+	if (castPosition < 5) 
+	{
+		cast[castPosition] = direction;
+		castPosition++;
+	}
+	else 
+	{
+		doneCasting = true;
+	}
 }
 
 void DoorScene::update(float& dt) {
@@ -104,6 +142,8 @@ void DoorScene::update(float& dt) {
 	else {
 		canPress = true;
 	}
+
+	characterHandling();
 
 	// PLACE MODE - can be used for any sprite
 	characterSpr.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
@@ -136,57 +176,29 @@ void DoorScene::render(sf::RenderWindow& window) {
 	//Top Layer - UI
 }
 
-void loadDoor() {
-	hasLoadedDoor = true;
-
-	// load doorway
-	if (!doorframeTexture.loadFromFile("Assets/Sprites/Doorway.tga"))
-	{
-		printf("--ERROR LOADING ASSETS--"); // Error Loading File
-	}
-	doorframeSpr.setTexture(doorframeTexture);
-	doorframeSpr.setPosition(0, 0);
-
-	// load doorwayBG
-	if (!doorframeBgTexture.loadFromFile("Assets/Sprites/doorwayBG.tga"))
-	{
-		printf("--ERROR LOADING ASSETS--"); // Error Loading File
-	}
-	doorframeBgSpr.setTexture(doorframeBgTexture);
-	doorframeBgSpr.setPosition(0, 0);
-
-	loadCharacters();
-}
-
-void loadCharacters(){
-	// load timmy
-	if (!characterTexture.loadFromFile("Assets/Sprites/Characters/Timmy/TimmyNeutral.tga"))
-	{
-		printf("--ERROR LOADING ASSETS--"); // Error Loading File
-	}
-	// load timmy happy
-	if (!characterHappyTexture.loadFromFile("Assets/Sprites/Characters/Timmy/TimmyHappy.tga"))
-	{
-		printf("--ERROR LOADING ASSETS--"); // Error Loading File
-	}
-	// load timmy sad 
-	if (!characterSadTexture.loadFromFile("Assets/Sprites/Characters/Timmy/TimmySad.tga"))
-	{
-		printf("--ERROR LOADING ASSETS--"); // Error Loading File
-	}
-	// load timmy 3D
-	if (!character3DTexture.loadFromFile("Assets/Sprites/Characters/Timmy/Timmy3D.tga"))
-	{
-		printf("--ERROR LOADING ASSETS--"); // Error Loading File
-	}
-	character3DSpr.setTexture(character3DTexture);
-	characterSpr.setTexture(characterTexture);
-
-	characterSpr.setPosition(411, 160);
-	character3DSpr.setPosition(characterSpr.getPosition());
-}
-
 void characterHandling() {
+	int getCastLength = sizeof(cast) / sizeof(cast[0]);
+	if (doneCasting)
+	{
+		doneCasting = false;
+		castPosition = 0;
+		// check if arrays are same
+		for (int num : cast) {
+			if (num == correctCast[x]) {
+				// next number
+				characterSpr.setTexture(characterHappyTexture);
+			}
+			else
+			{
+				// cancel and fail
+				characterSpr.setTexture(characterSadTexture);
+				return;
+			}
+			x++;
+		}
+		x = 0;
+	}
+
 	/*
 	float conversation = 0;
 
@@ -241,4 +253,60 @@ void characterHandling() {
 		text = "yap fest";
 	}
 	*/
+}
+
+void loadDoor() {
+	hasLoadedDoor = true;
+
+	// load doorway
+	if (!doorframeTexture.loadFromFile("Assets/Sprites/Doorway.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	doorframeSpr.setTexture(doorframeTexture);
+	doorframeSpr.setPosition(0, 0);
+
+	// load doorwayBG
+	if (!doorframeBgTexture.loadFromFile("Assets/Sprites/doorwayBG.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	doorframeBgSpr.setTexture(doorframeBgTexture);
+	doorframeBgSpr.setPosition(0, 0);
+
+	loadCharacters();
+}
+
+void loadCharacters(){
+	// load timmy
+	if (!characterTexture.loadFromFile("Assets/Sprites/Characters/Timmy/TimmyNeutral.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load timmy happy
+	if (!characterHappyTexture.loadFromFile("Assets/Sprites/Characters/Timmy/TimmyHappy.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load timmy sad 
+	if (!characterSadTexture.loadFromFile("Assets/Sprites/Characters/Timmy/TimmySad.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load timmy 3D
+	if (!character3DTexture.loadFromFile("Assets/Sprites/Characters/Timmy/Timmy3D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	character3DSpr.setTexture(character3DTexture);
+	characterSpr.setTexture(characterTexture);
+
+	characterSpr.setPosition(411, 160);
+	character3DSpr.setPosition(characterSpr.getPosition());
+
+	correctCast[0] = 1; // 0up 1down 2left 3right 0up = 12341
+	correctCast[1] = 2;
+	correctCast[2] = 3;
+	correctCast[3] = 4;
+	correctCast[4] = 1;
 }
