@@ -31,6 +31,19 @@ sf::Texture characterSadTexture;
 sf::Sprite character3DSpr;
 sf::Texture character3DTexture;
 
+sf::Sprite spellBannerSpr;
+sf::Texture spellBannerTexture;
+
+sf::Texture spellUpTexture;
+sf::Texture spellDownTexture;
+sf::Texture spellLeftTexture;
+sf::Texture spellRightTexture;
+sf::Texture blankTexture;
+
+sf::Sprite SpellSpr[5];
+sf::Texture currentSpellTexture;
+
+
 void loadDoor();
 void loadCharacters();
 void characterHandling();
@@ -92,12 +105,15 @@ void DoorScene::handleInput() {
 	// Spell Casting Input
 	// WASD inputs
 	if (sf::Keyboard::isKeyPressed(controls[0]) && canPress && !doneCasting) { //up
+		currentSpellTexture = spellUpTexture;
 		casting(1);
 	}
 	else if (sf::Keyboard::isKeyPressed(controls[1]) && canPress && !doneCasting) { //down
+		currentSpellTexture = spellDownTexture;
 		casting(2);
 	}
 	else if (sf::Keyboard::isKeyPressed(controls[2]) && canPress && !doneCasting) { //left
+		currentSpellTexture = spellLeftTexture;
 		casting(3);
 	}
 	else if (sf::Keyboard::isKeyPressed(controls[3]) && canPress && !doneCasting) { //right
@@ -112,9 +128,27 @@ void casting(int direction) {
 	if (castPosition < 5) 
 	{
 		cast[castPosition] = direction;
+		
+		if (direction == 1) {
+			SpellSpr[castPosition].setTexture(spellUpTexture);
+		}
+		else if (direction == 2) {
+			SpellSpr[castPosition].setTexture(spellDownTexture);
+		}
+		else if (direction == 3) {
+			SpellSpr[castPosition].setTexture(spellLeftTexture);
+		}
+		else if (direction == 4) {
+			SpellSpr[castPosition].setTexture(spellRightTexture);
+		}
+		
+		int move = castPosition * 100;
+		
+		SpellSpr[castPosition].setPosition(1222 + move, 805);
 		castPosition++;
 	}
-	else 
+	
+	if (castPosition == 5) 
 	{
 		doneCasting = true;
 	}
@@ -146,9 +180,9 @@ void DoorScene::update(float& dt) {
 	characterHandling();
 
 	// PLACE MODE - can be used for any sprite
-	characterSpr.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
+	SpellSpr[0].move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
 	// DEBUG TEXT - "(x,y) Placing: t/f"
-	sf::Vector2f textPosition = characterSpr.getPosition();
+	sf::Vector2f textPosition = SpellSpr[0].getPosition();
 
 	text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
 		std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode));
@@ -171,6 +205,13 @@ void DoorScene::render(sf::RenderWindow& window) {
 	if (characterArrived) {
 		window.draw(character3DSpr);
 	}
+	window.draw(spellBannerSpr);
+
+	window.draw(SpellSpr[0]);
+	window.draw(SpellSpr[1]);
+	window.draw(SpellSpr[2]);
+	window.draw(SpellSpr[3]);
+	window.draw(SpellSpr[4]);
 	window.draw(text);
 	window.draw(flameTimerText);
 	//Top Layer - UI
@@ -194,6 +235,7 @@ void characterHandling() {
 				characterSpr.setTexture(characterSadTexture);
 				return;
 			}
+			SpellSpr[num].setTexture(blankTexture);
 			x++;
 		}
 		x = 0;
@@ -274,6 +316,42 @@ void loadDoor() {
 	doorframeBgSpr.setTexture(doorframeBgTexture);
 	doorframeBgSpr.setPosition(0, 0);
 
+	// load SpellBanner
+	if (!spellBannerTexture.loadFromFile("Assets/Sprites/Spells/SpellBanner.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	spellBannerSpr.setTexture(spellBannerTexture);
+	spellBannerSpr.setPosition(1164, 771);
+
+	// load SpellDown
+	if (!spellDownTexture.loadFromFile("Assets/Sprites/Spells/SpellDown.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+
+	// load SpellLeft
+	if (!spellLeftTexture.loadFromFile("Assets/Sprites/Spells/SpellLeft.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+
+	// load SpellRight
+	if (!spellRightTexture.loadFromFile("Assets/Sprites/Spells/SpellRight.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+
+	// load SpellUp
+	if (!spellUpTexture.loadFromFile("Assets/Sprites/Spells/SpellUp.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+
+	if (!blankTexture.loadFromFile("Assets/Sprites/Spells/blankTexture.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
 	loadCharacters();
 }
 
