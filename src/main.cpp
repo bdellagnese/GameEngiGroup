@@ -102,6 +102,12 @@ int main() {
 			doorScene.update(dt);
 			doorScene.render(window);
 
+			if (doorScene.backDoor) {
+				// Door
+				doorScene.backDoor = false;
+				currentState = States::PLAY;
+			}
+
 			break;
 		
 		case States::ORB:
@@ -109,12 +115,24 @@ int main() {
 			orbScene.update(dt);
 			orbScene.render(window);
 
+			if (orbScene.backOrb) {
+				// Door
+				orbScene.backOrb = false;
+				currentState = States::PLAY;
+			}
+
 			break;
 		
 		case States::BOOK:
 			spellScene.handleInput();
 			spellScene.update(dt);
 			spellScene.render(window);
+
+			if (spellScene.backSpell) {
+				// Door
+				spellScene.backSpell = false;
+				currentState = States::PLAY;
+			}
 
 			break;
 		}
