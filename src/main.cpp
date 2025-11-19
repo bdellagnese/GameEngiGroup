@@ -13,14 +13,19 @@
 bool placeMode = false;
 bool canPress = true;
 bool characterArrived = false;
+
 float pressTime = 0.0f;
 const float placeModeSpeed = 25.0f;
 const int gameWidth = 1920;
 const int gameHeight = 1080;
 float direction1 = 0.0f;
 float direction2 = 0.0f;
+float globalTime;
+
 sf::Font font;
+sf::Font flameTimerFont;
 sf::Text text;
+sf::Text flameTimerText;
 
 enum class States { MENU, PLAY, DOOR, ORB, FLAME, BOOK };
 
@@ -34,14 +39,18 @@ int main() {
 	bool placeMode = false;
 	bool canPress = true;
 	bool characterArrived = false;
+
 	float pressTime = 0.0f;
 	const float placeModeSpeed = 25.0f;
 	const int gameWidth = 1920;
 	const int gameHeight = 1080;
 	float direction1 = 0.0f;
 	float direction2 = 0.0f;
+	float globalTime;
+
 	sf::Font font;
 	sf::Text text;
+	sf::Text flameTimerText;
 	
 	//create the window
 	sf::RenderWindow window(sf::VideoMode({ gameWidth, gameHeight }), "FixAllShop");

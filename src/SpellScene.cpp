@@ -9,12 +9,13 @@ void loadSpell();
 sf::Sprite spellPlaceholder;
 
 // Controls
-const sf::Keyboard::Key controls[5] = {
+const sf::Keyboard::Key controls[6] = {
 	sf::Keyboard::W,  // Up
 	sf::Keyboard::S,  // Down
 	sf::Keyboard::A,  // Left
 	sf::Keyboard::D,   // Right
-	sf::Keyboard::Space   // PlaceMode
+	sf::Keyboard::Space,   // PlaceMode
+	sf::Keyboard::E,   // go back
 };
 
 void SpellScene::handleInput() {
@@ -48,6 +49,17 @@ void SpellScene::handleInput() {
 	else {
 		direction2 = 0; direction1 = 0;
 	}
+
+	// Go back to game screen
+	if (sf::Keyboard::isKeyPressed(controls[5]) && canPress)
+	{
+		// Reset Press Timer
+		canPress = false;
+		pressTime = 1;
+
+		// go back
+		backSpell = true;
+	}
 }
 
 void SpellScene::update(float& dt) {
@@ -55,6 +67,15 @@ void SpellScene::update(float& dt) {
 	if (!hasLoaded) {
 		loadSpell();
 	}
+	
+	// Global Timer
+	if (globalTime > 0) {
+		globalTime -= dt;
+	}
+	else {
+		// lose
+	}
+	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
 
 	// Basic Timer
 	if (pressTime > 0) {
@@ -76,6 +97,10 @@ void SpellScene::update(float& dt) {
 
 void SpellScene::render(sf::RenderWindow& window) {
 	// Render game
+
+	//Bottom Layer - The background
+	window.draw(flameTimerText);
+	//Top Layer - UI
 }
 
 void loadSpell() {

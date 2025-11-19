@@ -82,6 +82,14 @@ void DoorScene::update(float& dt) {
 		loadDoor();
 	}
 
+	// Global Timer
+	if (globalTime > 0) {
+		globalTime -= dt;
+	}
+	else {
+		// lose
+	}
+	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
 
 	// Basic Timer
 	if (pressTime > 0) {
@@ -92,10 +100,10 @@ void DoorScene::update(float& dt) {
 	}
 
 	// PLACE MODE - can be used for any sprite
-	doorPlaceholder.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
+	flameTimerText.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
 
 	// DEBUG TEXT - "(x,y) Placing: t/f"
-	sf::Vector2f textPosition = doorPlaceholder.getPosition();
+	sf::Vector2f textPosition = flameTimerText.getPosition();
 
 	text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
 		std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode));
@@ -112,6 +120,8 @@ void DoorScene::render(sf::RenderWindow& window) {
 		//window.draw(textboxSpr);
 		//window.draw(characterText);
 	}
+	window.draw(text);
+	window.draw(flameTimerText);
 	//Top Layer - UI
 }
 
