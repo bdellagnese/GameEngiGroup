@@ -5,9 +5,10 @@ public:
     void handleInput() override;
     void update(float& dt) override;
     void render(sf::RenderWindow& window) override;
-    void random();
+    
+    static void random();
+    static void nextCharacter();
     
     // Special Variables
     float stateChange = 0;
-
 };

@@ -1,9 +1,12 @@
 #include <SFML/Graphics.hpp>
+#include <string>
+
 #include "DoorScene.h"
 #include "GameVariables.h"
 #include "GameState.h"
 
 GameState gameState;
+
 bool newCharacter;
 bool hasLoadedDoor = false;
 bool doneCasting;
@@ -12,11 +15,12 @@ bool backDoor;
 // Parameters
 int cast[5];
 int correctCast[5];
+
+int characters[7]; // if character[1] = timmy active
+
 int castPosition = 0;
 
 bool success;
-
-int globalDt;
 
 // Objects
 sf::Sprite doorPlaceholder;
@@ -35,6 +39,9 @@ sf::Texture characterSadTexture;
 sf::Sprite character3DSpr;
 sf::Texture character3DTexture;
 
+sf::Sprite textboxSpr;
+sf::Texture textboxTexture;
+
 sf::Sprite spellBannerSpr;
 sf::Texture spellBannerTexture;
 
@@ -47,6 +54,7 @@ sf::Texture blankTexture;
 sf::Sprite SpellSpr[5];
 sf::Texture currentSpellTexture;
 
+sf::Text characterText;
 
 void loadDoor();
 void loadCharacters();
@@ -130,7 +138,7 @@ void DoorScene::handleInput() {
 
 void casting(int direction) {
 	canPress = false;
-	pressTime = 1;
+	pressTime = 0.25f;
 
 	if (castPosition < 5) 
 	{
@@ -173,7 +181,7 @@ void DoorScene::update(float& dt) {
 	else {
 		// lose
 	}
-	flameTimerText.setString(std::to_string(static_cast<int>(animTimer)));
+	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
 
 	// Basic Timer
 	if (pressTime > 0) {
@@ -198,6 +206,7 @@ void DoorScene::update(float& dt) {
 		else {
 			if (!characterArrived) {
 				gameState.random();
+				gameState.nextCharacter();
 				characterArrived = true;
 			}
 		}
@@ -206,9 +215,9 @@ void DoorScene::update(float& dt) {
 	characterHandling();
 
 	// PLACE MODE - can be used for any sprite
-	SpellSpr[0].move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
+	textboxSpr.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
 	// DEBUG TEXT - "(x,y) Placing: t/f"
-	sf::Vector2f textPosition = SpellSpr[0].getPosition();
+	sf::Vector2f textPosition = textboxSpr.getPosition();
 
 	text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
 		std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode) + ", Arrived: " + std::to_string(characterArrived));
@@ -222,14 +231,14 @@ void DoorScene::render(sf::RenderWindow& window) {
 
 	if (characterArrived) {
 		window.draw(characterSpr);
-		//window.draw(textboxSpr);
-		//window.draw(characterText);
 	}
 
 	window.draw(doorframeSpr);
 	
 	if (characterArrived) {
 		window.draw(character3DSpr);
+		window.draw(textboxSpr);
+		window.draw(characterText);
 	}
 
 	// Spells and Runes
@@ -247,6 +256,8 @@ void DoorScene::render(sf::RenderWindow& window) {
 }
 
 void characterHandling() {
+	//if()
+	
 	int getCastLength = sizeof(cast) / sizeof(cast[0]);
 	if (doneCasting)
 	{
@@ -272,7 +283,6 @@ void characterHandling() {
 			// win
 			animTimerDone = false;
 			animTimer = 4;
-			//NextCharacter();
 
 			success = true;
 		}
@@ -282,14 +292,17 @@ void characterHandling() {
 			animTimer = 4;
 			success = false;
 		}
+		pressTime = 5;
 		castPosition = 0;
 
 		if (success) {
 			characterSpr.setTexture(characterHappyTexture);
+			//dialogueState = 2; // Happy Message
 		}
 		else
 		{
 			characterSpr.setTexture(characterSadTexture);
+			//dialogueState = 3; // Hateful
 		}
 	}
 
@@ -309,7 +322,7 @@ void characterHandling() {
 
 	if (nextText){
 		nextText = false;
-		interaction++
+		conversation++
 	}
 
 	if(conversation == 1){ // Greeting
@@ -329,31 +342,6 @@ void characterHandling() {
 		else if (at array character limit){
 			conversation = 4; //fail
 		}
-
-		// WASD inputs
-		if (sf::Keyboard::isKeyPressed(controls[0])) {
-
-		}
-		else if (sf::Keyboard::isKeyPressed(controls[1])) {
-
-		}
-		else if (sf::Keyboard::isKeyPressed(controls[2])) {
-
-		}
-		else if (sf::Keyboard::isKeyPressed(controls[3])) {
-
-		}
-	}
-	else if (conversation == 3){
-		// Success
-		charSpriteTexture = activeCharTexture; // change texture to happy / fail sprite. could be done elsewhere
-		charSprite.setTexture(charSpriteTexture);
-		text = "yap fest";
-	}
-	else if (conversation == 4){
-		// Fail
-		charSprite.setTexture(charSpriteTexture);
-		text = "yap fest";
 	}
 	*/
 }
@@ -379,6 +367,14 @@ void loadDoor() {
 	}
 	doorframeBgSpr.setTexture(doorframeBgTexture);
 	doorframeBgSpr.setPosition(0, 0);
+
+	// load TextBox
+	if (!textboxTexture.loadFromFile("Assets/Sprites/textbox.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	textboxSpr.setTexture(textboxTexture);
+	textboxSpr.setPosition(884, 0);
 
 	// load SpellBanner
 	if (!spellBannerTexture.loadFromFile("Assets/Sprites/Spells/SpellBanner.tga"))
@@ -452,3 +448,45 @@ void loadCharacters(){
 	correctCast[3] = 4;
 	correctCast[4] = 1;
 }
+
+/*
+if(click)
+{
+	if(character = 1) // Timmy
+	{
+		characterText = timmyText[dialogueState];
+	}
+	else if(character = 2)
+	{
+		characterText = xText[dialogueState];
+	}
+}
+
+if(character = 1)
+{
+	// Change character texture
+	character3DSpr.setTexture(timmyTexture3D);
+	characterSpr.setTexture(timmyTexture);
+
+	// Adjust position
+	characterSpr.setPosition(411, 160);
+	character3DSpr.setPosition(characterSpr.getPosition());
+
+	// Set text for character
+	timmyText[0] = "Greeting";
+	timmyText[1] = "Wait for Spell";
+	timmyText[2] = "Thankful Message";
+	timmyText[3] = "Hateful Message";
+
+	// The custom cast order needed for success
+	correctCast[0] = 1; // 0up 1down 2left 3right
+	correctCast[1] = 2;
+	correctCast[2] = 3;
+	correctCast[3] = 4;
+	correctCast[4] = 1;
+}
+else if (character = 2)
+{
+
+}
+*/

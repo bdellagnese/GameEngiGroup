@@ -6,10 +6,10 @@
 #include "GameVariables.h"
 #include "GameState.h"
 
+
+
 bool hasLoadedGame = false;
 void loadGame();
-
-void random_gs();
 
 bool canClick = false;
 
@@ -100,7 +100,7 @@ void GameState::update(float& dt) {
 	else {
 		// lose
 	}
-	flameTimerText.setString(std::to_string(static_cast<int>(randomTime)));
+	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
 
     // Basic Timer
     if (pressTime > 0) {
@@ -126,7 +126,8 @@ void GameState::update(float& dt) {
 		}
 		else {
 			if (!characterArrived) {
-				random_gs();
+				GameState::random();
+				GameState::nextCharacter();
 				characterArrived = true;
 			}
 		}
@@ -205,7 +206,7 @@ void GameState::render(sf::RenderWindow& window) {
 void loadGame() {
 	hasLoadedGame = true;
 	characterArrived = false;
-	random_gs();
+	GameState::random();
 
 
 	// Load global timer font
@@ -284,7 +285,6 @@ void GameState::random() {
 	randomTime = static_cast<float>(randomNumber);
 }
 
-void random_gs() {
-	randomNumber = distrib(gen);
-	randomTime = static_cast<float>(randomNumber);
+void GameState::nextCharacter() {
+
 }
