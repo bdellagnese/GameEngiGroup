@@ -13,6 +13,7 @@
 bool placeMode = false;
 bool canPress = true;
 bool characterArrived = false;
+bool animTimerDone = false;
 
 float pressTime = 0.0f;
 const float placeModeSpeed = 25.0f;
@@ -21,6 +22,7 @@ const int gameHeight = 1080;
 float direction1 = 0.0f;
 float direction2 = 0.0f;
 float globalTime;
+float animTimer;
 
 sf::Font font;
 sf::Font flameTimerFont;
@@ -39,6 +41,7 @@ int main() {
 	bool placeMode = false;
 	bool canPress = true;
 	bool characterArrived = false;
+	bool animTimerDone = false;
 
 	float pressTime = 0.0f;
 	const float placeModeSpeed = 25.0f;
@@ -47,6 +50,7 @@ int main() {
 	float direction1 = 0.0f;
 	float direction2 = 0.0f;
 	float globalTime;
+	float animTimer;
 
 	sf::Font font;
 	sf::Text text;

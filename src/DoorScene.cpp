@@ -13,6 +13,10 @@ int cast[5];
 int correctCast[5];
 int castPosition = 0;
 
+bool success;
+
+int globalDt;
+
 // Objects
 sf::Sprite doorPlaceholder;
 
@@ -103,20 +107,23 @@ void DoorScene::handleInput() {
 
 	// Spell Casting Input
 	// WASD inputs
-	if (sf::Keyboard::isKeyPressed(controls[0]) && canPress && !doneCasting) { //up
-		currentSpellTexture = spellUpTexture;
-		casting(1);
-	}
-	else if (sf::Keyboard::isKeyPressed(controls[1]) && canPress && !doneCasting) { //down
-		currentSpellTexture = spellDownTexture;
-		casting(2);
-	}
-	else if (sf::Keyboard::isKeyPressed(controls[2]) && canPress && !doneCasting) { //left
-		currentSpellTexture = spellLeftTexture;
-		casting(3);
-	}
-	else if (sf::Keyboard::isKeyPressed(controls[3]) && canPress && !doneCasting) { //right
-		casting(4);
+	
+	if (canPress && !doneCasting && characterArrived) {
+		if (sf::Keyboard::isKeyPressed(controls[0])) { //up
+			currentSpellTexture = spellUpTexture;
+			casting(1);
+		}
+		else if (sf::Keyboard::isKeyPressed(controls[1])) { //down
+			currentSpellTexture = spellDownTexture;
+			casting(2);
+		}
+		else if (sf::Keyboard::isKeyPressed(controls[2])) { //left
+			currentSpellTexture = spellLeftTexture;
+			casting(3);
+		}
+		else if (sf::Keyboard::isKeyPressed(controls[3])) { //right
+			casting(4);
+		}
 	}
 }
 
@@ -127,7 +134,6 @@ void casting(int direction) {
 	if (castPosition < 5) 
 	{
 		cast[castPosition] = direction;
-		
 		if (direction == 1) {
 			SpellSpr[castPosition].setTexture(spellUpTexture);
 		}
@@ -158,7 +164,7 @@ void DoorScene::update(float& dt) {
 	if (!hasLoadedDoor) {
 		loadDoor();
 	}
-
+	
 	// Global Timer
 	if (globalTime > 0) {
 		globalTime -= dt;
@@ -174,6 +180,14 @@ void DoorScene::update(float& dt) {
 	}
 	else {
 		canPress = true;
+	}
+
+	// Timer for animation pauses
+	if (animTimer > 0) {
+		animTimer -= dt;
+	}
+	else {
+		animTimerDone = true;
 	}
 
 	characterHandling();
@@ -204,13 +218,16 @@ void DoorScene::render(sf::RenderWindow& window) {
 	if (characterArrived) {
 		window.draw(character3DSpr);
 	}
-	window.draw(spellBannerSpr);
 
+	// Spells and Runes
+	window.draw(spellBannerSpr);
 	window.draw(SpellSpr[0]);
 	window.draw(SpellSpr[1]);
 	window.draw(SpellSpr[2]);
 	window.draw(SpellSpr[3]);
 	window.draw(SpellSpr[4]);
+
+	// Text
 	window.draw(text);
 	window.draw(flameTimerText);
 	//Top Layer - UI
@@ -235,19 +252,41 @@ void characterHandling() {
 				// next number
 				check++;
 			}
-			SpellSpr[num].setTexture(blankTexture);
 			x++;
 		}
 
 		if (check == 5) {
 			// win
-			characterSpr.setTexture(characterHappyTexture);
+			animTimerDone = false;
+			animTimer = 4;
+			//NextCharacter();
+
+			success = true;
 		}
 		else {
 			// fail
-			characterSpr.setTexture(characterSadTexture);
+			animTimerDone = false;
+			animTimer = 4;
+			success = false;
 		}
 		castPosition = 0;
+
+		if (success) {
+			characterSpr.setTexture(characterHappyTexture);
+		}
+		else
+		{
+			characterSpr.setTexture(characterSadTexture);
+		}
+	}
+
+	if (animTimerDone) {
+		characterArrived = false;
+
+		// clear spells
+		for (int i = 0; i < 5; i++) {
+			SpellSpr[i].setTexture(blankTexture);
+		}
 	}
 
 	/*
@@ -308,6 +347,7 @@ void characterHandling() {
 
 void loadDoor() {
 	hasLoadedDoor = true;
+	animTimer = 1000;
 
 	// load doorway
 	if (!doorframeTexture.loadFromFile("Assets/Sprites/Doorway.tga"))
