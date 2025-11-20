@@ -16,11 +16,13 @@ bool backDoor;
 int cast[5];
 int correctCast[5];
 
-int characters[7]; // if character[1] = timmy active
+int characters;
 
 int castPosition = 0;
 
 bool success;
+
+int dialogueState = 0;
 
 // Objects
 sf::Sprite doorPlaceholder;
@@ -114,9 +116,15 @@ void DoorScene::handleInput() {
 		backDoor = true;
 	}
 
+	// Dialogue
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && canPress)
+	{
+		if (dialogueState = 0) {
+			dialogueState++;
+		}
+	}
+
 	// Spell Casting Input
-	// WASD inputs
-	
 	if (canPress && !doneCasting && characterArrived) {
 		if (sf::Keyboard::isKeyPressed(controls[0])) { //up
 			currentSpellTexture = spellUpTexture;
@@ -206,7 +214,7 @@ void DoorScene::update(float& dt) {
 		else {
 			if (!characterArrived) {
 				gameState.random();
-				gameState.nextCharacter();
+				DoorScene::nextCharacter();
 				characterArrived = true;
 			}
 		}
@@ -314,36 +322,6 @@ void characterHandling() {
 			SpellSpr[i].setTexture(blankTexture);
 		}
 	}
-
-	/*
-	float conversation = 0;
-
-
-
-	if (nextText){
-		nextText = false;
-		conversation++
-	}
-
-	if(conversation == 1){ // Greeting
-		text = characterText;
-
-		if click{
-			nextText = true;
-		}
-	}
-	else if (conversation == 2){ // Additional Text - spell casting
-		text = characterText;
-
-		// array
-		if (currentSpell[] == CorrectSpell[]){
-			conversation = 3; //success
-		}
-		else if (at array character limit){
-			conversation = 4; //fail
-		}
-	}
-	*/
 }
 
 void loadDoor() {
@@ -449,17 +427,43 @@ void loadCharacters(){
 	correctCast[4] = 1;
 }
 
+void DoorScene::nextCharacter() {
+	/*if (character = 1)
+	{
+		// Change character texture
+		character3DSpr.setTexture(timmyTexture3D);
+		characterSpr.setTexture(timmyTexture);
+
+		// Adjust position
+		characterSpr.setPosition(411, 160);
+		character3DSpr.setPosition(characterSpr.getPosition());
+
+		// Set text for character
+		setCharacterText[0] = "Greeting";
+		setCharacterText[1] = "Wait for Spell";
+		setCharacterText[2] = "Thankful Message";
+		setCharacterText	[3] = "Hateful Message";
+
+		// The custom cast order needed for success
+		correctCast[0] = 1; // 0up 1down 2left 3right
+		correctCast[1] = 2;
+		correctCast[2] = 3;
+		correctCast[3] = 4;
+		correctCast[4] = 1;
+	}
+	else if (character = 2)
+	{
+
+	}*/
+}
 /*
-if(click)
+if(characters = 1) // Timmy
 {
-	if(character = 1) // Timmy
-	{
-		characterText = timmyText[dialogueState];
-	}
-	else if(character = 2)
-	{
-		characterText = xText[dialogueState];
-	}
+	characterText = timmyText[dialogueState];
+}
+else if(characters = 2)
+{
+	characterText = xText[dialogueState];
 }
 
 if(character = 1)

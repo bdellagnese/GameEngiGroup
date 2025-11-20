@@ -5,8 +5,9 @@
 
 #include "GameVariables.h"
 #include "GameState.h"
+#include "DoorScene.h"
 
-
+DoorScene doorScene;
 
 bool hasLoadedGame = false;
 void loadGame();
@@ -127,7 +128,7 @@ void GameState::update(float& dt) {
 		else {
 			if (!characterArrived) {
 				GameState::random();
-				GameState::nextCharacter();
+				doorScene.nextCharacter();
 				characterArrived = true;
 			}
 		}
@@ -283,8 +284,4 @@ void loadGame() {
 void GameState::random() {
 	randomNumber = distrib(gen);
 	randomTime = static_cast<float>(randomNumber);
-}
-
-void GameState::nextCharacter() {
-
 }

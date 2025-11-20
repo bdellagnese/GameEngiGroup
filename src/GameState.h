@@ -7,7 +7,6 @@ public:
     void render(sf::RenderWindow& window) override;
     
     static void random();
-    static void nextCharacter();
     
     // Special Variables
     float stateChange = 0;
