@@ -12,7 +12,6 @@ bool doneCasting;
 int cast[5];
 int correctCast[5];
 int castPosition = 0;
-int x = 0;
 
 // Objects
 sf::Sprite doorPlaceholder;
@@ -222,23 +221,33 @@ void characterHandling() {
 	if (doneCasting)
 	{
 		doneCasting = false;
-		castPosition = 0;
+
+		// reset timer
+		canPress = false;
+		pressTime = 1;
+		
+		int check = 0;
+		int x = 0;
+
 		// check if arrays are same
 		for (int num : cast) {
 			if (num == correctCast[x]) {
 				// next number
-				characterSpr.setTexture(characterHappyTexture);
-			}
-			else
-			{
-				// cancel and fail
-				characterSpr.setTexture(characterSadTexture);
-				return;
+				check++;
 			}
 			SpellSpr[num].setTexture(blankTexture);
 			x++;
 		}
-		x = 0;
+
+		if (check == 5) {
+			// win
+			characterSpr.setTexture(characterHappyTexture);
+		}
+		else {
+			// fail
+			characterSpr.setTexture(characterSadTexture);
+		}
+		castPosition = 0;
 	}
 
 	/*
