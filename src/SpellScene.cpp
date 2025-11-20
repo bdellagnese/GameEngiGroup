@@ -2,6 +2,7 @@
 #include "SpellScene.h"
 #include "GameVariables.h"
 
+bool backSpell;
 bool hasLoaded = false;
 void loadSpell();
 
@@ -105,4 +106,5 @@ void SpellScene::render(sf::RenderWindow& window) {
 
 void loadSpell() {
 	hasLoaded = true;
+	backSpell = false;
 }

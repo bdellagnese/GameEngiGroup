@@ -9,14 +9,21 @@ extern bool characterArrived;
 extern bool animTimerDone;
 
 // Numbers
-extern float pressTime;
 extern const int gameWidth;
 extern const int gameHeight;
+
 extern const float placeModeSpeed;
+
 extern float direction1;
 extern float direction2;
+
+extern float pressTime;
 extern float globalTime;
 extern float animTimer;
+extern float randomTime;
+
+extern int randomNumber;
+
 
 // Objects
 extern sf::Font font;

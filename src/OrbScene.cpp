@@ -4,6 +4,7 @@
 
 bool hasLoadedOrb = false;
 void loadOrb();
+bool backOrb;
 
 // Objects
 sf::Sprite orbPlaceholder;
@@ -106,4 +107,5 @@ void OrbScene::render(sf::RenderWindow& window) {
 
 void loadOrb() {
 	hasLoadedOrb = true;
+	backOrb = false;
 }

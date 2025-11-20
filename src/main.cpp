@@ -23,6 +23,8 @@ float direction1 = 0.0f;
 float direction2 = 0.0f;
 float globalTime;
 float animTimer;
+float randomTime;
+int randomNumber;
 
 sf::Font font;
 sf::Font flameTimerFont;
@@ -50,7 +52,9 @@ int main() {
 	float direction1 = 0.0f;
 	float direction2 = 0.0f;
 	float globalTime;
+	float randomTime;
 	float animTimer;
+	int randomNumber;
 
 	sf::Font font;
 	sf::Text text;

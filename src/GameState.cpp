@@ -1,12 +1,24 @@
 #include <SFML/Graphics.hpp>
+
 #include <string>
+#include <random>
+
 #include "GameVariables.h"
 #include "GameState.h"
 
 bool hasLoadedGame = false;
 void loadGame();
 
+void random_gs();
+
 bool canClick = false;
+
+// Create a random number generator engine
+std::random_device rd;
+std::mt19937 gen(rd());
+
+// Define the distribution (range)
+std::uniform_int_distribution<> distrib(5, 10); // Generates integers in the range [5, 10]
 
 // Objects
 sf::Sprite gamePlaceholder;
@@ -88,7 +100,7 @@ void GameState::update(float& dt) {
 	else {
 		// lose
 	}
-	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
+	flameTimerText.setString(std::to_string(static_cast<int>(randomTime)));
 
     // Basic Timer
     if (pressTime > 0) {
@@ -98,6 +110,27 @@ void GameState::update(float& dt) {
 		canPress = true;
 		canClick = true;
     }
+	
+	// Timer for animation pauses
+	if (animTimer > 0) {
+		animTimer -= dt;
+	}
+	else {
+		animTimerDone = true;
+	}
+
+	// Random Arrival Timer
+	if (!characterArrived) {
+		if (randomTime > 0) {
+			randomTime -= dt;
+		}
+		else {
+			if (!characterArrived) {
+				random_gs();
+				characterArrived = true;
+			}
+		}
+	}
 
     // PLACE MODE - can be used for any sprite
 	flameTimerText.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
@@ -105,7 +138,7 @@ void GameState::update(float& dt) {
     sf::Vector2f textPosition = flameTimerText.getPosition();
 
 	text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
-        std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode));
+        std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode) + ", Arrived: " + std::to_string(characterArrived));
 }
 
 void GameState::render(sf::RenderWindow& window) {
@@ -171,7 +204,9 @@ void GameState::render(sf::RenderWindow& window) {
 
 void loadGame() {
 	hasLoadedGame = true;
-	characterArrived = true;
+	characterArrived = false;
+	random_gs();
+
 
 	// Load global timer font
 	if (!flameTimerFont.loadFromFile("Assets/Fonts/lacquer.ttf")) {
@@ -242,4 +277,14 @@ void loadGame() {
 	}
 	charSilhouetteSprite.setTexture(charSilhouetteTexture);
 	charSilhouetteSprite.setPosition(858, 250);
+}
+
+void GameState::random() {
+	randomNumber = distrib(gen);
+	randomTime = static_cast<float>(randomNumber);
+}
+
+void random_gs() {
+	randomNumber = distrib(gen);
+	randomTime = static_cast<float>(randomNumber);
 }

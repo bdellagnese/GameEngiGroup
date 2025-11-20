@@ -7,6 +7,7 @@ GameState gameState;
 bool newCharacter;
 bool hasLoadedDoor = false;
 bool doneCasting;
+bool backDoor;
 
 // Parameters
 int cast[5];
@@ -172,7 +173,7 @@ void DoorScene::update(float& dt) {
 	else {
 		// lose
 	}
-	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
+	flameTimerText.setString(std::to_string(static_cast<int>(animTimer)));
 
 	// Basic Timer
 	if (pressTime > 0) {
@@ -190,6 +191,18 @@ void DoorScene::update(float& dt) {
 		animTimerDone = true;
 	}
 
+	if (!characterArrived) {
+		if (randomTime > 0) {
+			randomTime -= dt;
+		}
+		else {
+			if (!characterArrived) {
+				gameState.random();
+				characterArrived = true;
+			}
+		}
+	}
+
 	characterHandling();
 
 	// PLACE MODE - can be used for any sprite
@@ -198,7 +211,7 @@ void DoorScene::update(float& dt) {
 	sf::Vector2f textPosition = SpellSpr[0].getPosition();
 
 	text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
-		std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode));
+		std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode) + ", Arrived: " + std::to_string(characterArrived));
 }
 
 void DoorScene::render(sf::RenderWindow& window) {
@@ -348,6 +361,8 @@ void characterHandling() {
 void loadDoor() {
 	hasLoadedDoor = true;
 	animTimer = 1000;
+	animTimerDone = false;
+	backDoor = false;
 
 	// load doorway
 	if (!doorframeTexture.loadFromFile("Assets/Sprites/Doorway.tga"))
