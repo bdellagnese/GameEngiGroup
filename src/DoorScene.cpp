@@ -377,7 +377,7 @@ void DoorScene::nextCharacter() {
 		characterString[3] = "uhh I really don’t think this is\n     what I’m needing… \n     thanks for trying I guess";
 
 		// The custom cast order needed for success
-		correctCast[0] = 1; // 0up 1down 2left 3right
+		correctCast[0] = 1; // 1up 2down 3left 4right
 		correctCast[1] = 2;
 		correctCast[2] = 3;
 		correctCast[3] = 4;
@@ -400,13 +400,14 @@ void DoorScene::nextCharacter() {
 		characterString[3] = "Hateful Message but Shawnson";
 
 		// The custom cast order needed for success
-		correctCast[0] = 1; // 0up 1down 2left 3right
+		correctCast[0] = 1; // 1up 2down 3left 4right
 		correctCast[1] = 2;
 		correctCast[2] = 3;
 		correctCast[3] = 4;
 		correctCast[4] = 1;
 	}
-	else {
+	else if (character == 3) // Shawnson
+	{
 
 	}
 }
