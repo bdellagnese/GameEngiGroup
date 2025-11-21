@@ -1,14 +1,36 @@
 #include <SFML/Graphics.hpp>
+#include <string>
+
 #include "DoorScene.h"
 #include "GameVariables.h"
 #include "GameState.h"
 
 GameState gameState;
-bool newCharacter;
 
+bool newCharacter;
 bool hasLoadedDoor = false;
-void loadDoor();
-void characterHandling();
+bool doneCasting;
+bool backDoor;
+
+// Parameters
+int cast[5];
+int correctCast[5];
+const int totalCharacters = 2;
+// character textures and values - if one changes, they all do
+int renderNum;
+sf::Texture characterTexture[totalCharacters];
+sf::Texture characterHappyTexture[totalCharacters];
+sf::Texture characterSadTexture[totalCharacters];
+
+sf::Texture character3DTexture[totalCharacters];
+sf::Texture characterHappy3DTexture[totalCharacters];
+sf::Texture characterSad3DTexture[totalCharacters];
+
+int castPosition = 0;
+
+bool success;
+
+int dialogueState = 0;
 
 // Objects
 sf::Sprite doorPlaceholder;
@@ -20,15 +42,38 @@ sf::Sprite doorframeBgSpr;
 sf::Texture doorframeBgTexture;
 
 sf::Sprite characterSpr;
-sf::Texture characterTexture;
+sf::Sprite character3DSpr;
+
+sf::Sprite textboxSpr;
+sf::Texture textboxTexture;
+
+sf::Sprite spellBannerSpr;
+sf::Texture spellBannerTexture;
+
+sf::Texture spellUpTexture;
+sf::Texture spellDownTexture;
+sf::Texture spellLeftTexture;
+sf::Texture spellRightTexture;
+sf::Texture blankTexture;
+
+sf::Sprite SpellSpr[5];
+sf::Texture currentSpellTexture;
+
+sf::Text characterText;
+
+void loadDoor();
+void loadCharacters();
+void characterHandling();
+void casting(int direction);
 
 // Controls
-const sf::Keyboard::Key controls[5] = {
+const sf::Keyboard::Key controls[6] = {
 	sf::Keyboard::W,  // Up
 	sf::Keyboard::S,  // Down
 	sf::Keyboard::A,  // Left
 	sf::Keyboard::D,   // Right
-	sf::Keyboard::Space   // PlaceMode
+	sf::Keyboard::Space,   // PlaceMode
+	sf::Keyboard::E,   // go back
 };
 
 void DoorScene::handleInput() {
@@ -62,6 +107,76 @@ void DoorScene::handleInput() {
 	else {
 		direction2 = 0; direction1 = 0;
 	}
+
+	// Go back to game screen
+	if (sf::Keyboard::isKeyPressed(controls[5]) && canPress) 
+	{
+		// Reset Press Timer
+		canPress = false;
+		pressTime = 1;
+
+		// go back
+		backDoor = true;
+	}
+
+	// Dialogue
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && canPress)
+	{
+		if (dialogueState == 0) {
+			dialogueState++;
+		}
+	}
+
+	// Spell Casting Input
+	if (canPress && !doneCasting && characterArrived) {
+		if (sf::Keyboard::isKeyPressed(controls[0])) { //up
+			currentSpellTexture = spellUpTexture;
+			casting(1);
+		}
+		else if (sf::Keyboard::isKeyPressed(controls[1])) { //down
+			currentSpellTexture = spellDownTexture;
+			casting(2);
+		}
+		else if (sf::Keyboard::isKeyPressed(controls[2])) { //left
+			currentSpellTexture = spellLeftTexture;
+			casting(3);
+		}
+		else if (sf::Keyboard::isKeyPressed(controls[3])) { //right
+			casting(4);
+		}
+	}
+}
+
+void casting(int direction) {
+	canPress = false;
+	pressTime = 0.25f;
+
+	if (castPosition < 5) 
+	{
+		cast[castPosition] = direction;
+		if (direction == 1) {
+			SpellSpr[castPosition].setTexture(spellUpTexture);
+		}
+		else if (direction == 2) {
+			SpellSpr[castPosition].setTexture(spellDownTexture);
+		}
+		else if (direction == 3) {
+			SpellSpr[castPosition].setTexture(spellLeftTexture);
+		}
+		else if (direction == 4) {
+			SpellSpr[castPosition].setTexture(spellRightTexture);
+		}
+		
+		int move = castPosition * 100;
+		
+		SpellSpr[castPosition].setPosition(1222 + move, 805);
+		castPosition++;
+	}
+	
+	if (castPosition == 5) 
+	{
+		doneCasting = true;
+	}
 }
 
 void DoorScene::update(float& dt) {
@@ -70,6 +185,23 @@ void DoorScene::update(float& dt) {
 		loadDoor();
 	}
 
+	if (totalCharacters < character) {
+		//if (wins / totalCharacters > totalCharacters / 2){
+		
+		// Game Win
+		//back
+		gameDone = true;
+		backDoor = true;
+	}
+
+	// Global Timer
+	if (globalTime > 0) {
+		globalTime -= dt;
+	}
+	else {
+		// lose
+	}
+	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
 
 	// Basic Timer
 	if (pressTime > 0) {
@@ -79,32 +211,142 @@ void DoorScene::update(float& dt) {
 		canPress = true;
 	}
 
-	// PLACE MODE - can be used for any sprite
-	doorPlaceholder.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
+	// Timer for animation pauses
+	if (animTimer > 0) {
+		animTimer -= dt;
+	}
+	else {
+		animTimerDone = true;
+	}
 
+	// Show the customer after random timer
+	if (!characterArrived) {
+		if (randomTime > 0) {
+			randomTime -= dt;
+		}
+		else {
+			if (!characterArrived) {
+				DoorScene::nextCharacter();
+			}
+		}
+	}
+
+	characterHandling();
+
+	// PLACE MODE - can be used for any sprite
+	characterSpr.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
 	// DEBUG TEXT - "(x,y) Placing: t/f"
-	sf::Vector2f textPosition = doorPlaceholder.getPosition();
+	sf::Vector2f textPosition = characterSpr.getPosition();
 
 	text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
-		std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode));
+		std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode) + 
+		", Arrived: " + std::to_string(characterArrived));
 }
 
 void DoorScene::render(sf::RenderWindow& window) {
 	// Render game
-
 	//Bottom Layer - The background
 	window.draw(doorframeBgSpr);
-	window.draw(doorframeSpr);
+
 	if (characterArrived) {
 		window.draw(characterSpr);
-		//window.draw(textboxSpr);
-		//window.draw(characterText);
 	}
+
+	window.draw(doorframeSpr);
+	
+	if (characterArrived) {
+		window.draw(character3DSpr);
+		window.draw(textboxSpr);
+		window.draw(characterText);
+	}
+
+	// Spells and Runes
+	window.draw(spellBannerSpr);
+	window.draw(SpellSpr[0]);
+	window.draw(SpellSpr[1]);
+	window.draw(SpellSpr[2]);
+	window.draw(SpellSpr[3]);
+	window.draw(SpellSpr[4]);
+
+	// Text
+	window.draw(text);
+	window.draw(flameTimerText);
 	//Top Layer - UI
+}
+
+void characterHandling() {
+	//if()
+	
+	int getCastLength = sizeof(cast) / sizeof(cast[0]);
+	if (doneCasting)
+	{
+		doneCasting = false;
+
+		// reset timer
+		canPress = false;
+		pressTime = 1;
+		
+		int check = 0;
+		int x = 0;
+
+		// check if arrays are same
+		for (int num : cast) {
+			if (num == correctCast[x]) {
+				// next number
+				check++;
+			}
+			x++;
+		}
+
+		if (check == 5) {
+			// win
+			animTimerDone = false;
+			animTimer = 4;
+
+			success = true;
+		}
+		else {
+			// fail
+			animTimerDone = false;
+			animTimer = 4;
+			success = false;
+		}
+		pressTime = 5;
+		castPosition = 0;
+
+		if (success) {
+			characterSpr.setTexture(characterHappyTexture[renderNum]);
+			character3DSpr.setTexture(characterHappy3DTexture[renderNum]);
+			//dialogueState = 2; // Happy Message
+		}
+		else
+		{
+			characterSpr.setTexture(characterSadTexture[renderNum]);
+			character3DSpr.setTexture(characterSad3DTexture[renderNum]);
+			//dialogueState = 3; // Hateful
+		}
+	}
+
+	if (animTimerDone) {
+		animTimerDone = false;
+		animTimer = 1000;
+		
+		gameState.random();
+		characterArrived = false;
+
+		// clear spells
+		for (int i = 0; i < 5; i++) {
+			SpellSpr[i].setTexture(blankTexture);
+		}
+	}
 }
 
 void loadDoor() {
 	hasLoadedDoor = true;
+	animTimer = 1000;
+	animTimerDone = false;
+	backDoor = false;
+	totalCharacters;
 
 	// load doorway
 	if (!doorframeTexture.loadFromFile("Assets/Sprites/Doorway.tga"))
@@ -122,67 +364,209 @@ void loadDoor() {
 	doorframeBgSpr.setTexture(doorframeBgTexture);
 	doorframeBgSpr.setPosition(0, 0);
 
-	// load character
-	if (!characterTexture.loadFromFile("Assets/Sprites/character1.tga"))
+	// load TextBox
+	if (!textboxTexture.loadFromFile("Assets/Sprites/textbox.tga"))
 	{
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
-	characterSpr.setTexture(characterTexture);
+	textboxSpr.setTexture(textboxTexture);
+	textboxSpr.setPosition(884, 0);
+
+	// load SpellBanner
+	if (!spellBannerTexture.loadFromFile("Assets/Sprites/Spells/SpellBanner.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	spellBannerSpr.setTexture(spellBannerTexture);
+	spellBannerSpr.setPosition(1164, 771);
+
+	// load SpellDown
+	if (!spellDownTexture.loadFromFile("Assets/Sprites/Spells/SpellDown.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+
+	// load SpellLeft
+	if (!spellLeftTexture.loadFromFile("Assets/Sprites/Spells/SpellLeft.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+
+	// load SpellRight
+	if (!spellRightTexture.loadFromFile("Assets/Sprites/Spells/SpellRight.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+
+	// load SpellUp
+	if (!spellUpTexture.loadFromFile("Assets/Sprites/Spells/SpellUp.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+
+	if (!blankTexture.loadFromFile("Assets/Sprites/Spells/blankTexture.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	loadCharacters();
 }
 
-void characterHandling() {
-	/*
-	float conversation = 0;
-
-
-
-	if (nextText){
-		nextText = false;
-		interaction++
+void loadCharacters(){
+	// TIMMY
+	// load neutral
+	if (!characterTexture[0].loadFromFile("Assets/Sprites/Characters/Timmy/TimmyNeutral.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load happy
+	if (!characterHappyTexture[0].loadFromFile("Assets/Sprites/Characters/Timmy/TimmyHappy.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load sad 
+	if (!characterSadTexture[0].loadFromFile("Assets/Sprites/Characters/Timmy/TimmySad.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load neutral3D
+	if (!character3DTexture[0].loadFromFile("Assets/Sprites/Characters/Timmy/Timmy3D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load happy3D
+	if (!characterHappy3DTexture[0].loadFromFile("Assets/Sprites/Characters/Timmy/Timmy3D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load sad3D
+	if (!characterSad3DTexture[0].loadFromFile("Assets/Sprites/Characters/Timmy/Timmy3D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 
-	if(conversation == 1){ // Greeting
-		text = characterText;
-
-		if click{
-			nextText = true;
-		}
+	// SHAWNSON
+	// load neutral
+	if (!characterTexture[1].loadFromFile("Assets/Sprites/Characters/Shawnson/ShawnsonNeutral2D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
-	else if (conversation == 2){ // Additional Text - spell casting
-		text = characterText;
-
-		// array
-		if (currentSpell[] == CorrectSpell[]){
-			conversation = 3; //success
-		}
-		else if (at array character limit){
-			conversation = 4; //fail
-		}
-
-		// WASD inputs
-		if (sf::Keyboard::isKeyPressed(controls[0])) {
-
-		}
-		else if (sf::Keyboard::isKeyPressed(controls[1])) {
-
-		}
-		else if (sf::Keyboard::isKeyPressed(controls[2])) {
-
-		}
-		else if (sf::Keyboard::isKeyPressed(controls[3])) {
-
-		}
+	// load happy
+	if (!characterHappyTexture[1].loadFromFile("Assets/Sprites/Characters/Shawnson/ShawnsonHappy2D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
-	else if (conversation == 3){
-		// Success
-		charSpriteTexture = activeCharTexture; // change texture to happy / fail sprite. could be done elsewhere
-		charSprite.setTexture(charSpriteTexture);
-		text = "yap fest";
+	// load sad 
+	if (!characterSadTexture[1].loadFromFile("Assets/Sprites/Characters/Shawnson/ShawnsonMad2D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
-	else if (conversation == 4){
-		// Fail
-		charSprite.setTexture(charSpriteTexture);
-		text = "yap fest";
+	// load Neutral3D
+	if (!character3DTexture[1].loadFromFile("Assets/Sprites/Characters/Shawnson/ShawnsonNeutral3D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
-	*/
+	// load happy3D
+	if (!characterHappy3DTexture[1].loadFromFile("Assets/Sprites/Characters/Shawnson/ShawnsonHappy3D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load sad3D 
+	if (!characterSad3DTexture[1].loadFromFile("Assets/Sprites/Characters/Shawnson/ShawnsonMad3D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
 }
+
+void DoorScene::nextCharacter() {
+	characterArrived = true;
+	character++;
+
+	renderNum = character - 1;
+	if (character == 1) // Timmy
+	{
+		// Change character texture
+		character3DSpr.setTexture(character3DTexture[renderNum]);
+		characterSpr.setTexture(characterTexture[renderNum]);
+
+		// Adjust position
+		characterSpr.setPosition(411, 160);
+		character3DSpr.setPosition(characterSpr.getPosition());
+
+		/*Set text for character
+		setCharacterText[0] = "Greeting";
+		setCharacterText[1] = "Wait for Spell";
+		setCharacterText[2] = "Thankful Message";
+		setCharacterText[3] = "Hateful Message";*/ 
+
+		// The custom cast order needed for success
+		correctCast[0] = 1; // 0up 1down 2left 3right
+		correctCast[1] = 2;
+		correctCast[2] = 3;
+		correctCast[3] = 4;
+		correctCast[4] = 1;
+	}
+	else if (character == 2) // Shawnson
+	{
+		// Change character texture
+		character3DSpr.setTexture(character3DTexture[renderNum]);
+		characterSpr.setTexture(characterTexture[renderNum]);
+
+		// Adjust position
+		characterSpr.setPosition(150, 193);
+		character3DSpr.setPosition(characterSpr.getPosition());
+
+		/*Set text for character
+		setCharacterText[0] = "Greeting";
+		setCharacterText[1] = "Wait for Spell";
+		setCharacterText[2] = "Thankful Message";
+		setCharacterText[3] = "Hateful Message";*/
+
+		// The custom cast order needed for success
+		correctCast[0] = 1; // 0up 1down 2left 3right
+		correctCast[1] = 2;
+		correctCast[2] = 3;
+		correctCast[3] = 4;
+		correctCast[4] = 1;
+	}
+	else {
+		
+	}
+}
+/*
+if(characters = 1) // Timmy
+{
+	characterText = timmyText[dialogueState];
+}
+else if(characters = 2)
+{
+	characterText = xText[dialogueState];
+}
+
+if(character = 1)
+{
+	// Change character texture
+	character3DSpr.setTexture(timmyTexture3D);
+	characterSpr.setTexture(timmyTexture);
+
+	// Adjust position
+	characterSpr.setPosition(411, 160);
+	character3DSpr.setPosition(characterSpr.getPosition());
+
+	// Set text for character
+	timmyText[0] = "Greeting";
+	timmyText[1] = "Wait for Spell";
+	timmyText[2] = "Thankful Message";
+	timmyText[3] = "Hateful Message";
+
+	// The custom cast order needed for success
+	correctCast[0] = 1; // 0up 1down 2left 3right
+	correctCast[1] = 2;
+	correctCast[2] = 3;
+	correctCast[3] = 4;
+	correctCast[4] = 1;
+}
+else if (character = 2)
+{
+
+}
+*/

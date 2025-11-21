@@ -13,14 +13,26 @@
 bool placeMode = false;
 bool canPress = true;
 bool characterArrived = false;
+bool animTimerDone = false;
+bool gameDone = false;
+
 float pressTime = 0.0f;
 const float placeModeSpeed = 25.0f;
 const int gameWidth = 1920;
 const int gameHeight = 1080;
 float direction1 = 0.0f;
 float direction2 = 0.0f;
+float globalTime;
+float animTimer;
+float randomTime;
+
+int character;
+int randomNumber;
+
 sf::Font font;
+sf::Font flameTimerFont;
 sf::Text text;
+sf::Text flameTimerText;
 
 enum class States { MENU, PLAY, DOOR, ORB, FLAME, BOOK };
 
@@ -34,14 +46,25 @@ int main() {
 	bool placeMode = false;
 	bool canPress = true;
 	bool characterArrived = false;
+	bool animTimerDone = false;
+	bool gameDone = false;
+
 	float pressTime = 0.0f;
 	const float placeModeSpeed = 25.0f;
 	const int gameWidth = 1920;
 	const int gameHeight = 1080;
 	float direction1 = 0.0f;
 	float direction2 = 0.0f;
+	float globalTime;
+	float randomTime;
+	float animTimer;
+
+	int character;
+	int randomNumber;
+
 	sf::Font font;
 	sf::Text text;
+	sf::Text flameTimerText;
 	
 	//create the window
 	sf::RenderWindow window(sf::VideoMode({ gameWidth, gameHeight }), "FixAllShop");
@@ -80,6 +103,10 @@ int main() {
 			gameState.update(dt);
 			gameState.render(window);
 
+			if (gameState.firstLoad) {
+				gameState.stateChange = 1;
+			}
+
 			if (gameState.stateChange == 1) {
 				// Door
 				gameState.stateChange = 0;
@@ -96,31 +123,54 @@ int main() {
 				currentState = States::BOOK;
 			}
 			break;
-		
+
 		case States::DOOR:
 			doorScene.handleInput();
 			doorScene.update(dt);
 			doorScene.render(window);
 
+			if (gameState.firstLoad) {
+				gameState.firstLoad = false;
+				currentState = States::PLAY;
+			}
+
+			if (doorScene.backDoor) {
+				// Door
+				doorScene.backDoor = false;
+				currentState = States::PLAY;
+			}
+
 			break;
-		
+
 		case States::ORB:
 			orbScene.handleInput();
 			orbScene.update(dt);
 			orbScene.render(window);
 
+			if (orbScene.backOrb) {
+				// Door
+				orbScene.backOrb = false;
+				currentState = States::PLAY;
+			}
+
 			break;
-		
+
 		case States::BOOK:
 			spellScene.handleInput();
 			spellScene.update(dt);
 			spellScene.render(window);
 
+			if (spellScene.backSpell) {
+				// Door
+				spellScene.backSpell = false;
+				currentState = States::PLAY;
+			}
+
 			break;
 		}
-		
+		gameState.stateChange;
 		// Quit Game
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) || gameState.stateChange == 5) {
 			window.close();
 		}
 

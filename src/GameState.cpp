@@ -1,12 +1,27 @@
 #include <SFML/Graphics.hpp>
+
 #include <string>
+#include <random>
+
 #include "GameVariables.h"
 #include "GameState.h"
+#include "DoorScene.h"
+
+DoorScene doorScene;
 
 bool hasLoadedGame = false;
+bool firstLoad = true;
+
 void loadGame();
 
 bool canClick = false;
+
+// Create a random number generator engine
+std::random_device rd;
+std::mt19937 gen(rd());
+
+// Define the distribution (range)
+std::uniform_int_distribution<> distrib(5, 10); // Generates integers in the range [5, 10]
 
 // Objects
 sf::Sprite gamePlaceholder;
@@ -31,9 +46,6 @@ sf::Texture bookTextureHover;
 
 sf::Sprite charSilhouetteSprite;
 sf::Texture charSilhouetteTexture;
-
-sf::Text debugText;
-sf::Font debugFont;
 
 // Controls
 const sf::Keyboard::Key controls[5] = {
@@ -84,6 +96,26 @@ void GameState::update(float& dt) {
 		loadGame();
     }
 
+	if (2 < character) {
+		//if (wins / totalCharacters > totalCharacters / 2){
+
+		// Game Win
+		gameDone = true;
+	}
+
+	if (gameDone) {
+		stateChange = 5;
+	}
+
+	// Global Timer
+	if (globalTime > 0) {
+		globalTime -= dt;
+	}
+	else {
+		// lose
+	}
+	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
+
     // Basic Timer
     if (pressTime > 0) {
         pressTime -= dt;
@@ -92,14 +124,40 @@ void GameState::update(float& dt) {
 		canPress = true;
 		canClick = true;
     }
+	
+	// Timer for animation pauses
+	if (animTimer > 0) {
+		animTimer -= dt;
+	}
+	else {
+		animTimerDone = true;
+	}
+
+	if (animTimerDone) {
+		GameState::random();
+		characterArrived = false;
+	}
+
+
+	// Random Arrival Timer
+	if (!characterArrived) {
+		if (randomTime > 0) {
+			randomTime -= dt;
+		}
+		else {
+			if (!characterArrived) {
+				doorScene.nextCharacter();
+			}
+		}
+	}
 
     // PLACE MODE - can be used for any sprite
-	charSilhouetteSprite.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
+	flameTimerText.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
     // DEBUG TEXT - "(x,y) Placing: t/f"
-    sf::Vector2f textPosition = charSilhouetteSprite.getPosition();
+    sf::Vector2f textPosition = flameTimerText.getPosition();
 
-	debugText.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
-        std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode));
+	text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
+        std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode) + ", Arrived: " + std::to_string(characterArrived));
 }
 
 void GameState::render(sf::RenderWindow& window) {
@@ -158,24 +216,29 @@ void GameState::render(sf::RenderWindow& window) {
 	window.draw(doorSprite);
 	window.draw(orbSprite);
 	window.draw(bookSprite);
-	window.draw(debugText);
+	window.draw(text);
+	window.draw(flameTimerText);
 	//Top Layer - UI
 }
 
 void loadGame() {
 	hasLoadedGame = true;
+	firstLoad = true;
+	characterArrived = false;
+	GameState::random();
 
-	// Load values in GameVariables.h
 
-
-	// Load Font
-	if (!debugFont.loadFromFile("Assets/Fonts/arial.ttf")) {
+	// Load global timer font
+	if (!flameTimerFont.loadFromFile("Assets/Fonts/lacquer.ttf")) {
 		// Error loading font
 	}
-	debugText.setFont(debugFont);
-	debugText.setCharacterSize(24);
-	debugText.setFillColor(sf::Color::White);
-	debugText.setPosition(10, 10);
+	flameTimerText.setFont(flameTimerFont);
+	flameTimerText.setString("test");
+	flameTimerText.setCharacterSize(50);
+	flameTimerText.setFillColor(sf::Color::Black);
+	flameTimerText.setPosition(1840, 10);
+
+	globalTime = 100;
 
 	// load door
 	if (!doorTexture.loadFromFile("Assets/Sprites/gameDoor.tga"))
@@ -234,4 +297,9 @@ void loadGame() {
 	}
 	charSilhouetteSprite.setTexture(charSilhouetteTexture);
 	charSilhouetteSprite.setPosition(858, 250);
+}
+
+void GameState::random() {
+	randomNumber = distrib(gen);
+	randomTime = static_cast<float>(randomNumber);
 }

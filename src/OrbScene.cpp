@@ -4,17 +4,19 @@
 
 bool hasLoadedOrb = false;
 void loadOrb();
+bool backOrb;
 
 // Objects
 sf::Sprite orbPlaceholder;
 
 // Controls
-const sf::Keyboard::Key controls[5] = {
+const sf::Keyboard::Key controls[6] = {
 	sf::Keyboard::W,  // Up
 	sf::Keyboard::S,  // Down
 	sf::Keyboard::A,  // Left
 	sf::Keyboard::D,   // Right
-	sf::Keyboard::Space   // PlaceMode
+	sf::Keyboard::Space,   // PlaceMode
+	sf::Keyboard::E,   // go back
 };
 
 void OrbScene::handleInput() {
@@ -48,6 +50,17 @@ void OrbScene::handleInput() {
 	else {
 		direction2 = 0; direction1 = 0;
 	}
+
+	// Go back to game screen
+	if (sf::Keyboard::isKeyPressed(controls[5]) && canPress)
+	{
+		// Reset Press Timer
+		canPress = false;
+		pressTime = 1;
+
+		// go back
+		backOrb = true;
+	}
 }
 
 void OrbScene::update(float& dt) {
@@ -55,6 +68,15 @@ void OrbScene::update(float& dt) {
 	if (!hasLoadedOrb) {
 		loadOrb();
 	}
+
+	// Global Timer
+	if (globalTime > 0) {
+		globalTime -= dt;
+	}
+	else {
+		// lose
+	}
+	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
 
 	// Basic Timer
 	if (pressTime > 0) {
@@ -76,8 +98,14 @@ void OrbScene::update(float& dt) {
 
 void OrbScene::render(sf::RenderWindow& window) {
 	// Render game
+
+
+	//Bottom Layer - The background
+	window.draw(flameTimerText);
+	//Top Layer - UI
 }
 
 void loadOrb() {
 	hasLoadedOrb = true;
+	backOrb = false;
 }
