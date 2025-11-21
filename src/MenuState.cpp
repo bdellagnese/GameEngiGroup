@@ -146,6 +146,4 @@ void loadMenu() {
 	{
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
-
-	// load
 }

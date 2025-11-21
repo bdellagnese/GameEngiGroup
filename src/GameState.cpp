@@ -14,8 +14,6 @@ bool firstLoad = true;
 
 void loadGame();
 
-bool canClick = false;
-
 // Create a random number generator engine
 std::random_device rd;
 std::mt19937 gen(rd());
@@ -122,7 +120,6 @@ void GameState::update(float& dt) {
     }
     else {
 		canPress = true;
-		canClick = true;
     }
 	
 	// Timer for animation pauses
@@ -172,30 +169,36 @@ void GameState::render(sf::RenderWindow& window) {
 	sf::FloatRect bookBounds = bookSprite.getGlobalBounds();
 
 	// mouse hovering on startButton
-	if (doorBounds.contains(mouse) && canClick)
+	if (doorBounds.contains(mouse) && canPress)
 	{
 		doorSprite.setTexture(doorTextureHover);
 
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
+			canPress = false;
+			pressTime = 1;
 			stateChange = 1; // DOOR
 		}
 	}
-	else if (orbBounds.contains(mouse) && canClick)
+	else if (orbBounds.contains(mouse) && canPress)
 	{
 		orbSprite.setTexture(orbTextureHover);
 
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
+			canPress = false;
+			pressTime = 1;
 			stateChange = 2; // ORB
 		}
 	}
-	else if (bookBounds.contains(mouse) && canClick)
+	else if (bookBounds.contains(mouse) && canPress)
 	{
 		bookSprite.setTexture(bookTextureHover);
 
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
+			canPress = false;
+			pressTime = 1;
 			stateChange = 3; // BOOK
 		}
 	}
@@ -302,4 +305,5 @@ void loadGame() {
 void GameState::random() {
 	randomNumber = distrib(gen);
 	randomTime = static_cast<float>(randomNumber);
+	randomTime = 1;
 }

@@ -59,6 +59,7 @@ sf::Sprite SpellSpr[5];
 sf::Texture currentSpellTexture;
 
 sf::Text characterText;
+sf::Font characterFont;
 sf::String characterString[4];
 int currentString;
 
@@ -352,16 +353,78 @@ void characterHandling() {
 	}
 }
 
+void DoorScene::nextCharacter() {
+	characterArrived = true;
+	character++;
+
+	currentString = 0;
+
+	renderNum = character - 1;
+	if (character == 1) // Timmy
+	{
+		// Change character texture
+		character3DSpr.setTexture(character3DTexture[renderNum]);
+		characterSpr.setTexture(characterTexture[renderNum]);
+
+		// Adjust position
+		characterSpr.setPosition(411, 160);
+		character3DSpr.setPosition(characterSpr.getPosition());
+
+		//Set text for character
+		characterString[0] = "Hello mister wizard man!\nI was hoping you could maybe help me\n      out before my mum finds out I went\n      into the enchanted forest?";
+		characterString[1] = "I was hangin' out in the forest by\nmy house and there were these pretty\n          orange roots that smelled\n                         SO yummy!\n          anyways I think it gave me\n          a growth spurt?";
+		characterString[2] = "               THANKS!\n     I honestly wasn’t sure\n     that you were even a wizard";
+		characterString[3] = "uhh I really don’t think this is\n     what I’m needing… \n     thanks for trying I guess";
+
+		// The custom cast order needed for success
+		correctCast[0] = 1; // 0up 1down 2left 3right
+		correctCast[1] = 2;
+		correctCast[2] = 3;
+		correctCast[3] = 4;
+		correctCast[4] = 1;
+	}
+	else if (character == 2) // Shawnson
+	{
+		// Change character texture
+		character3DSpr.setTexture(character3DTexture[renderNum]);
+		characterSpr.setTexture(characterTexture[renderNum]);
+
+		// Adjust position
+		characterSpr.setPosition(150, 193);
+		character3DSpr.setPosition(characterSpr.getPosition());
+
+		//Set text for character
+		characterString[0] = "Greeting but Shawnson";
+		characterString[1] = "Wait for Spell but Shawnson";
+		characterString[2] = "Thankful Message but Shawnson";
+		characterString[3] = "Hateful Message but Shawnson";
+
+		// The custom cast order needed for success
+		correctCast[0] = 1; // 0up 1down 2left 3right
+		correctCast[1] = 2;
+		correctCast[2] = 3;
+		correctCast[3] = 4;
+		correctCast[4] = 1;
+	}
+	else {
+
+	}
+}
+
 void loadDoor() {
 	hasLoadedDoor = true;
 	animTimer = 1000;
 	animTimerDone = false;
 	backDoor = false;
 
-	characterText.setFont(flameTimerFont);
-	characterText.setCharacterSize(50);
+	if (!characterFont.loadFromFile("Assets/Fonts/RockSalt.ttf"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	characterText.setFont(characterFont);
+	characterText.setCharacterSize(30);
 	characterText.setFillColor(sf::Color::White);
-	characterText.setOutlineThickness(1);
+	//characterText.setOutlineThickness(1);
 	characterText.setPosition(1159, 158);
 
 	// load doorway
@@ -492,99 +555,3 @@ void loadCharacters(){
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 }
-
-void DoorScene::nextCharacter() {
-	characterArrived = true;
-	character++;
-
-	currentString = 0;
-
-	renderNum = character - 1;
-	if (character == 1) // Timmy
-	{
-		// Change character texture
-		character3DSpr.setTexture(character3DTexture[renderNum]);
-		characterSpr.setTexture(characterTexture[renderNum]);
-
-		// Adjust position
-		characterSpr.setPosition(411, 160);
-		character3DSpr.setPosition(characterSpr.getPosition());
-
-		//Set text for character
-		characterString[0] = "Greetin\ng";
-		characterString[1] = "Wait for Spell";
-		characterString[2] = "Thankful Message";
-		characterString[3] = "Hateful Message";
-
-		// The custom cast order needed for success
-		correctCast[0] = 1; // 0up 1down 2left 3right
-		correctCast[1] = 2;
-		correctCast[2] = 3;
-		correctCast[3] = 4;
-		correctCast[4] = 1;
-	}
-	else if (character == 2) // Shawnson
-	{
-		// Change character texture
-		character3DSpr.setTexture(character3DTexture[renderNum]);
-		characterSpr.setTexture(characterTexture[renderNum]);
-
-		// Adjust position
-		characterSpr.setPosition(150, 193);
-		character3DSpr.setPosition(characterSpr.getPosition());
-
-		//Set text for character
-		characterString[0] = "Greeting but Shawnson";
-		characterString[1] = "Wait for Spell but Shawnson";
-		characterString[2] = "Thankful Message but Shawnson";
-		characterString[3] = "Hateful Message but Shawnson";
-
-		// The custom cast order needed for success
-		correctCast[0] = 1; // 0up 1down 2left 3right
-		correctCast[1] = 2;
-		correctCast[2] = 3;
-		correctCast[3] = 4;
-		correctCast[4] = 1;
-	}
-	else {
-		
-	}
-}
-/*
-if(characters = 1) // Timmy
-{
-	characterText = timmyText[dialogueState];
-}
-else if(characters = 2)
-{
-	characterText = xText[dialogueState];
-}
-
-if(character = 1)
-{
-	// Change character texture
-	character3DSpr.setTexture(timmyTexture3D);
-	characterSpr.setTexture(timmyTexture);
-
-	// Adjust position
-	characterSpr.setPosition(411, 160);
-	character3DSpr.setPosition(characterSpr.getPosition());
-
-	// Set text for character
-	timmyText[0] = "Greeting";
-	timmyText[1] = "Wait for Spell";
-	timmyText[2] = "Thankful Message";
-	timmyText[3] = "Hateful Message";
-
-	// The custom cast order needed for success
-	correctCast[0] = 1; // 0up 1down 2left 3right
-	correctCast[1] = 2;
-	correctCast[2] = 3;
-	correctCast[3] = 4;
-	correctCast[4] = 1;
-}
-else if (character = 2)
-{
-
-}
-*/
