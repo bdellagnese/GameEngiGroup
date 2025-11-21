@@ -14,6 +14,7 @@ bool placeMode = false;
 bool canPress = true;
 bool characterArrived = false;
 bool animTimerDone = false;
+bool gameDone = false;
 
 float pressTime = 0.0f;
 const float placeModeSpeed = 25.0f;
@@ -24,6 +25,8 @@ float direction2 = 0.0f;
 float globalTime;
 float animTimer;
 float randomTime;
+
+int character;
 int randomNumber;
 
 sf::Font font;
@@ -44,6 +47,7 @@ int main() {
 	bool canPress = true;
 	bool characterArrived = false;
 	bool animTimerDone = false;
+	bool gameDone = false;
 
 	float pressTime = 0.0f;
 	const float placeModeSpeed = 25.0f;
@@ -54,6 +58,8 @@ int main() {
 	float globalTime;
 	float randomTime;
 	float animTimer;
+
+	int character;
 	int randomNumber;
 
 	sf::Font font;
@@ -97,6 +103,10 @@ int main() {
 			gameState.update(dt);
 			gameState.render(window);
 
+			if (gameState.firstLoad) {
+				gameState.stateChange = 1;
+			}
+
 			if (gameState.stateChange == 1) {
 				// Door
 				gameState.stateChange = 0;
@@ -113,11 +123,16 @@ int main() {
 				currentState = States::BOOK;
 			}
 			break;
-		
+
 		case States::DOOR:
 			doorScene.handleInput();
 			doorScene.update(dt);
 			doorScene.render(window);
+
+			if (gameState.firstLoad) {
+				gameState.firstLoad = false;
+				currentState = States::PLAY;
+			}
 
 			if (doorScene.backDoor) {
 				// Door
@@ -126,7 +141,7 @@ int main() {
 			}
 
 			break;
-		
+
 		case States::ORB:
 			orbScene.handleInput();
 			orbScene.update(dt);
@@ -139,7 +154,7 @@ int main() {
 			}
 
 			break;
-		
+
 		case States::BOOK:
 			spellScene.handleInput();
 			spellScene.update(dt);
@@ -153,9 +168,9 @@ int main() {
 
 			break;
 		}
-		
+		gameState.stateChange;
 		// Quit Game
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) || gameState.stateChange == 5) {
 			window.close();
 		}
 

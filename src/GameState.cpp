@@ -10,6 +10,8 @@
 DoorScene doorScene;
 
 bool hasLoadedGame = false;
+bool firstLoad = true;
+
 void loadGame();
 
 bool canClick = false;
@@ -94,6 +96,17 @@ void GameState::update(float& dt) {
 		loadGame();
     }
 
+	if (2 < character) {
+		//if (wins / totalCharacters > totalCharacters / 2){
+
+		// Game Win
+		gameDone = true;
+	}
+
+	if (gameDone) {
+		stateChange = 5;
+	}
+
 	// Global Timer
 	if (globalTime > 0) {
 		globalTime -= dt;
@@ -120,6 +133,12 @@ void GameState::update(float& dt) {
 		animTimerDone = true;
 	}
 
+	if (animTimerDone) {
+		GameState::random();
+		characterArrived = false;
+	}
+
+
 	// Random Arrival Timer
 	if (!characterArrived) {
 		if (randomTime > 0) {
@@ -127,9 +146,7 @@ void GameState::update(float& dt) {
 		}
 		else {
 			if (!characterArrived) {
-				GameState::random();
 				doorScene.nextCharacter();
-				characterArrived = true;
 			}
 		}
 	}
@@ -206,6 +223,7 @@ void GameState::render(sf::RenderWindow& window) {
 
 void loadGame() {
 	hasLoadedGame = true;
+	firstLoad = true;
 	characterArrived = false;
 	GameState::random();
 

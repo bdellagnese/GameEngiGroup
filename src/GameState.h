@@ -9,5 +9,6 @@ public:
     static void random();
     
     // Special Variables
+    bool firstLoad;
     float stateChange = 0;
 };

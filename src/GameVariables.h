@@ -7,6 +7,7 @@ extern bool placeMode;
 extern bool canPress;
 extern bool characterArrived;
 extern bool animTimerDone;
+extern bool gameDone;
 
 // Numbers
 extern const int gameWidth;
@@ -21,9 +22,8 @@ extern float pressTime;
 extern float globalTime;
 extern float animTimer;
 extern float randomTime;
-
+extern int character;
 extern int randomNumber;
-
 
 // Objects
 extern sf::Font font;
