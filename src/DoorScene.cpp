@@ -16,6 +16,7 @@ bool backDoor;
 int cast[5];
 int correctCast[5];
 const int totalCharacters = 2;
+
 // character textures and values - if one changes, they all do
 int renderNum;
 sf::Texture characterTexture[totalCharacters];
@@ -29,8 +30,6 @@ sf::Texture characterSad3DTexture[totalCharacters];
 int castPosition = 0;
 
 bool success;
-
-int dialogueState = 0;
 
 // Objects
 sf::Sprite doorPlaceholder;
@@ -60,6 +59,8 @@ sf::Sprite SpellSpr[5];
 sf::Texture currentSpellTexture;
 
 sf::Text characterText;
+sf::String characterString[4];
+int currentString;
 
 void loadDoor();
 void loadCharacters();
@@ -86,21 +87,29 @@ void DoorScene::handleInput() {
 	}
 	else if (sf::Keyboard::isKeyPressed(controls[0]) && placeMode) {
 		if (direction1 > -placeModeSpeed) {
+			canPress = false;
+			pressTime = 1;
 			direction1--;
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(controls[1]) && placeMode) {
 		if (direction1 < placeModeSpeed) {
+			canPress = false;
+			pressTime = 1;
 			direction1++;
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(controls[2]) && placeMode) {
 		if (direction2 > -placeModeSpeed) {
+			canPress = false;
+			pressTime = 1;
 			direction2--;
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(controls[3]) && placeMode) {
 		if (direction2 < placeModeSpeed) {
+			canPress = false;
+			pressTime = 1;
 			direction2++;
 		}
 	}
@@ -120,10 +129,11 @@ void DoorScene::handleInput() {
 	}
 
 	// Dialogue
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && canPress)
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && canPress) // Advance Dialogue
 	{
-		if (dialogueState == 0) {
-			dialogueState++;
+		if (currentString == 0) {
+			currentString = 1;
+			characterText.setString(characterString[currentString]);
 		}
 	}
 
@@ -234,9 +244,9 @@ void DoorScene::update(float& dt) {
 	characterHandling();
 
 	// PLACE MODE - can be used for any sprite
-	characterSpr.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
+	characterText.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
 	// DEBUG TEXT - "(x,y) Placing: t/f"
-	sf::Vector2f textPosition = characterSpr.getPosition();
+	sf::Vector2f textPosition = characterText.getPosition();
 
 	text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
 		std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode) + 
@@ -257,6 +267,7 @@ void DoorScene::render(sf::RenderWindow& window) {
 	if (characterArrived) {
 		window.draw(character3DSpr);
 		window.draw(textboxSpr);
+		characterText.setString(characterString[currentString]);
 		window.draw(characterText);
 	}
 
@@ -317,13 +328,13 @@ void characterHandling() {
 		if (success) {
 			characterSpr.setTexture(characterHappyTexture[renderNum]);
 			character3DSpr.setTexture(characterHappy3DTexture[renderNum]);
-			//dialogueState = 2; // Happy Message
+			currentString = 2; // Happy Message
 		}
 		else
 		{
 			characterSpr.setTexture(characterSadTexture[renderNum]);
 			character3DSpr.setTexture(characterSad3DTexture[renderNum]);
-			//dialogueState = 3; // Hateful
+			currentString = 3; // Hateful
 		}
 	}
 
@@ -346,7 +357,12 @@ void loadDoor() {
 	animTimer = 1000;
 	animTimerDone = false;
 	backDoor = false;
-	totalCharacters;
+
+	characterText.setFont(flameTimerFont);
+	characterText.setCharacterSize(50);
+	characterText.setFillColor(sf::Color::White);
+	characterText.setOutlineThickness(1);
+	characterText.setPosition(1159, 158);
 
 	// load doorway
 	if (!doorframeTexture.loadFromFile("Assets/Sprites/Doorway.tga"))
@@ -481,6 +497,8 @@ void DoorScene::nextCharacter() {
 	characterArrived = true;
 	character++;
 
+	currentString = 0;
+
 	renderNum = character - 1;
 	if (character == 1) // Timmy
 	{
@@ -492,11 +510,11 @@ void DoorScene::nextCharacter() {
 		characterSpr.setPosition(411, 160);
 		character3DSpr.setPosition(characterSpr.getPosition());
 
-		/*Set text for character
-		setCharacterText[0] = "Greeting";
-		setCharacterText[1] = "Wait for Spell";
-		setCharacterText[2] = "Thankful Message";
-		setCharacterText[3] = "Hateful Message";*/ 
+		//Set text for character
+		characterString[0] = "Greetin\ng";
+		characterString[1] = "Wait for Spell";
+		characterString[2] = "Thankful Message";
+		characterString[3] = "Hateful Message";
 
 		// The custom cast order needed for success
 		correctCast[0] = 1; // 0up 1down 2left 3right
@@ -515,11 +533,11 @@ void DoorScene::nextCharacter() {
 		characterSpr.setPosition(150, 193);
 		character3DSpr.setPosition(characterSpr.getPosition());
 
-		/*Set text for character
-		setCharacterText[0] = "Greeting";
-		setCharacterText[1] = "Wait for Spell";
-		setCharacterText[2] = "Thankful Message";
-		setCharacterText[3] = "Hateful Message";*/
+		//Set text for character
+		characterString[0] = "Greeting but Shawnson";
+		characterString[1] = "Wait for Spell but Shawnson";
+		characterString[2] = "Thankful Message but Shawnson";
+		characterString[3] = "Hateful Message but Shawnson";
 
 		// The custom cast order needed for success
 		correctCast[0] = 1; // 0up 1down 2left 3right
