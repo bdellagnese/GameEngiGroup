@@ -371,10 +371,10 @@ void DoorScene::nextCharacter() {
 		character3DSpr.setPosition(characterSpr.getPosition());
 
 		//Set text for character
-		characterString[0] = "Hello mister wizard man!\nI was hoping you could maybe help me\n      out before my mum finds out I went\n      into the enchanted forest?";
-		characterString[1] = "I was hangin' out in the forest by\nmy house and there were these pretty\n          orange roots that smelled\n                         SO yummy!\n          anyways I think it gave me\n          a growth spurt?";
-		characterString[2] = "               THANKS!\n     I honestly wasn’t sure\n     that you were even a wizard";
-		characterString[3] = "uhh I really don’t think this is\n     what I’m needing… \n     thanks for trying I guess";
+		characterString[0] = "Hello mister wizard man!\nI was hoping you could maybe help\nme out before my mum finds out I\nwent into the enchanted forest?";
+		characterString[1] = "I was hangin' out in the forest by\nmy house and there were these\n     pretty orange roots that \n          smelled SO yummy!\nanyways I think it gave me\na growth spurt?";
+		characterString[2] = "               THANKS!\nI honestly wasn’t sure\nthat you were even a wizard";
+		characterString[3] = "uhh I really don’t think this is\nwhat I’m needing…\nthanks for trying I guess";
 
 		// The custom cast order needed for success
 		correctCast[0] = 1; // 1up 2down 3left 4right
@@ -424,9 +424,9 @@ void loadDoor() {
 	}
 	characterText.setFont(characterFont);
 	characterText.setCharacterSize(30);
-	characterText.setFillColor(sf::Color::White);
+	characterText.setFillColor(sf::Color::Black);
 	//characterText.setOutlineThickness(1);
-	characterText.setPosition(1159, 158);
+	characterText.setPosition(1230, 158);
 
 	// load doorway
 	if (!doorframeTexture.loadFromFile("Assets/Sprites/Doorway.tga"))
@@ -450,7 +450,7 @@ void loadDoor() {
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	textboxSpr.setTexture(textboxTexture);
-	textboxSpr.setPosition(884, 0);
+	textboxSpr.setPosition(-3, -39);
 
 	// load SpellBanner
 	if (!spellBannerTexture.loadFromFile("Assets/Sprites/Spells/SpellBanner.tga"))
