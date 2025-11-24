@@ -15,7 +15,7 @@ bool backDoor;
 // Parameters
 int cast[5];
 int correctCast[5];
-const int totalCharacters = 2;
+const int totalCharacters = 4;
 
 // character textures and values - if one changes, they all do
 int renderNum;
@@ -245,9 +245,9 @@ void DoorScene::update(float& dt) {
 	characterHandling();
 
 	// PLACE MODE - can be used for any sprite
-	characterText.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
+	characterSpr.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
 	// DEBUG TEXT - "(x,y) Placing: t/f"
-	sf::Vector2f textPosition = characterText.getPosition();
+	sf::Vector2f textPosition = characterSpr.getPosition();
 
 	text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
 		std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode) + 
@@ -266,10 +266,10 @@ void DoorScene::render(sf::RenderWindow& window) {
 	window.draw(doorframeSpr);
 	
 	if (characterArrived) {
-		window.draw(character3DSpr);
 		window.draw(textboxSpr);
 		characterText.setString(characterString[currentString]);
 		window.draw(characterText);
+		window.draw(character3DSpr);
 	}
 
 	// Spells and Runes
@@ -354,9 +354,13 @@ void characterHandling() {
 }
 
 void DoorScene::nextCharacter() {
+	// Load largest sprite so all other textures fit within
+	character3DSpr.setTexture(character3DTexture[3]);
+	characterSpr.setTexture(characterTexture[3]);
+
+	// New Character
 	characterArrived = true;
 	character++;
-
 	currentString = 0;
 
 	renderNum = character - 1;
@@ -406,9 +410,51 @@ void DoorScene::nextCharacter() {
 		correctCast[3] = 4;
 		correctCast[4] = 1;
 	}
-	else if (character == 3) // Shawnson
+	else if (character == 3) // Medra
 	{
+		// Change character texture
+		character3DSpr.setTexture(character3DTexture[renderNum]);
+		characterSpr.setTexture(characterTexture[renderNum]);
 
+		// Adjust position
+		characterSpr.setPosition(360, 143);
+		character3DSpr.setPosition(characterSpr.getPosition());
+
+		//Set text for character
+		characterString[0] = "Fairy stuff";
+		characterString[1] = "More Fairy Stuff";
+		characterString[2] = "Nice";
+		characterString[3] = "Die";
+
+		// The custom cast order needed for success
+		correctCast[0] = 1; // 1up 2down 3left 4right
+		correctCast[1] = 2;
+		correctCast[2] = 3;
+		correctCast[3] = 4;
+		correctCast[4] = 1;
+	}
+	else if (character == 4) // Sir Wompulus
+	{
+		// Change character texture
+		character3DSpr.setTexture(character3DTexture[renderNum]);
+		characterSpr.setTexture(characterTexture[renderNum]);
+
+		// Adjust position
+		characterSpr.setPosition(228, 10);
+		character3DSpr.setPosition(characterSpr.getPosition());
+
+		//Set text for character
+		characterString[0] = "Womp";
+		characterString[1] = "Womp Womp";
+		characterString[2] = "Womp Womp Womp";
+		characterString[3] = "Womp Womp Womp Womp";
+
+		// The custom cast order needed for success
+		correctCast[0] = 1; // 1up 2down 3left 4right
+		correctCast[1] = 2;
+		correctCast[2] = 3;
+		correctCast[3] = 4;
+		correctCast[4] = 1;
 	}
 }
 
@@ -552,6 +598,70 @@ void loadCharacters(){
 	}
 	// load sad3D 
 	if (!characterSad3DTexture[1].loadFromFile("Assets/Sprites/Characters/Shawnson/ShawnsonMad3D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+
+	// MEDRA
+	// load neutral
+	if (!characterTexture[2].loadFromFile("Assets/Sprites/Characters/SirWomp/WompNeutral3D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load happy
+	if (!characterHappyTexture[2].loadFromFile("Assets/Sprites/Characters/SirWomp/WompNeutral3D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load sad 
+	if (!characterSadTexture[2].loadFromFile("Assets/Sprites/Characters/SirWomp/WompNeutral3D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load Neutral3D
+	if (!character3DTexture[2].loadFromFile("Assets/Sprites/Characters/Medra/MedraNeutral.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load happy3D
+	if (!characterHappy3DTexture[2].loadFromFile("Assets/Sprites/Characters/Medra/MedraHappy.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load sad3D 
+	if (!characterSad3DTexture[2].loadFromFile("Assets/Sprites/Characters/Medra/MedraMad.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+
+	// SIR WOMPULUS
+	// load neutral
+	if (!characterTexture[3].loadFromFile("Assets/Sprites/Characters/SirWomp/WompNeutral.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load happy
+	if (!characterHappyTexture[3].loadFromFile("Assets/Sprites/Characters/SirWomp/WompHappy.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load sad 
+	if (!characterSadTexture[3].loadFromFile("Assets/Sprites/Characters/SirWomp/WompMad.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load Neutral3D
+	if (!character3DTexture[3].loadFromFile("Assets/Sprites/Characters/SirWomp/WompNeutral3D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load happy3D
+	if (!characterHappy3DTexture[3].loadFromFile("Assets/Sprites/Characters/SirWomp/WompHappy3D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load sad3D 
+	if (!characterSad3DTexture[3].loadFromFile("Assets/Sprites/Characters/SirWomp/WompMad3D.tga"))
 	{
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
