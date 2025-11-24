@@ -20,6 +20,10 @@ float pressTime = 0.0f;
 const float placeModeSpeed = 25.0f;
 const int gameWidth = 1920;
 const int gameHeight = 1080;
+
+const int maxMana = 100; 
+int currentMana;
+
 float direction1 = 0.0f;
 float direction2 = 0.0f;
 float globalTime;
@@ -53,6 +57,10 @@ int main() {
 	const float placeModeSpeed = 25.0f;
 	const int gameWidth = 1920;
 	const int gameHeight = 1080;
+
+	const int maxMana = 100;
+	int currentMana;
+
 	float direction1 = 0.0f;
 	float direction2 = 0.0f;
 	float globalTime;

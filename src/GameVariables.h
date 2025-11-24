@@ -13,6 +13,9 @@ extern bool gameDone;
 extern const int gameWidth;
 extern const int gameHeight;
 
+extern const int maxMana;
+extern int currentMana;
+
 extern const float placeModeSpeed;
 
 extern float direction1;

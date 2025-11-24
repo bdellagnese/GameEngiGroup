@@ -11,6 +11,7 @@ bool newCharacter;
 bool hasLoadedDoor = false;
 bool doneCasting;
 bool backDoor;
+bool enoughMana;
 
 // Parameters
 int cast[5];
@@ -167,21 +168,52 @@ void casting(int direction) {
 		cast[castPosition] = direction;
 		if (direction == 1) {
 			SpellSpr[castPosition].setTexture(spellUpTexture);
+			if (currentMana > 30) {
+				currentMana = currentMana - 30;
+				enoughMana = true;
+			}
+			else {
+				enoughMana = false;
+			}
 		}
 		else if (direction == 2) {
 			SpellSpr[castPosition].setTexture(spellDownTexture);
+			if (currentMana > 20) {
+				currentMana = currentMana - 20;
+				enoughMana = true;
+			}
+			else {
+				enoughMana = false;
+			}
 		}
 		else if (direction == 3) {
 			SpellSpr[castPosition].setTexture(spellLeftTexture);
+			if (currentMana > 15) {
+				currentMana = currentMana - 15;
+				enoughMana = true;
+			}
+			else {
+				enoughMana = false;
+			}
 		}
 		else if (direction == 4) {
 			SpellSpr[castPosition].setTexture(spellRightTexture);
+			if (currentMana > 10) {
+				currentMana = currentMana - 10;
+				enoughMana = true;
+			}
+			else {
+				enoughMana = false;
+			}
 		}
 		
 		int move = castPosition * 100;
 		
 		SpellSpr[castPosition].setPosition(1222 + move, 805);
-		castPosition++;
+		
+		if (enoughMana) {
+			castPosition++;
+		}
 	}
 	
 	if (castPosition == 5) 
@@ -463,6 +495,9 @@ void loadDoor() {
 	animTimer = 1000;
 	animTimerDone = false;
 	backDoor = false;
+	enoughMana = true;
+
+	currentMana = maxMana;
 
 	if (!characterFont.loadFromFile("Assets/Fonts/RockSalt.ttf"))
 	{
