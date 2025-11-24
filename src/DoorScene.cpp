@@ -15,7 +15,8 @@ bool backDoor;
 // Parameters
 int cast[5];
 int correctCast[5];
-const int totalCharacters = 2;
+const int totalCharacters = 4;
+
 // character textures and values - if one changes, they all do
 int renderNum;
 sf::Texture characterTexture[totalCharacters];
@@ -29,8 +30,6 @@ sf::Texture characterSad3DTexture[totalCharacters];
 int castPosition = 0;
 
 bool success;
-
-int dialogueState = 0;
 
 // Objects
 sf::Sprite doorPlaceholder;
@@ -60,6 +59,9 @@ sf::Sprite SpellSpr[5];
 sf::Texture currentSpellTexture;
 
 sf::Text characterText;
+sf::Font characterFont;
+sf::String characterString[4];
+int currentString;
 
 void loadDoor();
 void loadCharacters();
@@ -86,21 +88,29 @@ void DoorScene::handleInput() {
 	}
 	else if (sf::Keyboard::isKeyPressed(controls[0]) && placeMode) {
 		if (direction1 > -placeModeSpeed) {
+			canPress = false;
+			pressTime = 1;
 			direction1--;
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(controls[1]) && placeMode) {
 		if (direction1 < placeModeSpeed) {
+			canPress = false;
+			pressTime = 1;
 			direction1++;
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(controls[2]) && placeMode) {
 		if (direction2 > -placeModeSpeed) {
+			canPress = false;
+			pressTime = 1;
 			direction2--;
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(controls[3]) && placeMode) {
 		if (direction2 < placeModeSpeed) {
+			canPress = false;
+			pressTime = 1;
 			direction2++;
 		}
 	}
@@ -120,10 +130,11 @@ void DoorScene::handleInput() {
 	}
 
 	// Dialogue
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && canPress)
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && canPress) // Advance Dialogue
 	{
-		if (dialogueState == 0) {
-			dialogueState++;
+		if (currentString == 0) {
+			currentString = 1;
+			characterText.setString(characterString[currentString]);
 		}
 	}
 
@@ -255,9 +266,10 @@ void DoorScene::render(sf::RenderWindow& window) {
 	window.draw(doorframeSpr);
 	
 	if (characterArrived) {
-		window.draw(character3DSpr);
 		window.draw(textboxSpr);
+		characterText.setString(characterString[currentString]);
 		window.draw(characterText);
+		window.draw(character3DSpr);
 	}
 
 	// Spells and Runes
@@ -317,13 +329,13 @@ void characterHandling() {
 		if (success) {
 			characterSpr.setTexture(characterHappyTexture[renderNum]);
 			character3DSpr.setTexture(characterHappy3DTexture[renderNum]);
-			//dialogueState = 2; // Happy Message
+			currentString = 2; // Happy Message
 		}
 		else
 		{
 			characterSpr.setTexture(characterSadTexture[renderNum]);
 			character3DSpr.setTexture(characterSad3DTexture[renderNum]);
-			//dialogueState = 3; // Hateful
+			currentString = 3; // Hateful
 		}
 	}
 
@@ -341,12 +353,126 @@ void characterHandling() {
 	}
 }
 
+void DoorScene::nextCharacter() {
+	// Load largest sprite so all other textures fit within
+	character3DSpr.setTexture(character3DTexture[3]);
+	characterSpr.setTexture(characterTexture[3]);
+
+	// New Character
+	characterArrived = true;
+	character++;
+	currentString = 0;
+
+	renderNum = character - 1;
+	if (character == 1) // Timmy
+	{
+		// Change character texture
+		character3DSpr.setTexture(character3DTexture[renderNum]);
+		characterSpr.setTexture(characterTexture[renderNum]);
+
+		// Adjust position
+		characterSpr.setPosition(411, 160);
+		character3DSpr.setPosition(characterSpr.getPosition());
+
+		//Set text for character
+		characterString[0] = "Hello mister wizard man!\nI was hoping you could maybe help\nme out before my mum finds out I\nwent into the enchanted forest?";
+		characterString[1] = "I was hangin' out in the forest by\nmy house and there were these\n     pretty orange roots that \n          smelled SO yummy!\nanyways I think it gave me\na growth spurt?";
+		characterString[2] = "               THANKS!\nI honestly wasn’t sure\nthat you were even a wizard";
+		characterString[3] = "uhh I really don’t think this is\nwhat I’m needing…\nthanks for trying I guess";
+
+		// The custom cast order needed for success
+		correctCast[0] = 1; // 1up 2down 3left 4right
+		correctCast[1] = 2;
+		correctCast[2] = 3;
+		correctCast[3] = 4;
+		correctCast[4] = 1;
+	}
+	else if (character == 2) // Shawnson
+	{
+		// Change character texture
+		character3DSpr.setTexture(character3DTexture[renderNum]);
+		characterSpr.setTexture(characterTexture[renderNum]);
+
+		// Adjust position
+		characterSpr.setPosition(150, 193);
+		character3DSpr.setPosition(characterSpr.getPosition());
+
+		//Set text for character
+		characterString[0] = "Greeting but Shawnson";
+		characterString[1] = "Wait for Spell but Shawnson";
+		characterString[2] = "Thankful Message but Shawnson";
+		characterString[3] = "Hateful Message but Shawnson";
+
+		// The custom cast order needed for success
+		correctCast[0] = 1; // 1up 2down 3left 4right
+		correctCast[1] = 2;
+		correctCast[2] = 3;
+		correctCast[3] = 4;
+		correctCast[4] = 1;
+	}
+	else if (character == 3) // Medra
+	{
+		// Change character texture
+		character3DSpr.setTexture(character3DTexture[renderNum]);
+		characterSpr.setTexture(characterTexture[renderNum]);
+
+		// Adjust position
+		characterSpr.setPosition(360, 143);
+		character3DSpr.setPosition(characterSpr.getPosition());
+
+		//Set text for character
+		characterString[0] = "Fairy stuff";
+		characterString[1] = "More Fairy Stuff";
+		characterString[2] = "Nice";
+		characterString[3] = "Die";
+
+		// The custom cast order needed for success
+		correctCast[0] = 1; // 1up 2down 3left 4right
+		correctCast[1] = 2;
+		correctCast[2] = 3;
+		correctCast[3] = 4;
+		correctCast[4] = 1;
+	}
+	else if (character == 4) // Sir Wompulus
+	{
+		// Change character texture
+		character3DSpr.setTexture(character3DTexture[renderNum]);
+		characterSpr.setTexture(characterTexture[renderNum]);
+
+		// Adjust position
+		characterSpr.setPosition(228, 10);
+		character3DSpr.setPosition(characterSpr.getPosition());
+
+		//Set text for character
+		characterString[0] = "Womp";
+		characterString[1] = "Womp Womp";
+		characterString[2] = "Womp Womp Womp";
+		characterString[3] = "Womp Womp Womp Womp";
+
+		// The custom cast order needed for success
+		correctCast[0] = 1; // 1up 2down 3left 4right
+		correctCast[1] = 2;
+		correctCast[2] = 3;
+		correctCast[3] = 4;
+		correctCast[4] = 1;
+	}
+}
+
 void loadDoor() {
 	hasLoadedDoor = true;
 	animTimer = 1000;
 	animTimerDone = false;
 	backDoor = false;
-	totalCharacters;
+
+	if (!characterFont.loadFromFile("Assets/Fonts/RockSalt.ttf"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	characterText.setFont(characterFont);
+	characterText.setCharacterSize(30);
+	characterText.setFillColor(sf::Color::Black);
+	//characterText.setOutlineThickness(1);
+	characterText.setPosition(1230, 158);
 
 	// load doorway
 	if (!doorframeTexture.loadFromFile("Assets/Sprites/Doorway.tga"))
@@ -370,7 +496,7 @@ void loadDoor() {
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	textboxSpr.setTexture(textboxTexture);
-	textboxSpr.setPosition(884, 0);
+	textboxSpr.setPosition(-3, -39);
 
 	// load SpellBanner
 	if (!spellBannerTexture.loadFromFile("Assets/Sprites/Spells/SpellBanner.tga"))
@@ -475,98 +601,68 @@ void loadCharacters(){
 	{
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
-}
 
-void DoorScene::nextCharacter() {
-	characterArrived = true;
-	character++;
-
-	renderNum = character - 1;
-	if (character == 1) // Timmy
+	// MEDRA
+	// load neutral
+	if (!characterTexture[2].loadFromFile("Assets/Sprites/Characters/SirWomp/WompNeutral3D.tga"))
 	{
-		// Change character texture
-		character3DSpr.setTexture(character3DTexture[renderNum]);
-		characterSpr.setTexture(characterTexture[renderNum]);
-
-		// Adjust position
-		characterSpr.setPosition(411, 160);
-		character3DSpr.setPosition(characterSpr.getPosition());
-
-		/*Set text for character
-		setCharacterText[0] = "Greeting";
-		setCharacterText[1] = "Wait for Spell";
-		setCharacterText[2] = "Thankful Message";
-		setCharacterText[3] = "Hateful Message";*/ 
-
-		// The custom cast order needed for success
-		correctCast[0] = 1; // 0up 1down 2left 3right
-		correctCast[1] = 2;
-		correctCast[2] = 3;
-		correctCast[3] = 4;
-		correctCast[4] = 1;
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
-	else if (character == 2) // Shawnson
+	// load happy
+	if (!characterHappyTexture[2].loadFromFile("Assets/Sprites/Characters/SirWomp/WompNeutral3D.tga"))
 	{
-		// Change character texture
-		character3DSpr.setTexture(character3DTexture[renderNum]);
-		characterSpr.setTexture(characterTexture[renderNum]);
-
-		// Adjust position
-		characterSpr.setPosition(150, 193);
-		character3DSpr.setPosition(characterSpr.getPosition());
-
-		/*Set text for character
-		setCharacterText[0] = "Greeting";
-		setCharacterText[1] = "Wait for Spell";
-		setCharacterText[2] = "Thankful Message";
-		setCharacterText[3] = "Hateful Message";*/
-
-		// The custom cast order needed for success
-		correctCast[0] = 1; // 0up 1down 2left 3right
-		correctCast[1] = 2;
-		correctCast[2] = 3;
-		correctCast[3] = 4;
-		correctCast[4] = 1;
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
-	else {
-		
+	// load sad 
+	if (!characterSadTexture[2].loadFromFile("Assets/Sprites/Characters/SirWomp/WompNeutral3D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load Neutral3D
+	if (!character3DTexture[2].loadFromFile("Assets/Sprites/Characters/Medra/MedraNeutral.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load happy3D
+	if (!characterHappy3DTexture[2].loadFromFile("Assets/Sprites/Characters/Medra/MedraHappy.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load sad3D 
+	if (!characterSad3DTexture[2].loadFromFile("Assets/Sprites/Characters/Medra/MedraMad.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+
+	// SIR WOMPULUS
+	// load neutral
+	if (!characterTexture[3].loadFromFile("Assets/Sprites/Characters/SirWomp/WompNeutral.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load happy
+	if (!characterHappyTexture[3].loadFromFile("Assets/Sprites/Characters/SirWomp/WompHappy.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load sad 
+	if (!characterSadTexture[3].loadFromFile("Assets/Sprites/Characters/SirWomp/WompMad.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load Neutral3D
+	if (!character3DTexture[3].loadFromFile("Assets/Sprites/Characters/SirWomp/WompNeutral3D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load happy3D
+	if (!characterHappy3DTexture[3].loadFromFile("Assets/Sprites/Characters/SirWomp/WompHappy3D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load sad3D 
+	if (!characterSad3DTexture[3].loadFromFile("Assets/Sprites/Characters/SirWomp/WompMad3D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 }
-/*
-if(characters = 1) // Timmy
-{
-	characterText = timmyText[dialogueState];
-}
-else if(characters = 2)
-{
-	characterText = xText[dialogueState];
-}
-
-if(character = 1)
-{
-	// Change character texture
-	character3DSpr.setTexture(timmyTexture3D);
-	characterSpr.setTexture(timmyTexture);
-
-	// Adjust position
-	characterSpr.setPosition(411, 160);
-	character3DSpr.setPosition(characterSpr.getPosition());
-
-	// Set text for character
-	timmyText[0] = "Greeting";
-	timmyText[1] = "Wait for Spell";
-	timmyText[2] = "Thankful Message";
-	timmyText[3] = "Hateful Message";
-
-	// The custom cast order needed for success
-	correctCast[0] = 1; // 0up 1down 2left 3right
-	correctCast[1] = 2;
-	correctCast[2] = 3;
-	correctCast[3] = 4;
-	correctCast[4] = 1;
-}
-else if (character = 2)
-{
-
-}
-*/
