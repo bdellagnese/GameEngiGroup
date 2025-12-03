@@ -497,7 +497,8 @@ void loadDoor() {
 	backDoor = false;
 	enoughMana = true;
 
-	currentMana = maxMana;
+	//currentMana = maxMana;
+	currentMana = 1000;
 
 	if (!characterFont.loadFromFile("Assets/Fonts/RockSalt.ttf"))
 	{
