@@ -305,5 +305,4 @@ void loadGame() {
 void GameState::random() {
 	randomNumber = distrib(gen);
 	randomTime = static_cast<float>(randomNumber);
-	randomTime = 1;
 }

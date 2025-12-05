@@ -7,6 +7,7 @@
 #include "DoorScene.h"
 #include "OrbScene.h"
 #include "SpellScene.h"
+#include "PauseScene.h"
 
 #include "State.h"
 
@@ -38,12 +39,15 @@ sf::Font flameTimerFont;
 sf::Text text;
 sf::Text flameTimerText;
 
-enum class States { MENU, PLAY, DOOR, ORB, FLAME, BOOK };
+enum class States { MENU, PLAY, DOOR, ORB, FLAME, BOOK, PAUSE };
 
 sf::Event event;
 
 //Parameters
 const float time_step = 0.017f; //60 fps
+void pausePress();
+States previousState;
+States currentState;
 
 int main() {
 	// Load values in GameVariables.h
@@ -79,7 +83,8 @@ int main() {
 	sf::Clock clock;
 
 	// Initialize the current state
-	States currentState = States::MENU;
+	currentState = States::MENU;
+	previousState = States::PLAY;
 
 	// Create instances of your states
 	MenuState menuState;
@@ -87,6 +92,7 @@ int main() {
 	DoorScene doorScene;
 	OrbScene orbScene;
 	SpellScene spellScene;
+	PauseScene pauseScene;
 
 	while (window.isOpen()) {
 		//Calculate dt
@@ -130,6 +136,9 @@ int main() {
 				gameState.stateChange = 0;
 				currentState = States::BOOK;
 			}
+			
+			pausePress();
+
 			break;
 
 		case States::DOOR:
@@ -148,6 +157,8 @@ int main() {
 				currentState = States::PLAY;
 			}
 
+			pausePress();
+
 			break;
 
 		case States::ORB:
@@ -160,6 +171,8 @@ int main() {
 				orbScene.backOrb = false;
 				currentState = States::PLAY;
 			}
+
+			pausePress();
 
 			break;
 
@@ -174,16 +187,43 @@ int main() {
 				currentState = States::PLAY;
 			}
 
+			pausePress();
+
+			break;
+
+		case States::PAUSE:
+			pauseScene.handleInput();
+			pauseScene.update(dt);
+			pauseScene.render(window);
+
+			if (pauseScene.unpause) {
+				pauseScene.unpause = false;
+				currentState = previousState;
+			}
+
+			if (pauseScene.quitGame) {
+				window.close();
+			}
+
 			break;
 		}
+
 		gameState.stateChange;
+		
 		// Quit Game
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) || gameState.stateChange == 5) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::M) || gameState.stateChange == 5) {
 			window.close();
 		}
 
 		//Wait for Vsync
 		window.display();
 		window.clear();
+	}
+}
+
+void pausePress() {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+		previousState = currentState;
+		currentState = States::PAUSE;
 	}
 }
