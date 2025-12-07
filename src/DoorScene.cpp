@@ -233,7 +233,7 @@ void DoorScene::update(float& dt) {
 	}
 
 	/*if (!tutorialDone) {
-
+		Tutorial();
 	}*/
 
 	if (totalCharacters < character) {
@@ -554,7 +554,7 @@ void loadDoor() {
 	backDoor = false;
 	enoughMana = true;
 	
-	character = 4;
+	//character = 4;
 
 	//currentMana = maxMana;
 	currentMana = 1000;
@@ -663,7 +663,7 @@ void loadCharacters(){
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	// load happy3D
-	if (!characterHappy3DTexture[0].loadFromFile("Assets/Sprites/Characters/Timmy/Timmy3D.tga"))
+	if (!characterHappy3DTexture[0].loadFromFile("Assets/Sprites/Characters/Timmy/TimmyHappy3D.tga"))
 	{
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
