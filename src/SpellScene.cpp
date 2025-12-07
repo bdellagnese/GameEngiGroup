@@ -9,6 +9,12 @@ void loadSpell();
 // Objects
 sf::Sprite spellPlaceholder;
 
+sf::Sprite bgSprite;
+sf::Sprite altarSprite;
+
+sf::Texture bgTexture;
+sf::Texture altarTexture;
+
 // Controls
 const sf::Keyboard::Key controls[6] = {
 	sf::Keyboard::W,  // Up
@@ -100,11 +106,31 @@ void SpellScene::render(sf::RenderWindow& window) {
 	// Render game
 
 	//Bottom Layer - The background
+	window.draw(bgSprite);
+	window.draw(altarSprite);
 	window.draw(flameTimerText);
+	window.draw(text);
 	//Top Layer - UI
 }
 
 void loadSpell() {
 	hasLoaded = true;
 	backSpell = false;
+
+	// load background
+	if (!bgTexture.loadFromFile("Assets/Sprites/SceneBackground.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	if (!altarTexture.loadFromFile("Assets/Sprites/Spellbook.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	bgSprite.setTexture(bgTexture);
+	altarSprite.setTexture(altarTexture);
+	bgSprite.setPosition(0, 0);
+	altarSprite.setPosition(56, 38);
+	altarSprite.setScale(0.9f, 0.9f);
+
+	// load
 }

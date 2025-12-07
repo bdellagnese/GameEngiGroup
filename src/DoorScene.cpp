@@ -69,8 +69,9 @@ void loadCharacters();
 void characterHandling();
 void casting(int direction);
 
+
 // Controls
-const sf::Keyboard::Key controls[6] = {
+sf::Keyboard::Key controls[6] = {
 	sf::Keyboard::W,  // Up
 	sf::Keyboard::S,  // Down
 	sf::Keyboard::A,  // Left

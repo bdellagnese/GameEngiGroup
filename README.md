@@ -1,5 +1,5 @@
 # GameEngiGroup
-Fix All Shop (DEV 0.5)
+Fix All Shop (DEV 0.6)
 
 Universal Controls:  
 [Click - Menu Interactions]  
@@ -12,4 +12,4 @@ Door Controls:
   
 Debug Controls:
 [WASD - Movement (in Place Mode)]  
-[Space - Place Mode]  
+[Space - Toggle Place Mode]  

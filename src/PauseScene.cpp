@@ -8,6 +8,7 @@ bool backPause;
 
 bool unpause = false;
 bool quitGame = false;
+bool optionsOpen = false;
 
 // Objects
 sf::Sprite pausePlaceholder;
@@ -102,45 +103,57 @@ void PauseScene::render(sf::RenderWindow& window) {
 	sf::FloatRect optionsBounds = optionsSprite.getGlobalBounds();
 	sf::FloatRect quitBounds = quitSprite.getGlobalBounds();
 
-	if (resumeBounds.contains(mouse) && canPress)
-	{
-		resumeSprite.setTexture(resumeHoverTexture);
-
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	// Handle mouse inputs in and out of options
+	if (!optionsOpen) {
+		if (resumeBounds.contains(mouse) && canPress)
 		{
-			unpause = true;
-			canPress = false;
-			pressTime = 1;
+			resumeSprite.setTexture(resumeHoverTexture);
+
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+				unpause = true;
+				canPress = false;
+				pressTime = 1;
+			}
 		}
-	}
-	else if (optionsBounds.contains(mouse) && canPress)
-	{
-		optionsSprite.setTexture(optionsHoverTexture);
-
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		else if (optionsBounds.contains(mouse) && canPress)
 		{
-			
+			optionsSprite.setTexture(optionsHoverTexture);
+
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+				optionsOpen = true;
+			}
 		}
-	}
-	else if (quitBounds.contains(mouse) && canPress)
-	{
-		quitSprite.setTexture(quitHoverTexture);
-
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		else if (quitBounds.contains(mouse) && canPress)
 		{
-			quitGame = true;
+			quitSprite.setTexture(quitHoverTexture);
+
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+				quitGame = true;
+			}
+		}
+		else {
+			resumeSprite.setTexture(resumeTexture);
+			optionsSprite.setTexture(optionsTexture);
+			quitSprite.setTexture(quitTexture);
 		}
 	}
 	else {
-		resumeSprite.setTexture(resumeTexture);
-		optionsSprite.setTexture(optionsTexture);
-		quitSprite.setTexture(quitTexture);
+
 	}
 
 	//Bottom Layer - The background
-	window.draw(resumeSprite);
-	window.draw(optionsSprite);
-	window.draw(quitSprite);
+	if (!optionsOpen) {
+		window.draw(resumeSprite);
+		window.draw(optionsSprite);
+		window.draw(quitSprite);
+	}
+	else {
+		// rebind WASD + E
+		// window.draw();
+	}
 
 	window.draw(text);
 	//Top Layer - UI

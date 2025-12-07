@@ -28,6 +28,13 @@ extern float randomTime;
 extern int character;
 extern int randomNumber;
 
+// 
+extern char upChar;
+extern char downChar;
+extern char leftChar;
+extern char rightChar;
+extern char prevChar;
+
 // Objects
 extern sf::Font font;
 extern sf::Font flameTimerFont;
