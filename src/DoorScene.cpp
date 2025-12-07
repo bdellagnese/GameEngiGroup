@@ -232,6 +232,10 @@ void DoorScene::update(float& dt) {
 		loadDoor();
 	}
 
+	/*if (!tutorialDone) {
+
+	}*/
+
 	if (totalCharacters < character) {
 		//if (wins / totalCharacters > totalCharacters / 2){
 		
@@ -281,9 +285,9 @@ void DoorScene::update(float& dt) {
 	characterHandling();
 
 	// PLACE MODE - can be used for any sprite
-	characterText.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
+	characterSpr.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
 	// DEBUG TEXT - "(x,y) Placing: t/f"
-	sf::Vector2f textPosition = characterText.getPosition();
+	sf::Vector2f textPosition = characterSpr.getPosition();
 
 	text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
 		std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode) + 
@@ -502,7 +506,7 @@ void DoorScene::nextCharacter() {
 		characterSpr.setTexture(characterTexture[renderNum]);
 
 		// Adjust position
-		characterSpr.setPosition(150, 193);
+		characterSpr.setPosition(241, 193);
 		character3DSpr.setPosition(characterSpr.getPosition());
 
 		// Jane
@@ -550,7 +554,7 @@ void loadDoor() {
 	backDoor = false;
 	enoughMana = true;
 	
-	//character = 3;
+	character = 4;
 
 	//currentMana = maxMana;
 	currentMana = 1000;
@@ -764,4 +768,68 @@ void loadCharacters(){
 	{
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
+
+	// Jane
+	// load neutral
+	if (!characterTexture[4].loadFromFile("Assets/Sprites/Characters/Jane/JaneNeutral.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load happy
+	if (!characterHappyTexture[4].loadFromFile("Assets/Sprites/Characters/Jane/JaneHappy2D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load sad 
+	if (!characterSadTexture[4].loadFromFile("Assets/Sprites/Characters/Jane/JaneMad.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load Neutral3D
+	if (!character3DTexture[4].loadFromFile("Assets/Sprites/Characters/Jane/Empty3D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load happy3D
+	if (!characterHappy3DTexture[4].loadFromFile("Assets/Sprites/Characters/Jane/JaneHappy3D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load sad3D 
+	if (!characterSad3DTexture[4].loadFromFile("Assets/Sprites/Characters/Jane/Empty3D.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+
+	/* Jester
+	// load neutral
+	if (!characterTexture[5].loadFromFile("Assets/Sprites/Characters/Jester/JestNeutral.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load happy
+	if (!characterHappyTexture[5].loadFromFile("Assets/Sprites/Characters/Jester/JestNeutral.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load sad 
+	if (!characterSadTexture[5].loadFromFile("Assets/Sprites/Characters/Jester/JestNeutral.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load Neutral3D
+	if (!character3DTexture[5].loadFromFile("Assets/Sprites/Characters/Jester/JestNeutral.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load happy3D
+	if (!characterHappy3DTexture[5].loadFromFile("Assets/Sprites/Characters/Jester/JestNeutral.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	// load sad3D 
+	if (!characterSad3DTexture[5].loadFromFile("Assets/Sprites/Characters/Jester/JestNeutral.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}*/
 }
