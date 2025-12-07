@@ -1,9 +1,9 @@
 # GameEngiGroup
-Fix All Shop (DEV 0.5)
+Fix All Shop (DEV 0.8)
 
 Universal Controls:  
 [Click - Menu Interactions]  
-[E - Go to Game Scene]  
+[E - Go to Game Scene] make it space in the future  
 [Escape - Quit]  
   
 Door Controls:  
@@ -12,4 +12,4 @@ Door Controls:
   
 Debug Controls:
 [WASD - Movement (in Place Mode)]  
-[Space - Place Mode]  
+[Space - Toggle Place Mode]  

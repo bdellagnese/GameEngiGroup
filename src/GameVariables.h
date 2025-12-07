@@ -10,8 +10,12 @@ extern bool animTimerDone;
 extern bool gameDone;
 
 // Numbers
-extern const int gameWidth;
-extern const int gameHeight;
+extern int gameWidth;
+extern int gameHeight;
+extern const int totalCharacters;
+
+extern const int maxMana;
+extern int currentMana;
 
 extern const float placeModeSpeed;
 
@@ -24,6 +28,13 @@ extern float animTimer;
 extern float randomTime;
 extern int character;
 extern int randomNumber;
+
+// 
+extern char upChar;
+extern char downChar;
+extern char leftChar;
+extern char rightChar;
+extern char prevChar;
 
 // Objects
 extern sf::Font font;
