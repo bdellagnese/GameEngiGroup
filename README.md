@@ -1,5 +1,5 @@
 # GameEngiGroup
-Fix All Shop (DEV 0.6)
+Fix All Shop (DEV 0.7)
 
 Universal Controls:  
 [Click - Menu Interactions]  

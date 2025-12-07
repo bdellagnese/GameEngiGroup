@@ -9,6 +9,9 @@ bool backOrb;
 // Objects
 sf::Sprite orbPlaceholder;
 
+sf::Sprite OrbBgSprite;
+sf::Texture OrbBgTexture;
+
 // Controls
 const sf::Keyboard::Key controls[6] = {
 	sf::Keyboard::W,  // Up
@@ -101,6 +104,7 @@ void OrbScene::render(sf::RenderWindow& window) {
 
 
 	//Bottom Layer - The background
+	window.draw(OrbBgSprite);
 	window.draw(flameTimerText);
 	//Top Layer - UI
 }
@@ -108,4 +112,12 @@ void OrbScene::render(sf::RenderWindow& window) {
 void loadOrb() {
 	hasLoadedOrb = true;
 	backOrb = false;
+
+	// load background
+	if (!OrbBgTexture.loadFromFile("Assets/Sprites/SceneBackground.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	OrbBgSprite.setTexture(OrbBgTexture);
+	OrbBgSprite.setPosition(0, 0);
 }
