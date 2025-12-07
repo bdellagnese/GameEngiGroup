@@ -94,7 +94,7 @@ void GameState::update(float& dt) {
 		loadGame();
     }
 
-	if (2 < character) {
+	if (totalCharacters < character) {
 		//if (wins / totalCharacters > totalCharacters / 2){
 
 		// Game Win
@@ -144,6 +144,7 @@ void GameState::update(float& dt) {
 		else {
 			if (!characterArrived) {
 				doorScene.nextCharacter();
+				pressTime = 3;
 			}
 		}
 	}
@@ -176,7 +177,14 @@ void GameState::render(sf::RenderWindow& window) {
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
 			canPress = false;
-			pressTime = 1;
+			
+			if (characterArrived) {
+				pressTime = 2;
+			}
+			else {
+				pressTime = 1;
+			}
+			
 			stateChange = 1; // DOOR
 		}
 	}
@@ -230,9 +238,8 @@ void loadGame() {
 	characterArrived = false;
 	GameState::random();
 
-
 	// Load global timer font
-	if (!flameTimerFont.loadFromFile("Assets/Fonts/lacquer.ttf")) {
+	if (!flameTimerFont.loadFromFile("Assets/Fonts/hennyPenny.ttf")) {
 		// Error loading font
 	}
 	flameTimerText.setFont(flameTimerFont);
@@ -305,4 +312,6 @@ void loadGame() {
 void GameState::random() {
 	randomNumber = distrib(gen);
 	randomTime = static_cast<float>(randomNumber);
+
+	randomTime = 1;
 }

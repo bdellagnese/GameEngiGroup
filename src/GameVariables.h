@@ -10,8 +10,9 @@ extern bool animTimerDone;
 extern bool gameDone;
 
 // Numbers
-extern const int gameWidth;
-extern const int gameHeight;
+extern int gameWidth;
+extern int gameHeight;
+extern const int totalCharacters;
 
 extern const int maxMana;
 extern int currentMana;

@@ -18,9 +18,10 @@ bool animTimerDone = false;
 bool gameDone = false;
 
 float pressTime = 0.0f;
-const float placeModeSpeed = 25.0f;
-const int gameWidth = 1920;
-const int gameHeight = 1080;
+const float placeModeSpeed = 25.0f; 
+int gameWidth = 1920;
+int gameHeight = 1080;
+const int totalCharacters = 6;
 
 const int maxMana = 100; 
 int currentMana;
@@ -65,8 +66,9 @@ int main() {
 
 	float pressTime = 0.0f;
 	const float placeModeSpeed = 25.0f;
-	const int gameWidth = 1920;
-	const int gameHeight = 1080;
+	int gameWidth = 1920;
+	int gameHeight = 1080;
+	const int totalCharacters = 6;
 
 	const int maxMana = 100;
 	int currentMana;
@@ -91,7 +93,7 @@ int main() {
 	sf::Text flameTimerText;
 	
 	//create the window
-	sf::RenderWindow window(sf::VideoMode({ gameWidth, gameHeight }), "FixAllShop");
+	sf::RenderWindow window(sf::VideoMode( gameWidth, gameHeight ), "FixAllShop");
 	sf::Clock clock;
 
 	// Initialize the current state
@@ -237,5 +239,8 @@ void pausePress() {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
 		previousState = currentState;
 		currentState = States::PAUSE;
+		
+		canPress = false;
+		pressTime = 0.25f;
 	}
 }

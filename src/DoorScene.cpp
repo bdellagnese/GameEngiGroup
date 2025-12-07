@@ -16,17 +16,18 @@ bool enoughMana;
 // Parameters
 int cast[5];
 int correctCast[5];
-const int totalCharacters = 4;
+
+const int totalChar = 6;
 
 // character textures and values - if one changes, they all do
 int renderNum;
-sf::Texture characterTexture[totalCharacters];
-sf::Texture characterHappyTexture[totalCharacters];
-sf::Texture characterSadTexture[totalCharacters];
+sf::Texture characterTexture[totalChar];
+sf::Texture characterHappyTexture[totalChar];
+sf::Texture characterSadTexture[totalChar];
 
-sf::Texture character3DTexture[totalCharacters];
-sf::Texture characterHappy3DTexture[totalCharacters];
-sf::Texture characterSad3DTexture[totalCharacters];
+sf::Texture character3DTexture[totalChar];
+sf::Texture characterHappy3DTexture[totalChar];
+sf::Texture characterSad3DTexture[totalChar];
 
 int castPosition = 0;
 
@@ -46,6 +47,9 @@ sf::Sprite character3DSpr;
 
 sf::Sprite textboxSpr;
 sf::Texture textboxTexture;
+
+sf::Sprite continueSpr;
+sf::Texture continueTexture;
 
 sf::Sprite spellBannerSpr;
 sf::Texture spellBannerTexture;
@@ -68,7 +72,6 @@ void loadDoor();
 void loadCharacters();
 void characterHandling();
 void casting(int direction);
-
 
 // Controls
 sf::Keyboard::Key controls[6] = {
@@ -278,9 +281,9 @@ void DoorScene::update(float& dt) {
 	characterHandling();
 
 	// PLACE MODE - can be used for any sprite
-	characterSpr.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
+	characterText.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
 	// DEBUG TEXT - "(x,y) Placing: t/f"
-	sf::Vector2f textPosition = characterSpr.getPosition();
+	sf::Vector2f textPosition = characterText.getPosition();
 
 	text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
 		std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode) + 
@@ -314,14 +317,16 @@ void DoorScene::render(sf::RenderWindow& window) {
 	window.draw(SpellSpr[4]);
 
 	// Text
+	if (canPress && currentString == 0 && characterArrived) {
+		window.draw(continueSpr);
+	}
+
 	window.draw(text);
 	window.draw(flameTimerText);
 	//Top Layer - UI
 }
 
 void characterHandling() {
-	//if()
-	
 	int getCastLength = sizeof(cast) / sizeof(cast[0]);
 	if (doneCasting)
 	{
@@ -346,14 +351,14 @@ void characterHandling() {
 		if (check == 5) {
 			// win
 			animTimerDone = false;
-			animTimer = 4;
+			animTimer = 8;
 
 			success = true;
 		}
 		else {
 			// fail
 			animTimerDone = false;
-			animTimer = 4;
+			animTimer = 8;
 			success = false;
 		}
 		pressTime = 5;
@@ -408,10 +413,10 @@ void DoorScene::nextCharacter() {
 		character3DSpr.setPosition(characterSpr.getPosition());
 
 		//Set text for character
-		characterString[0] = "Hello mister wizard man!\nI was hoping you could maybe help\nme out before my mum finds out I\nwent into the enchanted forest?";
-		characterString[1] = "I was hangin' out in the forest by\nmy house and there were these\n     pretty orange roots that \n          smelled SO yummy!\nanyways I think it gave me\na growth spurt?";
-		characterString[2] = "               THANKS!\nI honestly wasn’t sure\nthat you were even a wizard";
-		characterString[3] = "uhh I really don’t think this is\nwhat I’m needing…\nthanks for trying I guess";
+		characterString[0] = "Hello Sir, it's nice to see you again! \nNo, I haven't gotten into any mischief\ntoday.\n\nWell...only sort of!\n\nI wasn't always this big you know?";
+		characterString[1] = "Mummy said no wandering into the \nenchanted forest! \n\nI couldn't help myself though, and I \nwas really hungry waiting for dinner. \n\nI was plotting about and I saw some \norange roots, and I thought they \nwould be fine to eat. \nNow I'm TOO BIG to go back home!";
+		characterString[2] = "I'm perfect now! \n\nThank goodness, she was going to whip me \nup the wall if she saw I left on my own. \n\nI'll try not coming back here, pray \ndon't tell her though.";
+		characterString[3] = "That didn't work! \n\nMummy will call me home any minute \nnow, and she will be furious!\nWhat kind of a WIZARD are you? \n\nGoodbye, I will go find someone else \nwho can read a SPELL BOOK";
 
 		// The custom cast order needed for success
 		correctCast[0] = 1; // 1up 2down 3left 4right
@@ -431,10 +436,10 @@ void DoorScene::nextCharacter() {
 		character3DSpr.setPosition(characterSpr.getPosition());
 
 		//Set text for character
-		characterString[0] = "Greeting but Shawnson";
-		characterString[1] = "Wait for Spell but Shawnson";
-		characterString[2] = "Thankful Message but Shawnson";
-		characterString[3] = "Hateful Message but Shawnson";
+		characterString[0] = "A wizard! \n\nFinally!\n\nI pray you have time for me, I need \nyou in this trying time.";
+		characterString[1] = "My farm...the animals...all the hard \nwork gone! A...a fire! \n\nA really big fire! All I could do is grab \nsomething! I brought the goose, Betty \nis her name! \n\nI don't know what to do. \nMy barn is gone,\nhow am I to survive with no home!";
+		characterString[2] = "The golden goose! Wizard, you are a \ngenius! \n\nI will live labour-free for plenty \nyears to come! \n\nBetty my saviour, I knew she would \nbe my only chance at a new life!";
+		characterString[3] = "You imbecile! Nothing happened. \n\nForget I came to this stupid shack, \nI should have never trusted some old \nbag to do a real man's job! \n\nYou will never be seeing me again.";
 
 		// The custom cast order needed for success
 		correctCast[0] = 1; // 1up 2down 3left 4right
@@ -454,10 +459,11 @@ void DoorScene::nextCharacter() {
 		character3DSpr.setPosition(characterSpr.getPosition());
 
 		//Set text for character
-		characterString[0] = "Fairy stuff";
-		characterString[1] = "More Fairy Stuff";
-		characterString[2] = "Nice";
-		characterString[3] = "Die";
+		characterString[0] = "Wizard Fradros! You're in, at last! \n\nHelp me so! I'm miserable and I need to \nreverse this spell! The spell you gave \nme was a curse in disguise, \nI cannot stand to be this size anymore. \nI really need your help, hear my plea."
+			"\n\nI hate the human boy, the one I \ngave up my family for!";
+		characterString[1] = "The boy is a brat and he is always \ngrumpy. \n\nHe called me an insect, and said I had \ncoarse skin! Skin, like the stem of a \nflower, intentional and perfect! \n\nI want to go back home, I don't belong \nwith the humans.";
+		characterString[2] = "I am perfect this way! \n\nI won't dare to talk to them humans \nagain. Maybe, next season...\n\nThank you Wizard, I can always \ncount on you being a good listener.";
+		characterString[3] = "You are the best wizard I know! \n\nI can't believe it. I'm stuck at that \ncotttage for a while now. \n\nI'll have to start behaving like a \nhuman girl. Maybe, I can find someone \nelse to shelter me for now. \nBye Fradros, I hope to see you in \nbetter circumstances next time.";
 
 		// The custom cast order needed for success
 		correctCast[0] = 1; // 1up 2down 3left 4right
@@ -477,10 +483,56 @@ void DoorScene::nextCharacter() {
 		character3DSpr.setPosition(characterSpr.getPosition());
 
 		//Set text for character
-		characterString[0] = "Womp";
-		characterString[1] = "Womp Womp";
-		characterString[2] = "Womp Womp Womp";
-		characterString[3] = "Womp Womp Womp Womp";
+		characterString[0] = "Fradros, the good Wizard of the forest! \n\nYes, this is an intentional visit, may I \nshare my woes and sorrows with a \ngood man like you? Yes? \n\nMy father, you know he's getting \nolder. His kingdom hasn't the money to \nkeep up with...family needs.";
+		characterString[1] = "I have great ideas no one never listens \nto. I have saved a great deal of money \nwith the help of absolutely no one at \nall. All my own efforts! \n\nBut, it is not enough! I need more to \nfulfill my dreams! \n\nYou believe in my dreams, don't you?";
+		characterString[2] = "Fradros! Not what I expected, but I \nshine like never before. \n\nNo one will ever ignore me now, \nand I will always have the most gold in \nthe kingdom! \n\nIf you ever come by the kingdom, you \nwill live in luxury I tell you!";
+		characterString[3] = "WHAT!? YOU DON'T THINK \nI DESERVE THIS!? WHO DO YOU \nTHINK YOU ARE LIVING ON \nTHIS PROPERTY! WHOEVER \nOWNS THIS LAND WILL BE \nORDERED TO ERASE YOU FROM \nTHESE PREMISES. \nI am eternally miserable, you should \nbe ashamed. The Prince is never sad, \nand you have saddened me the most!";
+
+		// The custom cast order needed for success
+		correctCast[0] = 1; // 1up 2down 3left 4right
+		correctCast[1] = 2;
+		correctCast[2] = 3;
+		correctCast[3] = 4;
+		correctCast[4] = 1;
+	}
+	else if (character == 5) // Jane
+	{
+		// Change character texture
+		character3DSpr.setTexture(character3DTexture[renderNum]);
+		characterSpr.setTexture(characterTexture[renderNum]);
+
+		// Adjust position
+		characterSpr.setPosition(150, 193);
+		character3DSpr.setPosition(characterSpr.getPosition());
+
+		// Jane
+		characterString[0] = "Hi.";
+		characterString[1] = "I bought this box off a con. \n\nIt's supposed to have a ghoul or \nsomething in it, turns out there's \nnothing. \n\nI just need something in this thing \nso I can return it with a smile.";
+		characterString[2] = "Scary. Thanks.";
+		characterString[3] = "What a hack. You're dead old man.";
+
+		// The custom cast order needed for success
+		correctCast[0] = 1; // 1up 2down 3left 4right
+		correctCast[1] = 2;
+		correctCast[2] = 3;
+		correctCast[3] = 4;
+		correctCast[4] = 1;
+	}
+	else if (character == 6) // Jester
+	{
+		// Change character texture
+		character3DSpr.setTexture(character3DTexture[renderNum]);
+		characterSpr.setTexture(characterTexture[renderNum]);
+
+		// Adjust position
+		characterSpr.setPosition(150, 193);
+		character3DSpr.setPosition(characterSpr.getPosition());
+
+		// Jester
+		characterString[0] = "I'm glad I found you Wizard. Look, \njesters aren't always ready to \nentertain -I'm off duty and I need a \nsmoke. \n\nI'm here for a reason, you know!\n\nThe King - Grumble - I work for him. \nGreatest jester in the biz, don't sweat \nit baby.";
+		characterString[1] = "I can dance all day and all night, but \nwhat I can't stand is crowd demands. \n\nGrumble wants me to dance this \ncomplicated routine, and I'm bound to \nmess up - not as young as I used to be. \n\nDo me a favour, I just can't stand the \nKing throwing stones at me!";
+		characterString[2] = "This it? I feel hefty like cattle, just \none more reason for the wife to think im \na fat cow! \n\nThanks anyway for my thick skin. I \nwon't feel a thing from that Grumble.";
+		characterString[3] = "You kidding me? I came all the way \nhere from the other side of the \nenchanted forest for nothing? \n\nYou are just as useless as those \nfairies. \n\nBye.";
 
 		// The custom cast order needed for success
 		correctCast[0] = 1; // 1up 2down 3left 4right
@@ -497,19 +549,21 @@ void loadDoor() {
 	animTimerDone = false;
 	backDoor = false;
 	enoughMana = true;
+	
+	//character = 3;
 
 	//currentMana = maxMana;
 	currentMana = 1000;
 
-	if (!characterFont.loadFromFile("Assets/Fonts/RockSalt.ttf"))
+	if (!characterFont.loadFromFile("Assets/Fonts/hennyPenny.ttf"))
 	{
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	characterText.setFont(characterFont);
-	characterText.setCharacterSize(30);
+	characterText.setCharacterSize(35);
 	characterText.setFillColor(sf::Color::Black);
 	//characterText.setOutlineThickness(1);
-	characterText.setPosition(1230, 158);
+	characterText.setPosition(1234, 114);
 
 	// load doorway
 	if (!doorframeTexture.loadFromFile("Assets/Sprites/Doorway.tga"))
@@ -534,6 +588,14 @@ void loadDoor() {
 	}
 	textboxSpr.setTexture(textboxTexture);
 	textboxSpr.setPosition(-3, -39);
+
+	//load "continue"
+	if (!continueTexture.loadFromFile("Assets/Sprites/continue.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	continueSpr.setTexture(continueTexture);
+	continueSpr.setPosition(1758, 648);
 
 	// load SpellBanner
 	if (!spellBannerTexture.loadFromFile("Assets/Sprites/Spells/SpellBanner.tga"))
