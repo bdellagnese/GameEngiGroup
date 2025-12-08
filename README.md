@@ -10,6 +10,8 @@ Increase mana to cast spells by looking at the ORB.
 Cast your spells by talking to a customer at the DOOR.  
   
 Happy customers will increase the timer, and angry ones will decrease it. Be careful!  
+  
+Start the game by generating mana!
 
 --CONTROLS--  
 [Click - Menu Interactions]  
@@ -19,6 +21,9 @@ Happy customers will increase the timer, and angry ones will decrease it. Be car
 Door Controls:  
 [WASD - Cast Direction]  
 [Click - Advance Dialogue]  
+  
+Orb Controls:  
+[WASD - Generate Mana]  
   
 Spellbook Controls:  
 [A - page left]  
