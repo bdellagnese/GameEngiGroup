@@ -292,6 +292,7 @@ void DoorScene::update(float& dt) {
 			else {
 				if (!characterArrived) {
 					DoorScene::nextCharacter();
+					pressTime = 1;
 				}
 			}
 		}

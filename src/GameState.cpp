@@ -19,7 +19,7 @@ std::random_device rd;
 std::mt19937 gen(rd());
 
 // Define the distribution (range)
-std::uniform_int_distribution<> distrib(3, 7); // Generates integers in the range [5, 10]
+std::uniform_int_distribution<> distrib(1, 5); // Generates integers in the range [5, 10]
 
 // Objects
 sf::Sprite gamePlaceholder;
@@ -134,14 +134,16 @@ void GameState::update(float& dt) {
 	}
 
 	// Random Arrival Timer
-	if (!characterArrived) {
-		if (randomTime > 0) {
-			randomTime -= dt;
-		}
-		else {
-			if (!characterArrived) {
-				doorScene.nextCharacter();
-				pressTime = 1;
+	if (startTimer) {
+		if (!characterArrived) {
+			if (randomTime > 0) {
+				randomTime -= dt;
+			}
+			else {
+				if (!characterArrived) {
+					doorScene.nextCharacter();
+					pressTime = 1;
+				}
 			}
 		}
 	}

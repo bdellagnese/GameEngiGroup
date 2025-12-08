@@ -1,9 +1,12 @@
 #include <SFML/Graphics.hpp>
 #include "SpellScene.h"
 #include "GameVariables.h"
+#include "DoorScene.h"
 
 bool backSpell;
 bool hasLoaded = false;
+
+DoorScene doorScene2;
 
 // Objects
 sf::Sprite spellPlaceholder;
@@ -96,6 +99,21 @@ void SpellScene::update(float& dt) {
 		else {
 			// lose
 			backSpell = true;
+		}
+	}
+
+	// Random Arrival Timer
+	if (startTimer) {
+		if (!characterArrived) {
+			if (randomTime > 0) {
+				randomTime -= dt;
+			}
+			else {
+				if (!characterArrived) {
+					doorScene2.nextCharacter();
+					pressTime = 1;
+				}
+			}
 		}
 	}
 

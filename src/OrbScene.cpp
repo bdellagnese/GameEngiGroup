@@ -1,10 +1,13 @@
 #include <SFML/Graphics.hpp>
 #include "OrbScene.h"
 #include "GameVariables.h"
+#include "DoorScene.h"
 
 bool hasLoadedOrb = false;
 void loadOrb();
 bool backOrb;
+
+DoorScene doorScene1;
 
 //Initialises counters for mana regeneration
 //These are needed to delay the speed of mana regeneration without
@@ -232,6 +235,21 @@ void OrbScene::update(float& dt) {
 	else {
 		// lose
 		backOrb = true;
+	}
+
+	// Random Arrival Timer
+	if (startTimer) {
+		if (!characterArrived) {
+			if (randomTime > 0) {
+				randomTime -= dt;
+			}
+			else {
+				if (!characterArrived) {
+					doorScene1.nextCharacter();
+					pressTime = 1;
+				}
+			}
+		}
 	}
 
 	if (currentMana == maxMana) {
