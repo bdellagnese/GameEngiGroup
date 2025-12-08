@@ -105,6 +105,8 @@ void OrbScene::render(sf::RenderWindow& window) {
 
 	//Bottom Layer - The background
 	window.draw(OrbBgSprite);
+
+	window.draw(flameBgSpr);
 	window.draw(flameTimerText);
 	//Top Layer - UI
 }

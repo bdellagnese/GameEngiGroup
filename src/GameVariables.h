@@ -37,6 +37,9 @@ extern char rightChar;
 extern char prevChar;
 
 // Objects
+extern sf::Sprite flameBgSpr;
+extern sf::Texture flameBgTxt;
+
 extern sf::Font font;
 extern sf::Font flameTimerFont;
 extern sf::Text text;

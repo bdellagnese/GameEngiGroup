@@ -150,9 +150,9 @@ void GameState::update(float& dt) {
 	}
 
     // PLACE MODE - can be used for any sprite
-	flameTimerText.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
+	flameBgSpr.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
     // DEBUG TEXT - "(x,y) Placing: t/f"
-    sf::Vector2f textPosition = flameTimerText.getPosition();
+    sf::Vector2f textPosition = flameBgSpr.getPosition();
 
 	text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
         std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode) + ", Arrived: " + std::to_string(characterArrived));
@@ -228,6 +228,8 @@ void GameState::render(sf::RenderWindow& window) {
 	window.draw(orbSprite);
 	window.draw(bookSprite);
 	window.draw(text);
+	
+	window.draw(flameBgSpr);
 	window.draw(flameTimerText);
 	//Top Layer - UI
 }
@@ -249,6 +251,14 @@ void loadGame() {
 	flameTimerText.setPosition(1840, 10);
 
 	globalTime = 100;
+
+	// load global timer bg
+	if (!flameBgTxt.loadFromFile("Assets/Sprites/startButton.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	flameBgSpr.setTexture(flameBgTxt);
+	flameBgSpr.setPosition(1762, -473);
 
 	// load door
 	if (!doorTexture.loadFromFile("Assets/Sprites/gameDoor.tga"))

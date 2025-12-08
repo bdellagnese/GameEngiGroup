@@ -326,6 +326,7 @@ void DoorScene::render(sf::RenderWindow& window) {
 	}
 
 	window.draw(text);
+	window.draw(flameBgSpr);
 	window.draw(flameTimerText);
 	//Top Layer - UI
 }

@@ -108,6 +108,8 @@ void SpellScene::render(sf::RenderWindow& window) {
 	//Bottom Layer - The background
 	window.draw(bgSprite);
 	window.draw(altarSprite);
+
+	window.draw(flameBgSpr);
 	window.draw(flameTimerText);
 	window.draw(text);
 	//Top Layer - UI
