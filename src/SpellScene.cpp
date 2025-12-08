@@ -81,6 +81,7 @@ void SpellScene::update(float& dt) {
 	}
 	else {
 		// lose
+		backSpell = true;
 	}
 	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
 

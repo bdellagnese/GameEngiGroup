@@ -111,6 +111,7 @@ void GameState::update(float& dt) {
 	}
 	else {
 		// lose
+		stateChange = 1;
 	}
 	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
 
@@ -250,7 +251,7 @@ void loadGame() {
 	flameTimerText.setFillColor(sf::Color::Black);
 	flameTimerText.setPosition(1840, 10);
 
-	globalTime = 100;
+	globalTime = 30;
 
 	// load global timer bg
 	if (!flameBgTxt.loadFromFile("Assets/Sprites/startButton.tga"))

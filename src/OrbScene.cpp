@@ -78,6 +78,7 @@ void OrbScene::update(float& dt) {
 	}
 	else {
 		// lose
+		backOrb = true;
 	}
 	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
 

@@ -251,6 +251,11 @@ void DoorScene::update(float& dt) {
 	}
 	else {
 		// lose
+		characterArrived = true;
+		characterText.setString("You Lose!!");
+		
+		canPress = false;
+		pressTime = 100;
 	}
 	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
 
@@ -307,7 +312,11 @@ void DoorScene::render(sf::RenderWindow& window) {
 	
 	if (characterArrived) {
 		window.draw(textboxSpr);
-		characterText.setString(characterString[currentString]);
+		
+		if (globalTime > 0) {
+			characterText.setString(characterString[currentString]);
+		}
+		
 		window.draw(characterText);
 		window.draw(character3DSpr);
 	}
@@ -373,12 +382,16 @@ void characterHandling() {
 			characterSpr.setTexture(characterHappyTexture[renderNum]);
 			character3DSpr.setTexture(characterHappy3DTexture[renderNum]);
 			currentString = 2; // Happy Message
+
+			globalTime = globalTime + 15;
 		}
 		else
 		{
 			characterSpr.setTexture(characterSadTexture[renderNum]);
 			character3DSpr.setTexture(characterSad3DTexture[renderNum]);
 			currentString = 3; // Hateful
+
+			globalTime = globalTime - 5;
 		}
 	}
 
