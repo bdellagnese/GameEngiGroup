@@ -16,6 +16,7 @@ bool enoughMana;
 // Parameters
 int cast[5];
 int correctCast[5];
+int customerHappy = 0;
 
 const int totalChar = 6;
 
@@ -171,8 +172,9 @@ void casting(int direction) {
 	{
 		cast[castPosition] = direction;
 		if (direction == 1) {
-			SpellSpr[castPosition].setTexture(spellUpTexture);
+			
 			if (currentMana > 30) {
+				SpellSpr[castPosition].setTexture(spellUpTexture);
 				currentMana = currentMana - 30;
 				enoughMana = true;
 			}
@@ -181,8 +183,9 @@ void casting(int direction) {
 			}
 		}
 		else if (direction == 2) {
-			SpellSpr[castPosition].setTexture(spellDownTexture);
+			
 			if (currentMana > 20) {
+				SpellSpr[castPosition].setTexture(spellDownTexture);
 				currentMana = currentMana - 20;
 				enoughMana = true;
 			}
@@ -191,8 +194,9 @@ void casting(int direction) {
 			}
 		}
 		else if (direction == 3) {
-			SpellSpr[castPosition].setTexture(spellLeftTexture);
+			
 			if (currentMana > 15) {
+				SpellSpr[castPosition].setTexture(spellLeftTexture);
 				currentMana = currentMana - 15;
 				enoughMana = true;
 			}
@@ -201,8 +205,8 @@ void casting(int direction) {
 			}
 		}
 		else if (direction == 4) {
-			SpellSpr[castPosition].setTexture(spellRightTexture);
 			if (currentMana > 10) {
+				SpellSpr[castPosition].setTexture(spellRightTexture);
 				currentMana = currentMana - 10;
 				enoughMana = true;
 			}
@@ -232,25 +236,34 @@ void DoorScene::update(float& dt) {
 		loadDoor();
 	}
 
-	/*if (!tutorialDone) {
-		Tutorial();
-	}*/
+	manaText.setString(std::to_string(static_cast<int>(currentMana)));
 
 	if (totalCharacters < character) {
-		//if (wins / totalCharacters > totalCharacters / 2){
-		
-		// Game Win
-		//back
-		gameDone = true;
-		backDoor = true;
+		globalTime = 0;
 	}
 
 	// Global Timer
-	if (globalTime > 0) {
-		globalTime -= dt;
-	}
-	else {
-		// lose
+	if (startTimer) {
+		if (globalTime > 0) {
+			globalTime -= dt;
+		}
+		else {
+			if (customerHappy > totalCharacters / 2) {
+				characterArrived = true;
+				characterText.setString("You win!! \n\nThanks to you\nFradros has enough power to \nopen his bakery");
+
+				canPress = false;
+				pressTime = 100;
+			}
+			else {
+				// lose
+				characterArrived = true;
+				characterText.setString("You Lose!!");
+
+				canPress = false;
+				pressTime = 100;
+			}
+		}
 	}
 	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
 
@@ -271,13 +284,16 @@ void DoorScene::update(float& dt) {
 	}
 
 	// Show the customer after random timer
-	if (!characterArrived) {
-		if (randomTime > 0) {
-			randomTime -= dt;
-		}
-		else {
-			if (!characterArrived) {
-				DoorScene::nextCharacter();
+	if (startTimer) {
+		if (!characterArrived) {
+			if (randomTime > 0) {
+				randomTime -= dt;
+			}
+			else {
+				if (!characterArrived) {
+					DoorScene::nextCharacter();
+					pressTime = 1;
+				}
 			}
 		}
 	}
@@ -307,7 +323,15 @@ void DoorScene::render(sf::RenderWindow& window) {
 	
 	if (characterArrived) {
 		window.draw(textboxSpr);
-		characterText.setString(characterString[currentString]);
+		
+		if (globalTime > 0) {
+			characterText.setString(characterString[currentString]);
+		}
+
+		if (!enoughMana) {
+			characterText.setString("Not Enough Mana!!!");
+		}
+		
 		window.draw(characterText);
 		window.draw(character3DSpr);
 	}
@@ -325,7 +349,12 @@ void DoorScene::render(sf::RenderWindow& window) {
 		window.draw(continueSpr);
 	}
 
+	window.draw(manaBgSpr);
+	window.draw(manaText);
+
 	window.draw(text);
+
+	window.draw(flameBgSpr);
 	window.draw(flameTimerText);
 	//Top Layer - UI
 }
@@ -365,19 +394,23 @@ void characterHandling() {
 			animTimer = 8;
 			success = false;
 		}
-		pressTime = 5;
 		castPosition = 0;
 
 		if (success) {
 			characterSpr.setTexture(characterHappyTexture[renderNum]);
 			character3DSpr.setTexture(characterHappy3DTexture[renderNum]);
 			currentString = 2; // Happy Message
+
+			customerHappy++;
+			globalTime = globalTime + 35;
 		}
 		else
 		{
 			characterSpr.setTexture(characterSadTexture[renderNum]);
 			character3DSpr.setTexture(characterSad3DTexture[renderNum]);
 			currentString = 3; // Hateful
+
+			globalTime = globalTime - 1;
 		}
 	}
 
@@ -422,12 +455,12 @@ void DoorScene::nextCharacter() {
 		characterString[2] = "I'm perfect now! \n\nThank goodness, she was going to whip me \nup the wall if she saw I left on my own. \n\nI'll try not coming back here, pray \ndon't tell her though.";
 		characterString[3] = "That didn't work! \n\nMummy will call me home any minute \nnow, and she will be furious!\nWhat kind of a WIZARD are you? \n\nGoodbye, I will go find someone else \nwho can read a SPELL BOOK";
 
-		// The custom cast order needed for success
-		correctCast[0] = 1; // 1up 2down 3left 4right
-		correctCast[1] = 2;
-		correctCast[2] = 3;
-		correctCast[3] = 4;
-		correctCast[4] = 1;
+		// Shrink 34212 
+		correctCast[0] = 3; // 1up 2down 3left 4right
+		correctCast[1] = 4;
+		correctCast[2] = 2;
+		correctCast[3] = 1;
+		correctCast[4] = 2;
 	}
 	else if (character == 2) // Shawnson
 	{
@@ -445,11 +478,11 @@ void DoorScene::nextCharacter() {
 		characterString[2] = "The golden goose! Wizard, you are a \ngenius! \n\nI will live labour-free for plenty \nyears to come! \n\nBetty my saviour, I knew she would \nbe my only chance at a new life!";
 		characterString[3] = "You imbecile! Nothing happened. \n\nForget I came to this stupid shack, \nI should have never trusted some old \nbag to do a real man's job! \n\nYou will never be seeing me again.";
 
-		// The custom cast order needed for success
+		// gildgild 12131 
 		correctCast[0] = 1; // 1up 2down 3left 4right
 		correctCast[1] = 2;
-		correctCast[2] = 3;
-		correctCast[3] = 4;
+		correctCast[2] = 1;
+		correctCast[3] = 3;
 		correctCast[4] = 1;
 	}
 	else if (character == 3) // Medra
@@ -469,12 +502,12 @@ void DoorScene::nextCharacter() {
 		characterString[2] = "I am perfect this way! \n\nI won't dare to talk to them humans \nagain. Maybe, next season...\n\nThank you Wizard, I can always \ncount on you being a good listener.";
 		characterString[3] = "You are the best wizard I know! \n\nI can't believe it. I'm stuck at that \ncotttage for a while now. \n\nI'll have to start behaving like a \nhuman girl. Maybe, I can find someone \nelse to shelter me for now. \nBye Fradros, I hope to see you in \nbetter circumstances next time.";
 
-		// The custom cast order needed for success
-		correctCast[0] = 1; // 1up 2down 3left 4right
-		correctCast[1] = 2;
-		correctCast[2] = 3;
-		correctCast[3] = 4;
-		correctCast[4] = 1;
+		// shrink
+		correctCast[0] = 3; // 1up 2down 3left 4right
+		correctCast[1] = 4;
+		correctCast[2] = 2;
+		correctCast[3] = 1;
+		correctCast[4] = 2;
 	}
 	else if (character == 4) // Sir Wompulus
 	{
@@ -492,11 +525,11 @@ void DoorScene::nextCharacter() {
 		characterString[2] = "Fradros! Not what I expected, but I \nshine like never before. \n\nNo one will ever ignore me now, \nand I will always have the most gold in \nthe kingdom! \n\nIf you ever come by the kingdom, you \nwill live in luxury I tell you!";
 		characterString[3] = "WHAT!? YOU DON'T THINK \nI DESERVE THIS!? WHO DO YOU \nTHINK YOU ARE LIVING ON \nTHIS PROPERTY! WHOEVER \nOWNS THIS LAND WILL BE \nORDERED TO ERASE YOU FROM \nTHESE PREMISES. \nI am eternally miserable, you should \nbe ashamed. The Prince is never sad, \nand you have saddened me the most!";
 
-		// The custom cast order needed for success
+		// gild
 		correctCast[0] = 1; // 1up 2down 3left 4right
 		correctCast[1] = 2;
-		correctCast[2] = 3;
-		correctCast[3] = 4;
+		correctCast[2] = 1;
+		correctCast[3] = 3;
 		correctCast[4] = 1;
 	}
 	else if (character == 5) // Jane
@@ -515,12 +548,12 @@ void DoorScene::nextCharacter() {
 		characterString[2] = "Scary. Thanks.";
 		characterString[3] = "What a hack. You're dead old man.";
 
-		// The custom cast order needed for success
+		// curse bark 23444 curse 12432
 		correctCast[0] = 1; // 1up 2down 3left 4right
 		correctCast[1] = 2;
-		correctCast[2] = 3;
-		correctCast[3] = 4;
-		correctCast[4] = 1;
+		correctCast[2] = 4;
+		correctCast[3] = 3;
+		correctCast[4] = 2;
 	}
 	else if (character == 6) // Jester
 	{
@@ -529,7 +562,7 @@ void DoorScene::nextCharacter() {
 		characterSpr.setTexture(characterTexture[renderNum]);
 
 		// Adjust position
-		characterSpr.setPosition(150, 193);
+		characterSpr.setPosition(440, 300);
 		character3DSpr.setPosition(characterSpr.getPosition());
 
 		// Jester
@@ -538,12 +571,12 @@ void DoorScene::nextCharacter() {
 		characterString[2] = "This it? I feel hefty like cattle, just \none more reason for the wife to think im \na fat cow! \n\nThanks anyway for my thick skin. I \nwon't feel a thing from that Grumble.";
 		characterString[3] = "You kidding me? I came all the way \nhere from the other side of the \nenchanted forest for nothing? \n\nYou are just as useless as those \nfairies. \n\nBye.";
 
-		// The custom cast order needed for success
-		correctCast[0] = 1; // 1up 2down 3left 4right
-		correctCast[1] = 2;
-		correctCast[2] = 3;
+		// bark skin
+		correctCast[0] = 2; // 1up 2down 3left 4right
+		correctCast[1] = 3;
+		correctCast[2] = 4;
 		correctCast[3] = 4;
-		correctCast[4] = 1;
+		correctCast[4] = 4;
 	}
 }
 
@@ -554,10 +587,9 @@ void loadDoor() {
 	backDoor = false;
 	enoughMana = true;
 	
-	//character = 4;
+	//character = 5;
 
-	//currentMana = maxMana;
-	currentMana = 1000;
+	currentMana = 0;
 
 	if (!characterFont.loadFromFile("Assets/Fonts/hennyPenny.ttf"))
 	{
@@ -801,35 +833,35 @@ void loadCharacters(){
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 
-	/* Jester
+	// Jester
 	// load neutral
 	if (!characterTexture[5].loadFromFile("Assets/Sprites/Characters/Jester/JestNeutral.tga"))
 	{
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	// load happy
-	if (!characterHappyTexture[5].loadFromFile("Assets/Sprites/Characters/Jester/JestNeutral.tga"))
+	if (!characterHappyTexture[5].loadFromFile("Assets/Sprites/Characters/Jester/JestHappy.tga"))
 	{
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	// load sad 
-	if (!characterSadTexture[5].loadFromFile("Assets/Sprites/Characters/Jester/JestNeutral.tga"))
+	if (!characterSadTexture[5].loadFromFile("Assets/Sprites/Characters/Jester/JestAngry.tga"))
 	{
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	// load Neutral3D
-	if (!character3DTexture[5].loadFromFile("Assets/Sprites/Characters/Jester/JestNeutral.tga"))
+	if (!character3DTexture[5].loadFromFile("Assets/Sprites/Characters/Jester/Jest3D.tga"))
 	{
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	// load happy3D
-	if (!characterHappy3DTexture[5].loadFromFile("Assets/Sprites/Characters/Jester/JestNeutral.tga"))
+	if (!characterHappy3DTexture[5].loadFromFile("Assets/Sprites/Characters/Jester/Jest3D.tga"))
 	{
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	// load sad3D 
-	if (!characterSad3DTexture[5].loadFromFile("Assets/Sprites/Characters/Jester/JestNeutral.tga"))
+	if (!characterSad3DTexture[5].loadFromFile("Assets/Sprites/Characters/Jester/Jest3D.tga"))
 	{
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
-	}*/
+	}
 }

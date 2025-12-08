@@ -16,6 +16,7 @@ bool canPress = true;
 bool characterArrived = false;
 bool animTimerDone = false;
 bool gameDone = false;
+bool startTimer = false;
 
 float pressTime = 0.0f;
 const float placeModeSpeed = 25.0f; 
@@ -32,14 +33,14 @@ float globalTime;
 float animTimer;
 float randomTime;
 
-char upChar;
-char downChar;
-char leftChar;
-char rightChar;
-char prevChar;
-
 int character;
 int randomNumber;
+
+sf::Sprite manaBgSpr;
+sf::Text manaText;
+
+sf::Sprite flameBgSpr;
+sf::Texture flameBgTxt;
 
 sf::Font font;
 sf::Font flameTimerFont;
@@ -63,6 +64,7 @@ int main() {
 	bool characterArrived = false;
 	bool animTimerDone = false;
 	bool gameDone = false;
+	bool startTimer = false;
 
 	float pressTime = 0.0f;
 	const float placeModeSpeed = 25.0f;
@@ -79,14 +81,14 @@ int main() {
 	float randomTime;
 	float animTimer;
 
-	char upChar = 'W';
-	char downChar = 'S';
-	char leftChar = 'A';
-	char rightChar = 'D';
-	char prevChar = 'E';
-
 	int character;
 	int randomNumber;
+
+	sf::Sprite flameBgSpr;
+	sf::Texture flameBgTxt;
+
+	sf::Sprite manaBgSpr;
+	sf::Text manaText;
 
 	sf::Font font;
 	sf::Text text;

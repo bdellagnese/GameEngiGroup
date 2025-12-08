@@ -19,7 +19,7 @@ std::random_device rd;
 std::mt19937 gen(rd());
 
 // Define the distribution (range)
-std::uniform_int_distribution<> distrib(5, 10); // Generates integers in the range [5, 10]
+std::uniform_int_distribution<> distrib(1, 5); // Generates integers in the range [5, 10]
 
 // Objects
 sf::Sprite gamePlaceholder;
@@ -93,24 +93,22 @@ void GameState::update(float& dt) {
 		pressTime = 1;
 		loadGame();
     }
+	
+	manaText.setString(std::to_string(static_cast<int>(currentMana)));
 
 	if (totalCharacters < character) {
-		//if (wins / totalCharacters > totalCharacters / 2){
-
-		// Game Win
-		gameDone = true;
-	}
-
-	if (gameDone) {
-		stateChange = 5;
+		stateChange = 1;
 	}
 
 	// Global Timer
-	if (globalTime > 0) {
-		globalTime -= dt;
-	}
-	else {
-		// lose
+	if (startTimer) {
+		if (globalTime > 0) {
+			globalTime -= dt;
+		}
+		else {
+			// lose
+			stateChange = 1;
+		}
 	}
 	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
 
@@ -135,24 +133,25 @@ void GameState::update(float& dt) {
 		characterArrived = false;
 	}
 
-
 	// Random Arrival Timer
-	if (!characterArrived) {
-		if (randomTime > 0) {
-			randomTime -= dt;
-		}
-		else {
-			if (!characterArrived) {
-				doorScene.nextCharacter();
-				pressTime = 3;
+	if (startTimer) {
+		if (!characterArrived) {
+			if (randomTime > 0) {
+				randomTime -= dt;
+			}
+			else {
+				if (!characterArrived) {
+					doorScene.nextCharacter();
+					pressTime = 1;
+				}
 			}
 		}
 	}
 
     // PLACE MODE - can be used for any sprite
-	flameTimerText.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
+	manaBgSpr.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
     // DEBUG TEXT - "(x,y) Placing: t/f"
-    sf::Vector2f textPosition = flameTimerText.getPosition();
+    sf::Vector2f textPosition = manaBgSpr.getPosition();
 
 	text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
         std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode) + ", Arrived: " + std::to_string(characterArrived));
@@ -172,20 +171,22 @@ void GameState::render(sf::RenderWindow& window) {
 	// mouse hovering on startButton
 	if (doorBounds.contains(mouse) && canPress)
 	{
-		doorSprite.setTexture(doorTextureHover);
+		if (startTimer) {
+			doorSprite.setTexture(doorTextureHover);
 
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-		{
-			canPress = false;
-			
-			if (characterArrived) {
-				pressTime = 2;
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+				canPress = false;
+
+				if (characterArrived) {
+					pressTime = 1;
+				}
+				else {
+					pressTime = 1;
+				}
+
+				stateChange = 1; // DOOR
 			}
-			else {
-				pressTime = 1;
-			}
-			
-			stateChange = 1; // DOOR
 		}
 	}
 	else if (orbBounds.contains(mouse) && canPress)
@@ -227,7 +228,11 @@ void GameState::render(sf::RenderWindow& window) {
 	window.draw(doorSprite);
 	window.draw(orbSprite);
 	window.draw(bookSprite);
-	window.draw(text);
+	
+	window.draw(manaBgSpr);
+	window.draw(manaText);
+
+	window.draw(flameBgSpr);
 	window.draw(flameTimerText);
 	//Top Layer - UI
 }
@@ -248,7 +253,22 @@ void loadGame() {
 	flameTimerText.setFillColor(sf::Color::Black);
 	flameTimerText.setPosition(1840, 10);
 
-	globalTime = 100;
+	manaText.setFont(flameTimerFont);
+	manaText.setCharacterSize(50);
+	manaText.setFillColor(sf::Color::Black);
+	manaText.setPosition(1802, 930);
+
+	globalTime = 60;
+
+	// load global timer bg
+	if (!flameBgTxt.loadFromFile("Assets/Sprites/startButton.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	flameBgSpr.setTexture(flameBgTxt);
+	flameBgSpr.setPosition(1762, -473);
+	manaBgSpr.setTexture(flameBgTxt);
+	manaBgSpr.setPosition(1736, 876);
 
 	// load door
 	if (!doorTexture.loadFromFile("Assets/Sprites/gameDoor.tga"))
@@ -312,4 +332,6 @@ void loadGame() {
 void GameState::random() {
 	randomNumber = distrib(gen);
 	randomTime = static_cast<float>(randomNumber);
+
+	randomTime = 5;
 }
