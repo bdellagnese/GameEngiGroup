@@ -19,7 +19,7 @@ std::random_device rd;
 std::mt19937 gen(rd());
 
 // Define the distribution (range)
-std::uniform_int_distribution<> distrib(5, 10); // Generates integers in the range [5, 10]
+std::uniform_int_distribution<> distrib(3, 10); // Generates integers in the range [5, 10]
 
 // Objects
 sf::Sprite gamePlaceholder;
@@ -251,7 +251,7 @@ void loadGame() {
 	flameTimerText.setFillColor(sf::Color::Black);
 	flameTimerText.setPosition(1840, 10);
 
-	globalTime = 30;
+	globalTime = 60;
 
 	// load global timer bg
 	if (!flameBgTxt.loadFromFile("Assets/Sprites/startButton.tga"))

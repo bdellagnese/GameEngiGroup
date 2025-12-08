@@ -383,7 +383,7 @@ void characterHandling() {
 			character3DSpr.setTexture(characterHappy3DTexture[renderNum]);
 			currentString = 2; // Happy Message
 
-			globalTime = globalTime + 15;
+			globalTime = globalTime + 30;
 		}
 		else
 		{
