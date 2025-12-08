@@ -300,9 +300,9 @@ void DoorScene::update(float& dt) {
 	characterHandling();
 
 	// PLACE MODE - can be used for any sprite
-	characterSpr.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
+	doorPlaceholder.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
 	// DEBUG TEXT - "(x,y) Placing: t/f"
-	sf::Vector2f textPosition = characterSpr.getPosition();
+	sf::Vector2f textPosition = doorPlaceholder.getPosition();
 
 	text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
 		std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode) + 
