@@ -6,6 +6,10 @@ bool hasLoadedOrb = false;
 void loadOrb();
 bool backOrb;
 
+int manaIncreaseCountP = 0;
+int manaIncreaseCountY = 0;
+int manaIncreaseCountG = 0;
+int manaIncreaseCountR = 0;
 // Objects
 sf::Sprite orbPlaceholder;
 
@@ -40,33 +44,33 @@ const sf::Keyboard::Key controls[6] = {
 void OrbScene::handleInput() {
 	// Handle input for game
 	// Inputs for DEBUG PLACEMODE
-	if (sf::Keyboard::isKeyPressed(controls[4]) && canPress) { // toggle placemode
-		placeMode = !placeMode;
+	//if (sf::Keyboard::isKeyPressed(controls[4]) && canPress) { // toggle placemode
+	//	placeMode = !placeMode;
+	//	canPress = false;
+	//	pressTime = 1;
+	//}
+	if (sf::Keyboard::isKeyPressed(controls[0]) && canPress) {
+		pinkTubeSprite.setPosition(0, 0);
 		canPress = false;
 		pressTime = 1;
 	}
-	else if (sf::Keyboard::isKeyPressed(controls[0]) && placeMode) {
-		if (direction1 > -placeModeSpeed) {
-			direction1--;
-		}
+
+	else if (sf::Keyboard::isKeyPressed(controls[1]) && canPress) {
+		greenTubeSprite.setPosition(0, 0);
+		canPress = false;
+		pressTime = 1;
 	}
-	else if (sf::Keyboard::isKeyPressed(controls[1]) && placeMode) {
-		if (direction1 < placeModeSpeed) {
-			direction1++;
-		}
+
+	else if (sf::Keyboard::isKeyPressed(controls[2]) && canPress) {
+		redTubeSprite.setPosition(0, 0);
+		canPress = false;
+		pressTime = 1;
 	}
-	else if (sf::Keyboard::isKeyPressed(controls[2]) && placeMode) {
-		if (direction2 > -placeModeSpeed) {
-			direction2--;
-		}
-	}
-	else if (sf::Keyboard::isKeyPressed(controls[3]) && placeMode) {
-		if (direction2 < placeModeSpeed) {
-			direction2++;
-		}
-	}
-	else {
-		direction2 = 0; direction1 = 0;
+
+	else if (sf::Keyboard::isKeyPressed(controls[3]) && canPress) {
+		yellowTubeSprite.setPosition(0, 0);
+		canPress = false;
+		pressTime = 1;
 	}
 
 	// Go back to game screen
@@ -91,13 +95,132 @@ void OrbScene::update(float& dt) {
 
 	// Global Timer
 	if (globalTime > 0) {
+
+		sf::Vector2f positionTrackerPink = pinkTubeSprite.getPosition();
+
+		if (positionTrackerPink.y < 230) {
+
+			pinkTubeSprite.move(sf::Vector2f(0, 3 * placeModeSpeed * dt));
+
+			if (manaIncreaseCountP < 1000) {
+
+				manaIncreaseCountP++;
+
+			}
+
+			else {
+
+				if (currentMana < 100) {
+
+					currentMana += 1;
+
+					if (currentMana > 100) {
+
+						currentMana = 100;
+
+					}
+				}
+				manaIncreaseCountP = 0;
+			}
+
+		}
+
+		sf::Vector2f positionTrackerGreen = greenTubeSprite.getPosition();
+
+		if (positionTrackerGreen.y < 230) {
+
+			greenTubeSprite.move(sf::Vector2f(0, 3 * placeModeSpeed * dt));
+
+			if (manaIncreaseCountG < 1000) {
+
+				manaIncreaseCountG++;
+
+			}
+
+			else {
+
+				if (currentMana < 100) {
+
+					currentMana += 1;
+
+					if (currentMana > 100) {
+
+						currentMana = 100;
+
+					}
+				}
+				manaIncreaseCountG = 0;
+			}
+
+		}
+
+		sf::Vector2f positionTrackerRed = redTubeSprite.getPosition();
+
+		if (positionTrackerRed.y < 230) {
+
+			redTubeSprite.move(sf::Vector2f(0, 3 * placeModeSpeed * dt));
+
+			if (manaIncreaseCountR < 1000) {
+
+				manaIncreaseCountR++;
+
+			}
+
+			else {
+
+				if (currentMana < 100) {
+
+					currentMana += 1;
+
+					if (currentMana > 100) {
+
+						currentMana = 100;
+
+					}
+				}
+				manaIncreaseCountR = 0;
+			}
+
+		}
+
+		sf::Vector2f positionTrackerYellow = yellowTubeSprite.getPosition();
+
+		if (positionTrackerYellow.y < 230) {
+
+			yellowTubeSprite.move(sf::Vector2f(0, 3 * placeModeSpeed * dt));
+
+			if (manaIncreaseCountY < 1000) {
+
+				manaIncreaseCountY++;
+
+			}
+
+			else {
+
+				if (currentMana < 100) {
+
+					currentMana += 1;
+
+					if (currentMana > 100) {
+
+						currentMana = 100;
+
+					}
+				}
+				manaIncreaseCountY = 0;
+			}
+		}
+
 		globalTime -= dt;
+
 	}
 	else {
 		// lose
 		backOrb = true;
 	}
 	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
+
+	text.setString(std::to_string(static_cast<int>(currentMana)));
 
 	// Basic Timer
 	if (pressTime > 0) {
@@ -108,13 +231,13 @@ void OrbScene::update(float& dt) {
 	}
 
 	// PLACE MODE - can be used for any sprite
-	pinkTubeSprite.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
+	//pinkTubeSprite.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
 
 	// DEBUG TEXT - "(x,y) Placing: t/f"
-	sf::Vector2f textPosition = pinkTubeSprite.getPosition();
+	//sf::Vector2f textPosition = pinkTubeSprite.getPosition();
 
-	text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
-		std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode));
+	//text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
+	//	std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode));
 }
 
 void OrbScene::render(sf::RenderWindow& window) {
@@ -164,26 +287,26 @@ void loadOrb() {
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	greenTubeSprite.setTexture(greenTubeTexture);
-	greenTubeSprite.setPosition(0, 0);
+	greenTubeSprite.setPosition(0, 230);
 
 	if (!pinkTubeTexture.loadFromFile("Assets/Sprites/Orb/pinkTube.tga"))
 	{
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	pinkTubeSprite.setTexture(pinkTubeTexture);
-	pinkTubeSprite.setPosition(0, 0);
+	pinkTubeSprite.setPosition(0, 230);
 
 	if (!redTubeTexture.loadFromFile("Assets/Sprites/Orb/redTube.tga"))
 	{
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	redTubeSprite.setTexture(redTubeTexture);
-	redTubeSprite.setPosition(0, 0);
+	redTubeSprite.setPosition(0, 230);
 
 	if (!yellowTubeTexture.loadFromFile("Assets/Sprites/Orb/yellowTube.tga"))
 	{
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	yellowTubeSprite.setTexture(yellowTubeTexture);
-	yellowTubeSprite.setPosition(0, 0);
+	yellowTubeSprite.setPosition(0, 230);
 }

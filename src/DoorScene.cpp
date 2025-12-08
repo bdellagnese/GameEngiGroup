@@ -578,7 +578,7 @@ void loadDoor() {
 	//character = 4;
 
 	//currentMana = maxMana;
-	currentMana = 1000;
+	currentMana = 100;
 
 	if (!characterFont.loadFromFile("Assets/Fonts/hennyPenny.ttf"))
 	{
