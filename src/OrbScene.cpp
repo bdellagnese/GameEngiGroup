@@ -97,6 +97,8 @@ void OrbScene::update(float& dt) {
 		loadOrb();
 	}
 
+	manaText.setString(std::to_string(static_cast<int>(currentMana)));
+
 	// Global Timer and mana regeneration
 	if (globalTime > 0) {
 

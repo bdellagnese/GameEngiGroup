@@ -172,8 +172,9 @@ void casting(int direction) {
 	{
 		cast[castPosition] = direction;
 		if (direction == 1) {
-			SpellSpr[castPosition].setTexture(spellUpTexture);
+			
 			if (currentMana > 30) {
+				SpellSpr[castPosition].setTexture(spellUpTexture);
 				currentMana = currentMana - 30;
 				enoughMana = true;
 			}
@@ -182,8 +183,9 @@ void casting(int direction) {
 			}
 		}
 		else if (direction == 2) {
-			SpellSpr[castPosition].setTexture(spellDownTexture);
+			
 			if (currentMana > 20) {
+				SpellSpr[castPosition].setTexture(spellDownTexture);
 				currentMana = currentMana - 20;
 				enoughMana = true;
 			}
@@ -192,8 +194,9 @@ void casting(int direction) {
 			}
 		}
 		else if (direction == 3) {
-			SpellSpr[castPosition].setTexture(spellLeftTexture);
+			
 			if (currentMana > 15) {
+				SpellSpr[castPosition].setTexture(spellLeftTexture);
 				currentMana = currentMana - 15;
 				enoughMana = true;
 			}
@@ -202,8 +205,8 @@ void casting(int direction) {
 			}
 		}
 		else if (direction == 4) {
-			SpellSpr[castPosition].setTexture(spellRightTexture);
 			if (currentMana > 10) {
+				SpellSpr[castPosition].setTexture(spellRightTexture);
 				currentMana = currentMana - 10;
 				enoughMana = true;
 			}
@@ -318,6 +321,10 @@ void DoorScene::render(sf::RenderWindow& window) {
 		
 		if (globalTime > 0) {
 			characterText.setString(characterString[currentString]);
+		}
+
+		if (!enoughMana) {
+			characterText.setString("Not Enough Mana!!!");
 		}
 		
 		window.draw(characterText);
