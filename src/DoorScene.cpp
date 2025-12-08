@@ -249,7 +249,7 @@ void DoorScene::update(float& dt) {
 	else {
 		if (customerHappy > totalCharacters / 2) {
 			characterArrived = true;
-			characterText.setString("You win!! \n\nThanks to you\nFradros has enough power to open his bakery");
+			characterText.setString("You win!! \n\nThanks to you\nFradros has enough power to \nopen his bakery");
 
 			canPress = false;
 			pressTime = 100;
