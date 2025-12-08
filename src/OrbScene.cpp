@@ -252,6 +252,14 @@ void OrbScene::update(float& dt) {
 		}
 	}
 
+	// Timer for animation pauses
+	if (animTimer > 0) {
+		animTimer -= dt;
+	}
+	else {
+		animTimerDone = true;
+	}
+
 	if (currentMana == maxMana) {
 		startTimer = true;
 	}

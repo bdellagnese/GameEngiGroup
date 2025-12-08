@@ -117,6 +117,14 @@ void SpellScene::update(float& dt) {
 		}
 	}
 
+	// Timer for animation pauses
+	if (animTimer > 0) {
+		animTimer -= dt;
+	}
+	else {
+		animTimerDone = true;
+	}
+
 	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
 
 	// Basic Timer
