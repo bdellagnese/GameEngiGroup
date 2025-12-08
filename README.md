@@ -1,5 +1,5 @@
 # GameEngiGroup
-Fix All Shop (DEV 0.8)
+Fix All Shop (DEV 0.9)
 
 --HOW TO PLAY--  
 You are open for business! Customers will be arriving at your doorstep  
@@ -19,6 +19,10 @@ Happy customers will increase the timer, and angry ones will decrease it. Be car
 Door Controls:  
 [WASD - Cast Direction]  
 [Click - Advance Dialogue]  
+  
+Spellbook Controls:  
+[A - page left]  
+[D - page right]  
   
 Debug Controls:
 [WASD - Movement (in Place Mode)]  

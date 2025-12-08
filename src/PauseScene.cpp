@@ -13,6 +13,9 @@ bool optionsOpen = false;
 // Objects
 sf::Sprite pausePlaceholder;
 
+sf::Sprite bgSpr;
+sf::Texture bgTxt;
+
 sf::Sprite resumeSprite;
 sf::Sprite optionsSprite;
 sf::Sprite quitSprite;
@@ -122,7 +125,7 @@ void PauseScene::render(sf::RenderWindow& window) {
 
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 			{
-				optionsOpen = true;
+				//optionsOpen = true;
 			}
 		}
 		else if (quitBounds.contains(mouse) && canPress)
@@ -145,6 +148,8 @@ void PauseScene::render(sf::RenderWindow& window) {
 	}
 
 	//Bottom Layer - The background
+	window.draw(bgSpr);
+
 	if (!optionsOpen) {
 		window.draw(resumeSprite);
 		window.draw(optionsSprite);
@@ -154,8 +159,6 @@ void PauseScene::render(sf::RenderWindow& window) {
 		// rebind WASD + E
 		// window.draw();
 	}
-
-	window.draw(text);
 	//Top Layer - UI
 }
 
@@ -173,8 +176,16 @@ void loadPause() {
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	resumeSprite.setTexture(resumeTexture);
-	resumeSprite.setPosition(748, 24);
+	resumeSprite.setPosition(748, 250);
 	resumeSprite.setScale(0.5f, 0.5f);
+
+	// load doorway
+	if (!bgTxt.loadFromFile("Assets/Sprites/SceneBackground.tga"))
+	{
+		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+	}
+	bgSpr.setTexture(bgTxt);
+	bgSpr.setPosition(0, 0);
 
 	// load options
 	if (!optionsTexture.loadFromFile("Assets/Sprites/PauseMenu/Options.tga"))
@@ -186,7 +197,7 @@ void loadPause() {
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	optionsSprite.setTexture(optionsTexture);
-	optionsSprite.setPosition(314, 576);
+	optionsSprite.setPosition(210, 250);
 	optionsSprite.setScale(0.5f, 0.5f);
 
 	// load quit
@@ -199,6 +210,6 @@ void loadPause() {
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
 	quitSprite.setTexture(quitTexture);
-	quitSprite.setPosition(1182, 576);
+	quitSprite.setPosition(1264, 250);
 	quitSprite.setScale(0.5f, 0.5f);
 }
