@@ -4,7 +4,6 @@
 
 bool backSpell;
 bool hasLoaded = false;
-void loadSpell();
 
 // Objects
 sf::Sprite spellPlaceholder;
@@ -30,7 +29,7 @@ void SpellScene::handleInput() {
 	// Inputs for DEBUG PLACEMODE
 	if (sf::Keyboard::isKeyPressed(controls[4]) && canPress) { // toggle placemode
 		placeMode = !placeMode;
-		canPress = false;
+		//canPress = false;
 		pressTime = 1;
 	}
 	else if (sf::Keyboard::isKeyPressed(controls[0]) && placeMode) {
@@ -67,12 +66,26 @@ void SpellScene::handleInput() {
 		// go back
 		backSpell = true;
 	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && canPress) {
+		currentPage++;
+		updatePageText();
+		canPress = false;
+		pressTime = 0.25f;
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && canPress) {
+		currentPage--;
+		updatePageText();
+		canPress = false;
+		pressTime = 0.25f;
+	}
 }
 
 void SpellScene::update(float& dt) {
 	// Update game logic
 	if (!hasLoaded) {
-		loadSpell();
+		loadAssets();
 	}
 	
 	// Global Timer
@@ -110,13 +123,18 @@ void SpellScene::render(sf::RenderWindow& window) {
 	window.draw(bgSprite);
 	window.draw(altarSprite);
 
+	window.draw(manaBgSpr);
+	window.draw(manaText);
+
 	window.draw(flameBgSpr);
 	window.draw(flameTimerText);
 	window.draw(text);
+	window.draw(pageText);
+	window.draw(pageText2);
 	//Top Layer - UI
 }
 
-void loadSpell() {
+void SpellScene::loadAssets() {
 	hasLoaded = true;
 	backSpell = false;
 
@@ -135,5 +153,48 @@ void loadSpell() {
 	altarSprite.setPosition(56, 38);
 	altarSprite.setScale(0.9f, 0.9f);
 
-	// load
+	if (!spellFont.loadFromFile("Assets/Fonts/lacquer.ttf"))
+	{
+		printf("--ERROR LOADING FONT--");
+	}
+	if (!spellFont.loadFromFile("Assets/Fonts/lacquer.ttf"))
+	{
+		printf("--ERROR LOADING FONT--");
+	}
+	pageText.setFont(spellFont);
+	pageText.setCharacterSize(40);
+	pageText.setFillColor(sf::Color::Black);
+	pageText.setPosition(56 + 340, 38 + 250);
+
+	
+
+	pageText2.setFont(spellFont);
+	pageText2.setCharacterSize(67);
+	pageText2.setFillColor(sf::Color::Black);
+	pageText2.setPosition(56 + 910, 38 + 300);
+
+	leftPageTexts = {
+	"Shrink\nMakes enemies smaller.",
+	"Gild\nWhatever this spell\n is cast upon is \nturned to gold.",
+	"Bark Skin\nReinforces the \nspell targets skin \nto make them more\n resistent to harm.",
+	"Curse\nCurses a customers\n object, results will\n vary depending on \nthe target.",
+	
+	};
+
+	rightPageTexts = {
+		"<  >  V  ^  V",
+		"^  V  ^  <  ^",
+		"V  <  >  >  >",
+		"^  V  >  <  V",
+	};
+	updatePageText();
+
+}
+void SpellScene::updatePageText() {
+    if (currentPage < 0) currentPage = 0;
+    if (currentPage >= leftPageTexts.size()) 
+        currentPage = leftPageTexts.size() - 1;
+
+    pageText.setString(leftPageTexts[currentPage]);
+    pageText2.setString(rightPageTexts[currentPage]);
 }

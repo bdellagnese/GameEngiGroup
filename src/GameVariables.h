@@ -29,14 +29,10 @@ extern float randomTime;
 extern int character;
 extern int randomNumber;
 
-// 
-extern char upChar;
-extern char downChar;
-extern char leftChar;
-extern char rightChar;
-extern char prevChar;
-
 // Objects
+extern sf::Sprite manaBgSpr;
+extern sf::Text manaText;
+
 extern sf::Sprite flameBgSpr;
 extern sf::Texture flameBgTxt;
 
@@ -44,5 +40,4 @@ extern sf::Font font;
 extern sf::Font flameTimerFont;
 extern sf::Text text;
 extern sf::Text flameTimerText;
-
 #endif // GAMEVARIABLES_H

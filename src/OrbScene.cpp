@@ -91,6 +91,8 @@ void OrbScene::update(float& dt) {
 		loadOrb();
 	}
 
+	manaText.setString(std::to_string(static_cast<int>(currentMana)));
+
 	// Global Timer
 	if (globalTime > 0) {
 
@@ -252,6 +254,9 @@ void OrbScene::render(sf::RenderWindow& window) {
 	window.draw(OrbBgBlockSprite);
 
 	window.draw(text);
+
+	window.draw(manaBgSpr);
+	window.draw(manaText);
 
 	window.draw(flameBgSpr);
 	window.draw(flameTimerText);

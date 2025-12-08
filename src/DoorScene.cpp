@@ -232,9 +232,7 @@ void DoorScene::update(float& dt) {
 		loadDoor();
 	}
 
-	/*if (!tutorialDone) {
-		Tutorial();
-	}*/
+	manaText.setString(std::to_string(static_cast<int>(currentMana)));
 
 	if (totalCharacters < character) {
 		//if (wins / totalCharacters > totalCharacters / 2){
@@ -333,6 +331,9 @@ void DoorScene::render(sf::RenderWindow& window) {
 	if (canPress && currentString == 0 && characterArrived) {
 		window.draw(continueSpr);
 	}
+
+	window.draw(manaBgSpr);
+	window.draw(manaText);
 
 	window.draw(text);
 	window.draw(flameBgSpr);
