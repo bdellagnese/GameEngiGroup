@@ -222,7 +222,6 @@ void GameState::render(sf::RenderWindow& window) {
 	window.draw(doorSprite);
 	window.draw(orbSprite);
 	window.draw(bookSprite);
-	window.draw(text);
 	
 	window.draw(manaBgSpr);
 	window.draw(manaText);

@@ -128,7 +128,7 @@ void SpellScene::render(sf::RenderWindow& window) {
 
 	window.draw(flameBgSpr);
 	window.draw(flameTimerText);
-	window.draw(text);
+
 	window.draw(pageText);
 	window.draw(pageText2);
 	//Top Layer - UI

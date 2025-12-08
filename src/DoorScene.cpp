@@ -340,7 +340,6 @@ void DoorScene::render(sf::RenderWindow& window) {
 	window.draw(manaBgSpr);
 	window.draw(manaText);
 
-	window.draw(text);
 	window.draw(flameBgSpr);
 	window.draw(flameTimerText);
 	//Top Layer - UI
@@ -390,7 +389,7 @@ void characterHandling() {
 			currentString = 2; // Happy Message
 
 			customerHappy++;
-			globalTime = globalTime + 30;
+			globalTime = globalTime + 35;
 		}
 		else
 		{

@@ -253,8 +253,6 @@ void OrbScene::render(sf::RenderWindow& window) {
 	window.draw(yellowTubeSprite);
 	window.draw(OrbBgBlockSprite);
 
-	window.draw(text);
-
 	window.draw(manaBgSpr);
 	window.draw(manaText);
 
