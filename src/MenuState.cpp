@@ -125,7 +125,7 @@ void loadMenu() {
 	text.setPosition(5, 5);
 
 	// load doorway
-	if (!DoorwayTexture.loadFromFile("Assets/Sprites/TestDoorway.tga"))
+	if (!DoorwayTexture.loadFromFile("Assets/Sprites/SceneBackground.tga"))
 	{
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
 	}
