@@ -16,6 +16,7 @@ bool canPress = true;
 bool characterArrived = false;
 bool animTimerDone = false;
 bool gameDone = false;
+bool startTimer = false;
 
 float pressTime = 0.0f;
 const float placeModeSpeed = 25.0f; 
@@ -63,6 +64,7 @@ int main() {
 	bool characterArrived = false;
 	bool animTimerDone = false;
 	bool gameDone = false;
+	bool startTimer = false;
 
 	float pressTime = 0.0f;
 	const float placeModeSpeed = 25.0f;

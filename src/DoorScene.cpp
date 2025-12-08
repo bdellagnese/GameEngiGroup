@@ -243,24 +243,26 @@ void DoorScene::update(float& dt) {
 	}
 
 	// Global Timer
-	if (globalTime > 0) {
-		globalTime -= dt;
-	}
-	else {
-		if (customerHappy > totalCharacters / 2) {
-			characterArrived = true;
-			characterText.setString("You win!! \n\nThanks to you\nFradros has enough power to \nopen his bakery");
-
-			canPress = false;
-			pressTime = 100;
+	if (startTimer) {
+		if (globalTime > 0) {
+			globalTime -= dt;
 		}
 		else {
-			// lose
-			characterArrived = true;
-			characterText.setString("You Lose!!");
+			if (customerHappy > totalCharacters / 2) {
+				characterArrived = true;
+				characterText.setString("You win!! \n\nThanks to you\nFradros has enough power to \nopen his bakery");
 
-			canPress = false;
-			pressTime = 100;
+				canPress = false;
+				pressTime = 100;
+			}
+			else {
+				// lose
+				characterArrived = true;
+				characterText.setString("You Lose!!");
+
+				canPress = false;
+				pressTime = 100;
+			}
 		}
 	}
 	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
@@ -583,8 +585,7 @@ void loadDoor() {
 	
 	//character = 4;
 
-	//currentMana = maxMana;
-	currentMana = 100;
+	currentMana = 0;
 
 	if (!characterFont.loadFromFile("Assets/Fonts/hennyPenny.ttf"))
 	{

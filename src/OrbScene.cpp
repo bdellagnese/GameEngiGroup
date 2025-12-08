@@ -225,12 +225,17 @@ void OrbScene::update(float& dt) {
 			}
 		}
 
-		globalTime -= dt;
-
+		if (startTimer) {
+			globalTime -= dt;
+		}
 	}
 	else {
 		// lose
 		backOrb = true;
+	}
+
+	if (currentMana == maxMana) {
+		startTimer = true;
 	}
 
 	//Displays global timer

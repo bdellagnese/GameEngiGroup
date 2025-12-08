@@ -89,13 +89,16 @@ void SpellScene::update(float& dt) {
 	}
 	
 	// Global Timer
-	if (globalTime > 0) {
-		globalTime -= dt;
+	if (startTimer) {
+		if (globalTime > 0) {
+			globalTime -= dt;
+		}
+		else {
+			// lose
+			backSpell = true;
+		}
 	}
-	else {
-		// lose
-		backSpell = true;
-	}
+
 	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
 
 	// Basic Timer

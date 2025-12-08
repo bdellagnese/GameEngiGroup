@@ -101,12 +101,14 @@ void GameState::update(float& dt) {
 	}
 
 	// Global Timer
-	if (globalTime > 0) {
-		globalTime -= dt;
-	}
-	else {
-		// lose
-		stateChange = 1;
+	if (startTimer) {
+		if (globalTime > 0) {
+			globalTime -= dt;
+		}
+		else {
+			// lose
+			stateChange = 1;
+		}
 	}
 	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
 
@@ -167,20 +169,22 @@ void GameState::render(sf::RenderWindow& window) {
 	// mouse hovering on startButton
 	if (doorBounds.contains(mouse) && canPress)
 	{
-		doorSprite.setTexture(doorTextureHover);
+		if (startTimer) {
+			doorSprite.setTexture(doorTextureHover);
 
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-		{
-			canPress = false;
-			
-			if (characterArrived) {
-				pressTime = 2;
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+				canPress = false;
+
+				if (characterArrived) {
+					pressTime = 2;
+				}
+				else {
+					pressTime = 1;
+				}
+
+				stateChange = 1; // DOOR
 			}
-			else {
-				pressTime = 1;
-			}
-			
-			stateChange = 1; // DOOR
 		}
 	}
 	else if (orbBounds.contains(mouse) && canPress)

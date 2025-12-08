@@ -8,6 +8,7 @@ extern bool canPress;
 extern bool characterArrived;
 extern bool animTimerDone;
 extern bool gameDone;
+extern bool startTimer;
 
 // Numbers
 extern int gameWidth;
