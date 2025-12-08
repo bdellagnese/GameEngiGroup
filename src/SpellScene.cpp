@@ -110,6 +110,9 @@ void SpellScene::render(sf::RenderWindow& window) {
 	window.draw(bgSprite);
 	window.draw(altarSprite);
 
+	window.draw(manaBgSpr);
+	window.draw(manaText);
+
 	window.draw(flameBgSpr);
 	window.draw(flameTimerText);
 	window.draw(text);

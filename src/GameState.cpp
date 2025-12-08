@@ -93,6 +93,8 @@ void GameState::update(float& dt) {
 		pressTime = 1;
 		loadGame();
     }
+	
+	manaText.setString(std::to_string(static_cast<int>(currentMana)));
 
 	if (totalCharacters < character) {
 		//if (wins / totalCharacters > totalCharacters / 2){
@@ -151,9 +153,9 @@ void GameState::update(float& dt) {
 	}
 
     // PLACE MODE - can be used for any sprite
-	flameBgSpr.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
+	manaBgSpr.move(sf::Vector2f(direction2 * placeModeSpeed * dt, direction1 * placeModeSpeed * dt));
     // DEBUG TEXT - "(x,y) Placing: t/f"
-    sf::Vector2f textPosition = flameBgSpr.getPosition();
+    sf::Vector2f textPosition = manaBgSpr.getPosition();
 
 	text.setString("(" + std::to_string(static_cast<int>(textPosition.x)) + "," +
         std::to_string(static_cast<int>(textPosition.y)) + ") Placing: " + std::to_string(placeMode) + ", Arrived: " + std::to_string(characterArrived));
@@ -230,6 +232,9 @@ void GameState::render(sf::RenderWindow& window) {
 	window.draw(bookSprite);
 	window.draw(text);
 	
+	window.draw(manaBgSpr);
+	window.draw(manaText);
+
 	window.draw(flameBgSpr);
 	window.draw(flameTimerText);
 	//Top Layer - UI
@@ -251,6 +256,11 @@ void loadGame() {
 	flameTimerText.setFillColor(sf::Color::Black);
 	flameTimerText.setPosition(1840, 10);
 
+	manaText.setFont(flameTimerFont);
+	manaText.setCharacterSize(50);
+	manaText.setFillColor(sf::Color::Black);
+	manaText.setPosition(1802, 930);
+
 	globalTime = 60;
 
 	// load global timer bg
@@ -260,6 +270,8 @@ void loadGame() {
 	}
 	flameBgSpr.setTexture(flameBgTxt);
 	flameBgSpr.setPosition(1762, -473);
+	manaBgSpr.setTexture(flameBgTxt);
+	manaBgSpr.setPosition(1736, 876);
 
 	// load door
 	if (!doorTexture.loadFromFile("Assets/Sprites/gameDoor.tga"))
