@@ -6,10 +6,14 @@ bool hasLoadedOrb = false;
 void loadOrb();
 bool backOrb;
 
+//Initialises counters for mana regeneration
+//These are needed to delay the speed of mana regeneration without
+//retroactively having to switch currentMana to a float in all other files
 int manaIncreaseCountP = 0;
 int manaIncreaseCountY = 0;
 int manaIncreaseCountG = 0;
 int manaIncreaseCountR = 0;
+
 // Objects
 sf::Sprite orbPlaceholder;
 
@@ -49,6 +53,8 @@ void OrbScene::handleInput() {
 	//	canPress = false;
 	//	pressTime = 1;
 	//}
+
+	//Reads inputs, each directional key (WASD) resets a tubes liquid to the top to continue generating mana
 	if (sf::Keyboard::isKeyPressed(controls[0]) && canPress) {
 		pinkTubeSprite.setPosition(0, 0);
 		canPress = false;
@@ -91,17 +97,23 @@ void OrbScene::update(float& dt) {
 		loadOrb();
 	}
 
-	manaText.setString(std::to_string(static_cast<int>(currentMana)));
-
-	// Global Timer
+	// Global Timer and mana regeneration
 	if (globalTime > 0) {
 
+		//Gets position of tube contents
 		sf::Vector2f positionTrackerPink = pinkTubeSprite.getPosition();
 
+		//Checks if tube contents are above a certain point, if they are then their y position is lowered
 		if (positionTrackerPink.y < 230) {
 
+			//Moves tube contents down
 			pinkTubeSprite.move(sf::Vector2f(0, 3 * placeModeSpeed * dt));
 
+			//This section first counts up to 1000 through the associated manaIncreaseCount, when it reaches
+			//1000 then currentMana is increased by 1 and the count is reset, this is done to slow down the 
+			//speed of mana regeneration as without it your mana would regen almost instantly. Decimal points
+			//couldn't be utilised as currentMana is stored as an int and it would be more effort to go back
+			//and change all references of it to a float
 			if (manaIncreaseCountP < 1000) {
 
 				manaIncreaseCountP++;
@@ -218,9 +230,9 @@ void OrbScene::update(float& dt) {
 		// lose
 		backOrb = true;
 	}
-	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
 
-	text.setString(std::to_string(static_cast<int>(currentMana)));
+	//Displays global timer
+	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
 
 	// Basic Timer
 	if (pressTime > 0) {
@@ -242,32 +254,33 @@ void OrbScene::update(float& dt) {
 
 void OrbScene::render(sf::RenderWindow& window) {
 	// Render game
-
-
 	//Bottom Layer - The background
 	window.draw(OrbBgSprite);
 
+	//Middle Layer - Tube liquids
 	window.draw(greenTubeSprite);
 	window.draw(pinkTubeSprite);
 	window.draw(redTubeSprite);
 	window.draw(yellowTubeSprite);
+
+	//Top Layer - Copy of lower half of background, layered over the tube liquids
+	//so they can move down below this layer and appear to be draining 
 	window.draw(OrbBgBlockSprite);
 
-	window.draw(text);
-
+	//Displays current mana
 	window.draw(manaBgSpr);
 	window.draw(manaText);
 
+	//Displays global timer
 	window.draw(flameBgSpr);
 	window.draw(flameTimerText);
-	//Top Layer - UI
 }
 
 void loadOrb() {
 	hasLoadedOrb = true;
 	backOrb = false;
 
-	// load background
+	// Loads all assets
 	if (!OrbBgTexture.loadFromFile("Assets/Sprites/Orb/orbFullAssets.tga"))
 	{
 		printf("--ERROR LOADING ASSETS--"); // Error Loading File
