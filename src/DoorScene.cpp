@@ -16,6 +16,7 @@ bool enoughMana;
 // Parameters
 int cast[5];
 int correctCast[5];
+int customerHappy = 0;
 
 const int totalChar = 6;
 
@@ -235,12 +236,7 @@ void DoorScene::update(float& dt) {
 	manaText.setString(std::to_string(static_cast<int>(currentMana)));
 
 	if (totalCharacters < character) {
-		//if (wins / totalCharacters > totalCharacters / 2){
-		
-		// Game Win
-		//back
-		gameDone = true;
-		backDoor = true;
+		globalTime = 0;
 	}
 
 	// Global Timer
@@ -248,12 +244,21 @@ void DoorScene::update(float& dt) {
 		globalTime -= dt;
 	}
 	else {
-		// lose
-		characterArrived = true;
-		characterText.setString("You Lose!!");
-		
-		canPress = false;
-		pressTime = 100;
+		if (customerHappy > totalCharacters / 2) {
+			characterArrived = true;
+			characterText.setString("You win!! \n\nThanks to you\nFradros has enough power to open his bakery");
+
+			canPress = false;
+			pressTime = 100;
+		}
+		else {
+			// lose
+			characterArrived = true;
+			characterText.setString("You Lose!!");
+
+			canPress = false;
+			pressTime = 100;
+		}
 	}
 	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
 
@@ -384,6 +389,7 @@ void characterHandling() {
 			character3DSpr.setTexture(characterHappy3DTexture[renderNum]);
 			currentString = 2; // Happy Message
 
+			customerHappy++;
 			globalTime = globalTime + 30;
 		}
 		else

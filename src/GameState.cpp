@@ -97,14 +97,7 @@ void GameState::update(float& dt) {
 	manaText.setString(std::to_string(static_cast<int>(currentMana)));
 
 	if (totalCharacters < character) {
-		//if (wins / totalCharacters > totalCharacters / 2){
-
-		// Game Win
-		gameDone = true;
-	}
-
-	if (gameDone) {
-		stateChange = 5;
+		stateChange = 1;
 	}
 
 	// Global Timer
@@ -138,7 +131,6 @@ void GameState::update(float& dt) {
 		characterArrived = false;
 	}
 
-
 	// Random Arrival Timer
 	if (!characterArrived) {
 		if (randomTime > 0) {
@@ -147,7 +139,7 @@ void GameState::update(float& dt) {
 		else {
 			if (!characterArrived) {
 				doorScene.nextCharacter();
-				pressTime = 3;
+				pressTime = 1;
 			}
 		}
 	}

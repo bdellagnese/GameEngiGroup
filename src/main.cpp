@@ -32,12 +32,6 @@ float globalTime;
 float animTimer;
 float randomTime;
 
-char upChar;
-char downChar;
-char leftChar;
-char rightChar;
-char prevChar;
-
 int character;
 int randomNumber;
 
@@ -84,12 +78,6 @@ int main() {
 	float globalTime;
 	float randomTime;
 	float animTimer;
-
-	char upChar = 'W';
-	char downChar = 'S';
-	char leftChar = 'A';
-	char rightChar = 'D';
-	char prevChar = 'E';
 
 	int character;
 	int randomNumber;
