@@ -2,7 +2,6 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <string>
-#pragma once
 
 class SpellScene : public State {
 public:
