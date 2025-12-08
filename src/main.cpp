@@ -41,6 +41,12 @@ char prevChar;
 int character;
 int randomNumber;
 
+sf::Sprite manaBgSpr;
+sf::Text manaText;
+
+sf::Sprite flameBgSpr;
+sf::Texture flameBgTxt;
+
 sf::Font font;
 sf::Font flameTimerFont;
 sf::Text text;
@@ -87,6 +93,12 @@ int main() {
 
 	int character;
 	int randomNumber;
+
+	sf::Sprite flameBgSpr;
+	sf::Texture flameBgTxt;
+
+	sf::Sprite manaBgSpr;
+	sf::Text manaText;
 
 	sf::Font font;
 	sf::Text text;

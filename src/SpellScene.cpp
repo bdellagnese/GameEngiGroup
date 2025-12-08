@@ -94,6 +94,7 @@ void SpellScene::update(float& dt) {
 	}
 	else {
 		// lose
+		backSpell = true;
 	}
 	flameTimerText.setString(std::to_string(static_cast<int>(globalTime)));
 
@@ -121,6 +122,11 @@ void SpellScene::render(sf::RenderWindow& window) {
 	//Bottom Layer - The background
 	window.draw(bgSprite);
 	window.draw(altarSprite);
+
+	window.draw(manaBgSpr);
+	window.draw(manaText);
+
+	window.draw(flameBgSpr);
 	window.draw(flameTimerText);
 	window.draw(text);
 	window.draw(pageText);
