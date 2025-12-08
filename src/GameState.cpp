@@ -19,7 +19,7 @@ std::random_device rd;
 std::mt19937 gen(rd());
 
 // Define the distribution (range)
-std::uniform_int_distribution<> distrib(3, 10); // Generates integers in the range [5, 10]
+std::uniform_int_distribution<> distrib(3, 7); // Generates integers in the range [5, 10]
 
 // Objects
 sf::Sprite gamePlaceholder;
@@ -177,7 +177,7 @@ void GameState::render(sf::RenderWindow& window) {
 				canPress = false;
 
 				if (characterArrived) {
-					pressTime = 2;
+					pressTime = 1;
 				}
 				else {
 					pressTime = 1;

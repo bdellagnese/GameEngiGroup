@@ -284,13 +284,15 @@ void DoorScene::update(float& dt) {
 	}
 
 	// Show the customer after random timer
-	if (!characterArrived) {
-		if (randomTime > 0) {
-			randomTime -= dt;
-		}
-		else {
-			if (!characterArrived) {
-				DoorScene::nextCharacter();
+	if (startTimer) {
+		if (!characterArrived) {
+			if (randomTime > 0) {
+				randomTime -= dt;
+			}
+			else {
+				if (!characterArrived) {
+					DoorScene::nextCharacter();
+				}
 			}
 		}
 	}
@@ -389,7 +391,6 @@ void characterHandling() {
 			animTimer = 8;
 			success = false;
 		}
-		pressTime = 5;
 		castPosition = 0;
 
 		if (success) {
@@ -406,7 +407,7 @@ void characterHandling() {
 			character3DSpr.setTexture(characterSad3DTexture[renderNum]);
 			currentString = 3; // Hateful
 
-			globalTime = globalTime - 5;
+			globalTime = globalTime - 1;
 		}
 	}
 
