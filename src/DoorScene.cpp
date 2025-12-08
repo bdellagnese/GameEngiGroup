@@ -422,12 +422,12 @@ void DoorScene::nextCharacter() {
 		characterString[2] = "I'm perfect now! \n\nThank goodness, she was going to whip me \nup the wall if she saw I left on my own. \n\nI'll try not coming back here, pray \ndon't tell her though.";
 		characterString[3] = "That didn't work! \n\nMummy will call me home any minute \nnow, and she will be furious!\nWhat kind of a WIZARD are you? \n\nGoodbye, I will go find someone else \nwho can read a SPELL BOOK";
 
-		// The custom cast order needed for success
-		correctCast[0] = 1; // 1up 2down 3left 4right
-		correctCast[1] = 2;
-		correctCast[2] = 3;
-		correctCast[3] = 4;
-		correctCast[4] = 1;
+		// Shrink 34212 
+		correctCast[0] = 3; // 1up 2down 3left 4right
+		correctCast[1] = 4;
+		correctCast[2] = 2;
+		correctCast[3] = 1;
+		correctCast[4] = 2;
 	}
 	else if (character == 2) // Shawnson
 	{
@@ -445,11 +445,11 @@ void DoorScene::nextCharacter() {
 		characterString[2] = "The golden goose! Wizard, you are a \ngenius! \n\nI will live labour-free for plenty \nyears to come! \n\nBetty my saviour, I knew she would \nbe my only chance at a new life!";
 		characterString[3] = "You imbecile! Nothing happened. \n\nForget I came to this stupid shack, \nI should have never trusted some old \nbag to do a real man's job! \n\nYou will never be seeing me again.";
 
-		// The custom cast order needed for success
+		// gildgild 12131 
 		correctCast[0] = 1; // 1up 2down 3left 4right
 		correctCast[1] = 2;
-		correctCast[2] = 3;
-		correctCast[3] = 4;
+		correctCast[2] = 1;
+		correctCast[3] = 3;
 		correctCast[4] = 1;
 	}
 	else if (character == 3) // Medra
@@ -469,12 +469,12 @@ void DoorScene::nextCharacter() {
 		characterString[2] = "I am perfect this way! \n\nI won't dare to talk to them humans \nagain. Maybe, next season...\n\nThank you Wizard, I can always \ncount on you being a good listener.";
 		characterString[3] = "You are the best wizard I know! \n\nI can't believe it. I'm stuck at that \ncotttage for a while now. \n\nI'll have to start behaving like a \nhuman girl. Maybe, I can find someone \nelse to shelter me for now. \nBye Fradros, I hope to see you in \nbetter circumstances next time.";
 
-		// The custom cast order needed for success
-		correctCast[0] = 1; // 1up 2down 3left 4right
-		correctCast[1] = 2;
-		correctCast[2] = 3;
-		correctCast[3] = 4;
-		correctCast[4] = 1;
+		// shrink
+		correctCast[0] = 3; // 1up 2down 3left 4right
+		correctCast[1] = 4;
+		correctCast[2] = 2;
+		correctCast[3] = 1;
+		correctCast[4] = 2;
 	}
 	else if (character == 4) // Sir Wompulus
 	{
@@ -492,11 +492,11 @@ void DoorScene::nextCharacter() {
 		characterString[2] = "Fradros! Not what I expected, but I \nshine like never before. \n\nNo one will ever ignore me now, \nand I will always have the most gold in \nthe kingdom! \n\nIf you ever come by the kingdom, you \nwill live in luxury I tell you!";
 		characterString[3] = "WHAT!? YOU DON'T THINK \nI DESERVE THIS!? WHO DO YOU \nTHINK YOU ARE LIVING ON \nTHIS PROPERTY! WHOEVER \nOWNS THIS LAND WILL BE \nORDERED TO ERASE YOU FROM \nTHESE PREMISES. \nI am eternally miserable, you should \nbe ashamed. The Prince is never sad, \nand you have saddened me the most!";
 
-		// The custom cast order needed for success
+		// gild
 		correctCast[0] = 1; // 1up 2down 3left 4right
 		correctCast[1] = 2;
-		correctCast[2] = 3;
-		correctCast[3] = 4;
+		correctCast[2] = 1;
+		correctCast[3] = 3;
 		correctCast[4] = 1;
 	}
 	else if (character == 5) // Jane
@@ -515,12 +515,12 @@ void DoorScene::nextCharacter() {
 		characterString[2] = "Scary. Thanks.";
 		characterString[3] = "What a hack. You're dead old man.";
 
-		// The custom cast order needed for success
+		// curse bark 23444 curse 12432
 		correctCast[0] = 1; // 1up 2down 3left 4right
 		correctCast[1] = 2;
-		correctCast[2] = 3;
-		correctCast[3] = 4;
-		correctCast[4] = 1;
+		correctCast[2] = 4;
+		correctCast[3] = 3;
+		correctCast[4] = 2;
 	}
 	else if (character == 6) // Jester
 	{
@@ -538,12 +538,12 @@ void DoorScene::nextCharacter() {
 		characterString[2] = "This it? I feel hefty like cattle, just \none more reason for the wife to think im \na fat cow! \n\nThanks anyway for my thick skin. I \nwon't feel a thing from that Grumble.";
 		characterString[3] = "You kidding me? I came all the way \nhere from the other side of the \nenchanted forest for nothing? \n\nYou are just as useless as those \nfairies. \n\nBye.";
 
-		// The custom cast order needed for success
-		correctCast[0] = 1; // 1up 2down 3left 4right
-		correctCast[1] = 2;
-		correctCast[2] = 3;
+		// bark skin
+		correctCast[0] = 2; // 1up 2down 3left 4right
+		correctCast[1] = 3;
+		correctCast[2] = 4;
 		correctCast[3] = 4;
-		correctCast[4] = 1;
+		correctCast[4] = 4;
 	}
 }
 
