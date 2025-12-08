@@ -144,22 +144,27 @@ void SpellScene::loadAssets() {
 	// load background
 	if (!bgTexture.loadFromFile("Assets/Sprites/SceneBackground.tga"))
 	{
-		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+		printf("--ERROR LOADING ASSETS--");
 	}
+	//load spelbook texture
 	if (!altarTexture.loadFromFile("Assets/Sprites/Spellbook.tga"))
 	{
-		printf("--ERROR LOADING ASSETS--"); // Error Loading File
+		printf("--ERROR LOADING ASSETS--");
 	}
+
+	//aply textures to sprites
 	bgSprite.setTexture(bgTexture);
 	altarSprite.setTexture(altarTexture);
-	bgSprite.setPosition(0, 0);
+	bgSprite.setPosition(0, 0); //setting positions
 	altarSprite.setPosition(56, 38);
-	altarSprite.setScale(0.9f, 0.9f);
+	altarSprite.setScale(0.9f, 0.9f); //scale down a bit
 
+	//load font
 	if (!spellFont.loadFromFile("Assets/Fonts/lacquer.ttf"))
 	{
 		printf("--ERROR LOADING FONT--");
 	}
+	
 	if (!spellFont.loadFromFile("Assets/Fonts/lacquer.ttf"))
 	{
 		printf("--ERROR LOADING FONT--");
@@ -170,20 +175,22 @@ void SpellScene::loadAssets() {
 	pageText.setPosition(56 + 340, 38 + 250);
 
 	
-
+	//instructions setup
 	pageText2.setFont(spellFont);
 	pageText2.setCharacterSize(67);
 	pageText2.setFillColor(sf::Color::Black);
 	pageText2.setPosition(56 + 910, 38 + 300);
 
+	//text on left page
 	leftPageTexts = {
-	"Shrink\nMakes enemies smaller.",
+	"Shrink\nMakes enemies smaller. Use this on customers\nthat require shrinkage",
 	"Gild\nWhatever this spell\n is cast upon is \nturned to gold.",
 	"Bark Skin\nReinforces the \nspell targets skin \nto make them more\n resistent to harm.",
 	"Curse\nCurses a customers\n object, results will\n vary depending on \nthe target.",
 	
 	};
 
+	//keybind instructions
 	rightPageTexts = {
 		"<  >  V  ^  V",
 		"^  V  ^  <  ^",
@@ -193,10 +200,12 @@ void SpellScene::loadAssets() {
 	updatePageText();
 
 }
+
+//
 void SpellScene::updatePageText() {
-    if (currentPage < 0) currentPage = 0;
+    if (currentPage < 0) currentPage=0;
     if (currentPage >= leftPageTexts.size()) 
-        currentPage = leftPageTexts.size() - 1;
+        currentPage = leftPageTexts.size()-1;
 
     pageText.setString(leftPageTexts[currentPage]);
     pageText2.setString(rightPageTexts[currentPage]);
